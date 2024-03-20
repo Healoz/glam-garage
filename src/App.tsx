@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './assets/App.css';
-
-// define object shape
-interface Data {
-  name: string;
-  age: number;
-  numbers: number[];
-}
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
-  const [data, setData] = useState<Data>({
-    name: 'Brian',
-    age: 0,
-    numbers: [3, 5, 6, 7, 10],
-  });
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  // checking if screen is mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    }
+
+    // Add event kusteber for window resize
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    // cleanup the eventn listener when component unmounts
+    return () => window.removeEventListener('resize', handleResize);
+
+  }, []);
 
   return (
     <div className="App">
-      <h1>{data.name}</h1>
-      <p>Age: {data.age}</p>
-      <ul>
-        {data.numbers.map((num, index) => (
-          <li key={index}>{num}</li>
-        ))}
-      </ul>
+      <Header 
+        isMobile={isMobile}
+      />
+      
     </div>
   );
 }

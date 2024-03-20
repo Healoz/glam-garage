@@ -1,0 +1,27 @@
+.header {
+    background-color: var(--purple-light);
+    padding: var(--spacing-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+
+.icon {
+    font-size: 2.5rem;
+}
+
+.iconSmall {
+    font-size: 2rem;
+}
+
+.menuBtns {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
