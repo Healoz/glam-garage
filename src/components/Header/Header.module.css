@@ -1,3 +1,6 @@
+
+/* Mobile */
+
 .header {
     background-color: var(--purple-light);
     padding: var(--spacing-3);
@@ -10,6 +13,10 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-1);
+}
+
+.logo h3 {
+    display: none;
 }
 
 .icon {
@@ -25,3 +32,89 @@
     gap: var(--spacing-3);
 }
 
+/* remove list styling */
+
+.menuItems ul, ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.desktopMenuItems {
+    display: none;
+}
+
+.desktopMenuItems li {
+    font-size: 12px;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .logo h3 {
+        display: block;
+    }
+
+    .desktopMenuItems {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-2);
+    }
+
+    .menuItems {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-3);
+    }
+
+    .desktopMenuItems li {
+        font-size: 13px;
+    }
+
+    
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+
+    .desktopMenuItems {
+        gap: var(--spacing-4);
+    }
+
+    .menuItems {
+        gap: var(--spacing-5);
+    }
+
+    .desktopMenuItems li {
+        font-size: 14px;
+    }
+
+    .menuBtns {
+        width: 30%;
+    }
+
+    .searchBarBtn {
+        cursor: unset;
+    }
+
+    .searchBar {
+        border: 1px var(--black) solid;
+        border-radius: 50px;
+        width: 100%;
+        padding: var(--spacing-1) var(--spacing-2);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .searchBarIcon {
+        font-size: 1.4rem;
+    }
+}
+
+/* Desktop - wider screen */
+@media screen and (min-width: 1500px) {
+    .menuBtns {
+        width: 20%;
+    }
+}
