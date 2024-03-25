@@ -1,0 +1,51 @@
+.homeMain {
+    background-color: var(--purple-light);
+}
+
+.hero {
+    padding: var(--spacing-4);
+}
+
+.imageCollage {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 3fr; 
+    grid-template-rows: 2fr 3fr; 
+    gap: var(--spacing-2);
+    height: 40vh;
+    margin-bottom: var(--spacing-3);
+}
+
+.imageCollage .img:first-child {
+    background-color: blue;
+    grid-row: span 2;
+}
+
+.imageCollage .img {
+    display: flex;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 130px;
+}
+
+.heroText h1 {
+    font-size: 2rem;
+}
+
+.heroText {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+}
+
+/* Desktop - wider screen */
+@media screen and (min-width: 1500px) {
+}

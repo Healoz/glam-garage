@@ -1,0 +1,26 @@
+.button p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Michroma", sans-serif;
+    color: var(--black);
+    width: unset;
+    padding: 16px 30px;
+    gap: 7px;
+    border-radius: 50px;
+    border: 1px var(--black) solid;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+}
+
+.button span {
+    color: var(--black);
+}
+
+.primary-colour {
+    background-color: var(--fluro-yellow);
+}

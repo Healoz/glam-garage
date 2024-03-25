@@ -2,7 +2,6 @@
 /* Mobile */
 
 .header {
-    background-color: var(--purple-light);
     padding: var(--spacing-3);
     display: flex;
     justify-content: space-between;
@@ -86,7 +85,7 @@
     }
 
     .desktopMenuItems li {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .menuBtns {
