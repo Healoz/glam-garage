@@ -91,6 +91,24 @@
     animation: rotate 10s linear infinite;
 }
 
+.catalogue {
+    padding: 20px;
+}
+
+.catalogue h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-4);
+    margin-top: calc(var(--spacing-4) - 10px);
+}
+
+.catalogueGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
     .hero {
@@ -122,6 +140,7 @@
 
     .imageCollage {
         margin-bottom: 0;
+        height: 35vh;
     }
 
     .heroContent {
@@ -136,7 +155,7 @@
 @media screen and (min-width: 1200px) {
     .hero {
         gap: 7vw;
-        padding: 5rem 15vw 8rem 15vw;
+        padding: 5rem 10vw 8rem 10vw;
     }
 
     .heroText h1 {
@@ -145,16 +164,18 @@
 
     .imageCollage {
         gap: var(--spacing-4);
+        height: 45vh;
     }
 
     .imageCollageContainer {
-        width: 60%;
+        width: 70%;
     }
 }
 
 /* Desktop - wider screen */
 @media screen and (min-width: 1500px) {
     .hero {
+        /* padding: 5rem 20vw 8rem 20vw; */
         padding: 5rem 20vw 8rem 20vw;
     }
 }

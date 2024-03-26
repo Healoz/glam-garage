@@ -42,6 +42,7 @@ a:-webkit-any-link {
   --fluro-yellow: #E8FF57;
   --white: #FFF9FF;
   --black: #130719;
+  --black-opacity: #13071979;
   --grey: #555458;
   --spacing-1: 5px;
   --spacing-2: 15px;

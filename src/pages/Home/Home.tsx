@@ -2,11 +2,14 @@ import styles from './Home.module.css';
 import React from 'react';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
+import CatalogueItem from '../../components/CatalogueItem/CatalogueItem';
+import purpleDressImg from '../../assets/images/purple-dress.jpg';
 import ColourScheme from '../../enums/ColourScheme';
 import womanImg from '../../assets/images/kalea-morgan-ZmcHE6c7-7U-unsplash.jpg';
 import glassesImg from '../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg';
 import shirtImg from '../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg';
 import circleText from '../../assets/images/circle-text.svg';
+
 
 interface HomeProps {
     
@@ -64,6 +67,25 @@ const CircleSticker = () => {
     )
 }
 
+const CatalogueGrid = () => {
+    return (
+        <div className={styles.catalogueGrid}>
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
+        </div>
+    )
+}
+
 const Home: React.FC<HomeProps> = ({}) => {
 
     return (
@@ -75,7 +97,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                     <HeroContent />
                 </section>
             </section>
-            
+            <section className={styles.catalogue}>
+                <h3>View our new range</h3>
+                <CatalogueGrid />
+            </section>
         </main>
         
     )
