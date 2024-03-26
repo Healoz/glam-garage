@@ -1,4 +1,4 @@
-.button p {
+.button a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,6 +21,10 @@
     color: var(--black);
 }
 
-.primary-colour {
+.primaryColour {
     background-color: var(--fluro-yellow);
+}
+
+.defaultColour {
+    background-color: unset;
 }

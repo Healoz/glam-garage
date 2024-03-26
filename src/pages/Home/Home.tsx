@@ -6,6 +6,7 @@ import ColourScheme from '../../enums/ColourScheme';
 import womanImg from '../../assets/images/kalea-morgan-ZmcHE6c7-7U-unsplash.jpg';
 import glassesImg from '../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg';
 import shirtImg from '../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg';
+import circleText from '../../assets/images/circle-text.svg';
 
 interface HomeProps {
     
@@ -14,19 +15,51 @@ interface HomeProps {
 const ImageCollage = () => {
 
     return (
-        <div className={styles.imageCollage}>
-            <div 
-                className={styles.img} 
-                style={{backgroundImage: `url(${womanImg})`}}>
+        <div className={styles.imageCollageContainer}>
+            <CircleSticker />
+            <div className={styles.imageCollage}>
+                <div 
+                    className={styles.img} 
+                    style={{backgroundImage: `url(${womanImg})`}}>
+                </div>
+                <div 
+                    className={styles.img} 
+                    style={{backgroundImage: `url(${glassesImg})`}}>
+                </div>
+                <div 
+                    className={styles.img} 
+                    style={{backgroundImage: `url(${shirtImg})`}}>
+                </div>  
             </div>
-            <div 
-                className={styles.img} 
-                style={{backgroundImage: `url(${glassesImg})`}}>
+        </div>
+    )
+}
+
+const HeroContent = () => {
+    return (
+        <div className={styles.heroContent}>
+            <div className={styles.heroText}>
+                <div className={styles.titleText}>
+                    <h1>ALL NEW</h1>
+                    <h1>RANGES</h1>
+                </div>
+                <h4>Lorem ipsum dolor sit amet consect etur.</h4>
+                <Button 
+                    buttonText="Shop now"
+                    colourScheme={ColourScheme.Primary}
+                    iconCode="arrow_forward"
+                    buttonLink="#"
+                />
             </div>
-            <div 
-                className={styles.img} 
-                style={{backgroundImage: `url(${shirtImg})`}}>
-            </div>  
+        </div>
+    )
+}
+
+const CircleSticker = () => {
+    return (
+        <div className={styles.circleSticker}>
+            <img src={circleText} className={`${styles.circleTextSvg} ${styles.rotateForever}`}></img>
+            <span className={`material-symbols-outlined ${styles.icon}`}>garage_home</span>
         </div>
     )
 }
@@ -35,24 +68,14 @@ const Home: React.FC<HomeProps> = ({}) => {
 
     return (
         <main className={styles.homeMain}>
-            <Header />
-            <section className={styles.hero}>
-                <ImageCollage />
-                <div className={styles.heroContent}>
-                    <div className={styles.heroText}>
-                        <div>
-                            <h1>ALL NEW</h1>
-                            <h1>RANGES</h1>
-                        </div>
-                        <h4>Lorem ipsum dolor sit amet consectetur.</h4>
-                        <Button 
-                            buttonText={"Button text"}
-                            colourScheme={ColourScheme.Primary}
-                            iconCode={"arrow_forward"}
-                        />
-                    </div>
-                </div>
+            <section className={styles.navAndHero}>
+                <Header />
+                <section className={styles.hero}>
+                    <ImageCollage />
+                    <HeroContent />
+                </section>
             </section>
+            
         </main>
         
     )

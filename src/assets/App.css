@@ -21,6 +21,13 @@ input[type="submit"] {
   /* Add any additional styling as needed */
 }
 
+/* removing default a styling */
+a:-webkit-any-link {
+  text-decoration: none;
+  color: unset;
+  cursor: unset;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
