@@ -2,6 +2,7 @@ import styles from './CatalogueItem.module.css';
 import React from 'react';
 import Button from '../Button/Button';
 import ColourScheme from '../../enums/ColourScheme';
+import { Link } from 'react-router-dom';
 
 interface CatalogueItemProps {
     productImageUrl: string;
@@ -10,7 +11,10 @@ interface CatalogueItemProps {
 const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
 
     return (
-        <a className={styles.catalogueItem}>
+        <Link 
+            className={styles.catalogueItem}
+            to={"/product-name"}
+        >
             <div 
                 className={styles.productImage}
                 style={{backgroundImage: `url(${productImageUrl})`}}
@@ -36,7 +40,7 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
                 <h4>$27</h4>
             </div>
             
-        </a>
+        </Link>
     )
 }
 

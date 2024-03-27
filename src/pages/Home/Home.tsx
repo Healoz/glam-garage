@@ -9,6 +9,7 @@ import womanImg from '../../assets/images/kalea-morgan-ZmcHE6c7-7U-unsplash.jpg'
 import glassesImg from '../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg';
 import shirtImg from '../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg';
 import circleText from '../../assets/images/circle-text.svg';
+import { Link } from "react-router-dom";
 
 
 interface HomeProps {
@@ -51,7 +52,7 @@ const HeroContent = () => {
                     buttonText="Shop now"
                     colourScheme={ColourScheme.Primary}
                     iconCode="arrow_forward"
-                    buttonLink="#"
+                    buttonLink="/"
                 />
             </div>
         </div>

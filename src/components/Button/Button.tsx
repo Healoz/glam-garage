@@ -1,6 +1,7 @@
 import styles from './Button.module.css';
 import ColourScheme from '../../enums/ColourScheme';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
     buttonText: string;
@@ -27,12 +28,12 @@ const Button: React.FC<ButtonProps> = ({ buttonText, colourScheme, iconCode, but
 
     return (
         <div className={styles.button}>
-            <a 
+            <Link 
                 className={colourSchemeClass}
-                href={buttonLink}
+                to={buttonLink}
                 style={fontSizeClass}>
                 {buttonText}<span className="material-symbols-outlined">{iconCode}</span>
-            </a>
+            </Link>
         </div>
     )
 }
