@@ -28,3 +28,11 @@
 .defaultColour {
     background-color: unset;
 }
+
+.white span, .button .white {
+    color: var(--white);
+}
+
+.button .white {
+    border: 1px var(--white) solid;
+}

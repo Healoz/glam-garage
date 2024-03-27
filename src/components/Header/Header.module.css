@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--purple-light);
+    /* position: fixed;
+    width: 100%;
+    z-index: 3; */
 }
 
 .logo button {

@@ -106,7 +106,7 @@
 .catalogueGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
 }
 
 /* Mobile tweaks */
@@ -148,6 +148,24 @@
         align-items: center;
     }
 
+    .catalogueGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .catalogue {
+        padding: var(--spacing-4) 10vw;
+    }
+
+    .catalogue h3 {
+        /* font-size: 1.4rem; */
+        margin-bottom: 3rem;
+        margin-top: 0;
+    }
+
+    .catalogueGrid {
+        gap: 25px;
+    }
+
     
 }
 
@@ -159,7 +177,7 @@
     }
 
     .heroText h1 {
-        font-size: 3.2rem;
+        font-size: 2.6rem;
     }
 
     .imageCollage {
@@ -169,6 +187,18 @@
 
     .imageCollageContainer {
         width: 70%;
+    }
+
+    .catalogue {
+        padding: 5rem 10vw 5rem 10vw;
+    }
+
+    .catalogueGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .catalogue h3 {
+        font-size: 1.4rem;
     }
 }
 

@@ -82,6 +82,12 @@ const CatalogueGrid = () => {
             <CatalogueItem
                 productImageUrl={purpleDressImg}
             />
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
+            <CatalogueItem
+                productImageUrl={purpleDressImg}
+            />
         </div>
     )
 }
@@ -91,7 +97,6 @@ const Home: React.FC<HomeProps> = ({}) => {
     return (
         <main className={styles.homeMain}>
             <section className={styles.navAndHero}>
-                <Header />
                 <section className={styles.hero}>
                     <ImageCollage />
                     <HeroContent />

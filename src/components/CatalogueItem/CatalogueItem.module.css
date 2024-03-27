@@ -1,11 +1,13 @@
 /* Mobile */
 
 .catalogueItem h4 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin-bottom: var(--spacing-1);
 }
 
 .catalogueItem {
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .itemInfo {
@@ -15,12 +17,13 @@
 }
 
 .productImage {
-    height: 300px;
-    margin-bottom: 10px;
+    aspect-ratio: 2 / 3;
+    margin-bottom: 15px;
     border-radius: 50px 50px 15px 15px;
     background-size: cover;
     background-position: center center;
     position: relative;
+    overflow: hidden;
 }
 
 .saveButton {
@@ -28,18 +31,34 @@
     position: absolute;
     top: 0;
     right: 0;
-    margin-right: 13px;
-    margin-top: 13px;
+    margin-right: 23px;
+    margin-top: 23px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    border-radius: 60px 100px 40px 40px;
+    padding: 13px;
+    border-radius: 100%;
 }
 
 .saveButton span {
     color: var(--white);
 }
+
+.catalogueAddToCartOverlay {
+    background-color: var(--black-opacity);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+    justify-content: flex-end;
+    display: none;
+}
+
+.catalogueItem:hover .catalogueAddToCartOverlay {
+    display: flex;
+}   
 
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
@@ -48,6 +67,18 @@
 
 /* Tablet */
 @media screen and (min-width: 768px) {
+    .productImage {
+        aspect-ratio: 4 / 5;
+    }
+
+    .itemInfo {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .catalogueAddToCartOverlay {
+        padding-bottom: 2rem;
+    }
 }
 
 /* Desktop */

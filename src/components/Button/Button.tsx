@@ -7,15 +7,30 @@ interface ButtonProps {
     colourScheme: ColourScheme;
     iconCode: string;
     buttonLink: string;
+    fontSize?: number;
 }
 
-const Button: React.FC<ButtonProps> = ({ buttonText, colourScheme, iconCode, buttonLink }) => {
+
+
+const Button: React.FC<ButtonProps> = ({ buttonText, colourScheme, iconCode, buttonLink, fontSize }) => {
+
+    const colourSchemeClass =
+        colourScheme === ColourScheme.Primary
+            ? styles.primaryColour
+            : colourScheme === ColourScheme.Secondary
+            ? styles.secondaryColour
+            : colourScheme === ColourScheme.White
+            ? styles.white
+            : styles.defaultColour;
+
+    const fontSizeClass = { fontSize: fontSize };
 
     return (
         <div className={styles.button}>
             <a 
-                className={colourScheme === ColourScheme.Primary ? styles.primaryColour : styles.defaultColour}
-                href={buttonLink}>
+                className={colourSchemeClass}
+                href={buttonLink}
+                style={fontSizeClass}>
                 {buttonText}<span className="material-symbols-outlined">{iconCode}</span>
             </a>
         </div>
