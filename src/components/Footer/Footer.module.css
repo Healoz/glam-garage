@@ -1,11 +1,13 @@
 .footerContainer {
     width: 100%;
     background-color: var(--grey);
+    margin-top: auto;
 }
 
 .footer {
     color: var(--white);
     padding: 4rem var(--spacing-4);
+    
 }
 
 .footer h3 {

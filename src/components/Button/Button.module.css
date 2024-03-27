@@ -35,4 +35,5 @@
 
 .button .white {
     border: 1px var(--white) solid;
+    background-color: var(--black-opacity);
 }

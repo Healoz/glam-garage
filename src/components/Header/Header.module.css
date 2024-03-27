@@ -12,10 +12,11 @@
     z-index: 3; */
 }
 
-.logo button {
+.logo a {
     display: flex;
     align-items: center;
     gap: var(--spacing-1);
+    cursor: pointer;
 }
 
 .logo h3 {

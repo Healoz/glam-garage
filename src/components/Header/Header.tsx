@@ -1,5 +1,6 @@
 import styles from './Header.module.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
     // isMobile: boolean;
@@ -11,10 +12,10 @@ const Header: React.FC<HeaderProps> = ({ }) => {
         <section className={styles.header}>
             <div className={styles.menuItems}>
                 <div className={styles.logo}>
-                    <button>
+                    <Link to='/'>
                         <span className={`material-symbols-outlined ${styles.icon}`}>garage_home</span>
                         <h3>GlamGarage</h3>
-                    </button>
+                    </Link>
                 </div>
                     <ul className={styles.desktopMenuItems}>
                         <li>Menu Item 1</li>
