@@ -53,6 +53,8 @@ const HeroContent = () => {
                     colourScheme={ColourScheme.Primary}
                     iconCode="arrow_forward"
                     buttonLink="/"
+                    isCircle={false}
+                    fillsSpace={false}
                 />
             </div>
         </div>

@@ -1,0 +1,65 @@
+.productPage {
+    padding: 20px;
+}
+
+.productImageCarousel {
+    height: 50vh;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 250px 250px 70px 70px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10%;
+    margin-bottom: var(--spacing-3);
+}
+
+.carouselArrows {
+    display: none;
+}
+
+.carouselIndicators {
+    display: flex;
+    gap: 1rem;
+}
+
+.carouselIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    border: 1px var(--white) solid;
+}
+
+.filledIndicator {
+    background-color: var(--white-opacity);
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+
+
+
+/* Mobile tweaks */
+@media screen and (min-width: 500px) {
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+}
+
+/* Desktop - wider screen */
+@media screen and (min-width: 1500px) {
+}

@@ -26,6 +26,8 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
                         iconCode="arrow_forward"
                         buttonLink="#"
                         fontSize={12}
+                        isCircle={false}
+                        fillsSpace={false}
                     />
                 </div>
                 <div className={styles.saveButton}>

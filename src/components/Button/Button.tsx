@@ -9,6 +9,8 @@ interface ButtonProps {
   iconCode: string;
   buttonLink: string;
   fontSize?: number;
+  isCircle: boolean;
+  fillsSpace: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,6 +19,8 @@ const Button: React.FC<ButtonProps> = ({
   iconCode,
   buttonLink,
   fontSize,
+  isCircle,
+  fillsSpace,
 }) => {
   const colourSchemeClass =
     colourScheme === ColourScheme.Primary
@@ -30,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
   const fontSizeClass = { fontSize: fontSize };
 
   return (
-    <div className={styles.button}>
+    <div className={`${isCircle ? styles.isCircle : ''} ${fillsSpace ? styles.fillsSpace : ''} ${styles.button}`}>
       <Link className={colourSchemeClass} to={buttonLink} style={fontSizeClass}>
         {buttonText}
         <span className="material-symbols-outlined">{iconCode}</span>

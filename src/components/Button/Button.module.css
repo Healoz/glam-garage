@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.isCircle a {
+    padding: 16px 16px;
+    border-radius: 100%;
+}
+
 .button {
     display: flex;
     align-items: center;
@@ -36,4 +41,12 @@
 .button .white {
     border: 1px var(--white) solid;
     background-color: var(--black-opacity);
+}
+
+.fillsSpace {
+    flex-grow: 1;
+}
+
+.fillsSpace a {
+    flex-grow: 1;
 }
