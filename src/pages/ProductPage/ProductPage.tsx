@@ -100,7 +100,7 @@ const Accordions = () => {
 
 const ProductPage: React.FC<ProductPageProps> = ({}) => {
   return (
-    <section className={styles.productPage}>
+    <section className={`${styles.productPage} pageContentContainerWide`}>
       <Button
         colourScheme={ColourScheme.Secondary}
         iconCode="arrow_back"
@@ -108,10 +108,14 @@ const ProductPage: React.FC<ProductPageProps> = ({}) => {
         isCircle={true}
         fillsSpace={false}
       />
-      <ProductImageCarousel />
-      <ProductInfo />
-      <div className={styles.divider}></div>
-      <Accordions />
+      <div className={styles.productPageContent}>
+        <ProductImageCarousel />
+        <div>
+          <ProductInfo />
+          <div className={styles.divider}></div>
+          <Accordions />
+        </div>
+      </div>
     </section>
   );
 };
