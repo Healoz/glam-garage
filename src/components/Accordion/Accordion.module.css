@@ -1,0 +1,20 @@
+.accordion .accordionButton p {
+    font-size: 20px;
+    color: var(--black);
+}
+.accordionButton {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--spacing-3) 0px;
+    border-bottom: 1px var(--black) solid;
+}
+
+.content {
+    transition: ease-in-out;
+    padding-top: var(--spacing-3);
+}
+
+.hideContent {
+    display: none;
+}

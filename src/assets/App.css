@@ -21,6 +21,19 @@ input[type="submit"] {
   /* Add any additional styling as needed */
 }
 
+select {
+  /* Reset all default styles */
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  
+}
+
 /* removing default a styling */
 a:-webkit-any-link {
   text-decoration: none;

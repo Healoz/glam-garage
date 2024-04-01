@@ -1,4 +1,6 @@
 import Button from "../../components/Button/Button";
+import Select from "../../components/Select/Select";
+import Accordion from "../../components/Accordion/Accordion";
 import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
@@ -45,13 +47,7 @@ const ProductInfo = () => {
       </p>
       <div className={styles.size}>
         <p>Size:</p>
-        <select>
-          <option>XS</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-        </select>
+        <Select selectOptions={["XS", "S", "M", "L", "XL"]} />
       </div>
       <div className={styles.buttons}>
         <Button
@@ -74,27 +70,30 @@ const ProductInfo = () => {
   );
 };
 
-const Accordion = () => {
+const Accordions = () => {
   return (
     <div className={styles.accordionContainer}>
-      <div className={styles.accordion}>
-        <button className={styles.accordionButton}>Details</button>
-        <div className={styles.panel}>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-        </div>
-      </div>
-      <div className={styles.accordion}>
-        <button className={styles.accordionButton}>Shipping & Returns</button>
-        <div className={styles.panel}>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-        </div>
-      </div>
-      <div className={styles.accordion}>
-        <button className={styles.accordionButton}>Menu 3</button>
-        <div className={styles.panel}>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-        </div>
-      </div>
+      <Accordion
+        accordionTitle="Details"
+        accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
+        auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
+        pretium elit vitae egestas mauris condimentum."
+        contentShowing={true}
+      />
+      <Accordion
+        accordionTitle="Shipping & Returns"
+        accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
+        auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
+        pretium elit vitae egestas mauris condimentum."
+        contentShowing={false}
+      />
+      <Accordion
+        accordionTitle="Menu 3"
+        accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
+        auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
+        pretium elit vitae egestas mauris condimentum."
+        contentShowing={false}
+      />
     </div>
   );
 };
@@ -112,7 +111,7 @@ const ProductPage: React.FC<ProductPageProps> = ({}) => {
       <ProductImageCarousel />
       <ProductInfo />
       <div className={styles.divider}></div>
-      <Accordion />
+      <Accordions />
     </section>
   );
 };
