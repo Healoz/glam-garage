@@ -2,13 +2,14 @@ import styles from './CatalogueItem.module.css';
 import React from 'react';
 import Button from '../Button/Button';
 import ColourScheme from '../../enums/ColourScheme';
+import { Product } from '../../data/types';
 import { Link } from 'react-router-dom';
 
 interface CatalogueItemProps {
-    productImageUrl: string;
+    product: Product;
 }
 
-const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
+const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
 
     return (
         <Link 
@@ -17,7 +18,7 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
         >
             <div 
                 className={styles.productImage}
-                style={{backgroundImage: `url(${productImageUrl})`}}
+                style={{backgroundImage: `url(${product.imageUrls[0]})`}}
             >
                 <div className={styles.catalogueAddToCartOverlay}>
                     <Button 
@@ -36,10 +37,10 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ productImageUrl }) => {
             </div>
             <div className={styles.itemInfo}>
                 <div>
-                    <h4>Pretty purple dress</h4>
+                    <h4>{product.name}</h4>
                     <p>Womens Dresses</p>
                 </div>
-                <h4>$27</h4>
+                <h4>${product.price}</h4>
             </div>
             
         </Link>

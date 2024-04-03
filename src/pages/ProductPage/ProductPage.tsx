@@ -10,15 +10,18 @@ interface ProductPageProps {}
 
 const ProductImageCarousel = () => {
   return (
-    <div
-      className={styles.productImageCarousel}
-      style={{ backgroundImage: `url(${purpleDressImg})` }}
-    >
-      <div className={styles.carouselArrows}>
-        <span className="material-symbols-outlined">arrow_back_ios</span>
-        <span className="material-symbols-outlined">arrow_forward_ios</span>
+    <div>
+      <div
+        className={styles.productImageCarousel}
+        style={{ backgroundImage: `url(${purpleDressImg})` }}
+      >
+        <div className={styles.carouselArrows}>
+          <span className="material-symbols-outlined">arrow_back_ios</span>
+          <span className="material-symbols-outlined">arrow_forward_ios</span>
+        </div>
+        <CarouselIndicators />
       </div>
-      <CarouselIndicators />
+      <DesktopGallery />
     </div>
   );
 };
@@ -31,6 +34,16 @@ const CarouselIndicators = () => {
       ></div>
       <div className={`${styles.carouselIndicator}`}></div>
       <div className={`${styles.carouselIndicator}`}></div>
+    </div>
+  );
+};
+
+const DesktopGallery = () => {
+  return (
+    <div className={styles.desktopGallery}>
+      <div className={`${styles.desktopGalleryImg} ${styles.selectedImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
+      <div className={`${styles.desktopGalleryImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
+      <div className={`${styles.desktopGalleryImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
     </div>
   );
 };
