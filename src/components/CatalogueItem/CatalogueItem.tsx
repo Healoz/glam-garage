@@ -7,14 +7,16 @@ import { Link } from 'react-router-dom';
 
 interface CatalogueItemProps {
     product: Product;
+    navigateToProductPage: (product: Product) => void;
 }
 
-const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
+const CatalogueItem: React.FC<CatalogueItemProps> = ({ product, navigateToProductPage }) => {
 
     return (
-        <Link 
+        <Link
             className={styles.catalogueItem}
-            to={"/product-name"}
+            // onClick={() => navigateToProductPage(product)}
+            to={'/product-name'}
         >
             <div 
                 className={styles.productImage}
@@ -38,9 +40,9 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
             <div className={styles.itemInfo}>
                 <div>
                     <h4>{product.name}</h4>
-                    <p>Womens Dresses</p>
+                    <p>{product.category}</p>
                 </div>
-                <h4>${product.price}</h4>
+                <h4 className={styles.price}>${product.price}</h4>
             </div>
             
         </Link>

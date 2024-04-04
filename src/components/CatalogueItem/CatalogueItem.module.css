@@ -13,7 +13,7 @@
 .itemInfo {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-1)
+    gap: var(--spacing-1);
 }
 
 .productImage {
@@ -45,7 +45,7 @@
 }
 
 .catalogueAddToCartOverlay {
-    background-color: var(--black-opacity);
+    /* background-color: var(--black-opacity-2); */
     width: 100%;
     height: 100%;
     display: flex;
@@ -72,8 +72,13 @@
     }
 
     .itemInfo {
-        justify-content: space-between;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 1rem;
+    }
+
+    .itemInfo .price {
+        text-align: end;
     }
 
     .catalogueAddToCartOverlay {

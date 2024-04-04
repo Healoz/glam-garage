@@ -72,12 +72,13 @@ const CircleSticker = () => {
 
 interface CatalogueGridProps {
   products: Product[];
+  navigateToProductPage: (product: Product) => void;
 }
 
-const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
+const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products, navigateToProductPage }) => {
 
     const catalogueItems = products.map((product) => (
-        <CatalogueItem key={product.id} product={product} />
+        <CatalogueItem key={product.id} product={product} navigateToProductPage={navigateToProductPage}/>
     ))
 
   return (
@@ -89,9 +90,10 @@ const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
 
 interface HomeProps {
   products: Product[];
+  navigateToProductPage: (product: Product) => void;
 }
 
-const Home: React.FC<HomeProps> = ({ products }) => {
+const Home: React.FC<HomeProps> = ({ products, navigateToProductPage }) => {
   return (
     <main className={styles.homeMain}>
       <section className={styles.navAndHero}>
@@ -102,7 +104,7 @@ const Home: React.FC<HomeProps> = ({ products }) => {
       </section>
       <section className={styles.catalogue}>
         <h3>View our new range</h3>
-        <CatalogueGrid products={products} />
+        <CatalogueGrid products={products} navigateToProductPage={navigateToProductPage}/>
       </section>
     </main>
   );
