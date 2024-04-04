@@ -12,25 +12,14 @@ function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
 
-  function convertStringToUrlFriendly(string: string): string {
-    const urlFriendlyName = string.replace(/\s+/g, '-').toLowerCase();
-    return urlFriendlyName;
-  }
-
-  function navigateToProductPage(product: Product) {
-    const productUrl = convertStringToUrlFriendly(product.name);
-    const navigate = useNavigate();
-    navigate(`/${productUrl}`)
-  }
-
   return (
     <div className="App">
       <div className="appContainer">
         <Header />
         <div className="pageContent">
           <Routes>
-            <Route path="" element={<Home products={products} navigateToProductPage={navigateToProductPage}/>} />
-            <Route path="/product-name" element={<ProductPage />} />
+            <Route path="" element={<Home products={products} />} />
+            <Route path="/product/:id" element={<ProductPage />} />
           </Routes>
         </div>
         <Footer />

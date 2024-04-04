@@ -7,16 +7,14 @@ import { Link } from 'react-router-dom';
 
 interface CatalogueItemProps {
     product: Product;
-    navigateToProductPage: (product: Product) => void;
 }
 
-const CatalogueItem: React.FC<CatalogueItemProps> = ({ product, navigateToProductPage }) => {
+const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
 
     return (
         <Link
             className={styles.catalogueItem}
-            // onClick={() => navigateToProductPage(product)}
-            to={'/product-name'}
+            to={`product/${product.id}`}
         >
             <div 
                 className={styles.productImage}
