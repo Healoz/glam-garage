@@ -5,10 +5,10 @@ import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
 import React from "react";
+import { Product } from "../../data/types";
+import { useParams } from "react-router-dom";
 
-interface ProductPageProps {}
-
-const ProductImageCarousel = () => {
+const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
   return (
     <div>
       <div
@@ -21,7 +21,7 @@ const ProductImageCarousel = () => {
         </div>
         <CarouselIndicators />
       </div>
-      <DesktopGallery />
+      <DesktopGallery product={product} />
     </div>
   );
 };
@@ -38,17 +38,26 @@ const CarouselIndicators = () => {
   );
 };
 
-const DesktopGallery = () => {
+const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className={styles.desktopGallery}>
-      <div className={`${styles.desktopGalleryImg} ${styles.selectedImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
-      <div className={`${styles.desktopGalleryImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
-      <div className={`${styles.desktopGalleryImg}`} style={{ backgroundImage: `url(${purpleDressImg})` }}></div>
+      <div
+        className={`${styles.desktopGalleryImg} ${styles.selectedImg}`}
+        style={{ backgroundImage: `url(${purpleDressImg})` }}
+      ></div>
+      <div
+        className={`${styles.desktopGalleryImg}`}
+        style={{ backgroundImage: `url(${purpleDressImg})` }}
+      ></div>
+      <div
+        className={`${styles.desktopGalleryImg}`}
+        style={{ backgroundImage: `url(${purpleDressImg})` }}
+      ></div>
     </div>
   );
 };
 
-const ProductInfo = () => {
+const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className={styles.productInfo}>
       <h3>Pretty Purple Dress</h3>
@@ -83,7 +92,11 @@ const ProductInfo = () => {
   );
 };
 
-const Accordions = () => {
+interface ProductProps {
+  product: Product;
+}
+
+const Accordions: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className={styles.accordionContainer}>
       <Accordion
@@ -111,7 +124,31 @@ const Accordions = () => {
   );
 };
 
-const ProductPage: React.FC<ProductPageProps> = ({}) => {
+interface ProductPageProps {
+  products: Product[];
+}
+
+function getProductById(
+  id: string | undefined,
+  products: Product[]
+): Product | undefined {
+  // id in useParams is a string, need to convert to number
+  // Do not do if id is undefined
+  if (id === undefined) {
+    console.log("No id has been defined.");
+    return undefined;
+  }
+
+  const numId = parseInt(id);
+
+  return products.find((product) => product.id === numId);
+}
+
+const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
+  const { id } = useParams();
+  const productSelected = getProductById(id, products);
+  console.log(productSelected);
+
   return (
     <section className={`${styles.productPage} pageContentContainerWide`}>
       <Button
@@ -121,14 +158,19 @@ const ProductPage: React.FC<ProductPageProps> = ({}) => {
         isCircle={true}
         fillsSpace={false}
       />
-      <div className={styles.productPageContent}>
-        <ProductImageCarousel />
-        <div>
-          <ProductInfo />
-          <div className={styles.divider}></div>
-          <Accordions />
+
+      {productSelected ? (
+        <div className={styles.productPageContent}>
+          <ProductImageCarousel product={productSelected} />
+          <div>
+            <ProductInfo product={productSelected} />
+            <div className={styles.divider}></div>
+            <Accordions product={productSelected} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <h2>No product found</h2>
+      )}
     </section>
   );
 };
