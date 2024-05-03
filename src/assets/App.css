@@ -87,10 +87,29 @@ p {
   color: var(--grey);
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--purple-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple-dark);
+  border-radius: 10px;
+}
+
 .appContainer {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+}
+
+.pageContent {
+  margin-top: 100px;
 }
 
 .pageContentContainer {

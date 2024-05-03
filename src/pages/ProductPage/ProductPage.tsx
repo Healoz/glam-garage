@@ -13,7 +13,7 @@ const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
     <div>
       <div
         className={styles.productImageCarousel}
-        style={{ backgroundImage: `url(${purpleDressImg})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       >
         <div className={styles.carouselArrows}>
           <span className="material-symbols-outlined">arrow_back_ios</span>
@@ -43,15 +43,15 @@ const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
     <div className={styles.desktopGallery}>
       <div
         className={`${styles.desktopGalleryImg} ${styles.selectedImg}`}
-        style={{ backgroundImage: `url(${purpleDressImg})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
       <div
         className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${purpleDressImg})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
       <div
         className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${purpleDressImg})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
     </div>
   );
@@ -60,12 +60,10 @@ const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
 const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className={styles.productInfo}>
-      <h3>Pretty Purple Dress</h3>
-      <h3>$27</h3>
+      <h3>{product.name}</h3>
+      <h3>${product.price}</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
-        auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
-        pretium elit vitae egestas mauris condimentum.
+        {product.description}
       </p>
       <div className={styles.size}>
         <p>Size:</p>

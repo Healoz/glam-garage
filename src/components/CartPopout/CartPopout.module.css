@@ -1,0 +1,119 @@
+.cartPopout {
+  /* background-color: blue; */
+  position: absolute;
+  right: -1rem;
+  width: 28vw;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-top: 0.5rem;
+  z-index: 1000;
+}
+
+.cartPopout ::-webkit-scrollbar {
+  margin-bottom: 2rem;
+}
+
+.cartArrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  transform: rotate(45deg);
+  background-color: blue;
+  background-color: var(--white);
+  border-top: 1px var(--grey) solid;
+  border-left: 1px var(--grey) solid;
+  margin-right: 1.5rem;
+  margin-bottom: -0.8rem;
+}
+
+.heading {
+  display: flex;
+  /* background-color: blue; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem;
+  padding-bottom: 0rem;
+}
+
+.heading span {
+  font-size: 1.8rem;
+}
+
+.cartContainer {
+  background-color: green;
+  background-color: var(--white);
+  border: 1px var(--grey) solid;
+  border-radius: 30px;
+  /* height: 30rem; */
+  width: 100%;
+}
+
+.cartScroll {
+  height: 35vh;
+  /* background-color: red; */
+  overflow-y: auto;
+  flex-direction: column;
+  margin: 1rem;
+  margin-bottom: 0;
+}
+
+.cartItem {
+  /* background-color: blue; */
+  width: 100%;
+  
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 20px;
+}
+
+.productImg {
+    width: 30%;
+    height: inherit;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50px 15px 15px 50px;
+}
+
+.productInfo {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.qntyAndBtn {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.productInfo .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+}
+
+.productInfo .info h4 {
+    font-size: 0.9rem;
+}
+
+.total {
+    background-color: var(--purple-light);
+    display: flex;
+    justify-content: space-between;
+    padding: 1.3rem
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.3rem;
+    gap: 1.3rem;
+}
+
+.hidden {
+  display: none;
+}

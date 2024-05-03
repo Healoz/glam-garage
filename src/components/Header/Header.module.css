@@ -7,9 +7,9 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--purple-light);
-    /* position: fixed;
+    position: fixed;
     width: 100%;
-    z-index: 3; */
+    z-index: 3;
 }
 
 .logo a {
@@ -50,6 +50,11 @@
 
 .desktopMenuItems li {
     font-size: 12px;
+}
+
+.cartSection {
+    /* background-color: red; */
+    position: relative;
 }
 
 /* Tablet */
