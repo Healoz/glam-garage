@@ -6,6 +6,7 @@ import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 
 interface CartPopoutProps {
   isShown: boolean;
+  togglePopout: () => void;
 }
 
 const CartItem = () => {
@@ -36,7 +37,7 @@ const CartItem = () => {
   );
 };
 
-const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps> = ({isShown}, ref ) => {
+const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps> = ({isShown, togglePopout}, ref ) => {
 
   // Create local ref if no ref is provided
   const localRef = useRef<HTMLDivElement>(null);
@@ -48,7 +49,7 @@ const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps
       <div className={styles.cartContainer}>
         <div className={styles.heading}>
           <h3>My Cart</h3>
-          <button>
+          <button onClick={togglePopout}>
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>

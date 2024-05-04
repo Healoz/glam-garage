@@ -13,10 +13,15 @@ const Header: FC<HeaderProps> = ({}) => {
   const cartPopoutRef = useRef<HTMLDivElement>(null);
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
 
+  function togglePopout() {
+    setCartShowing((prevCartShowing) => !prevCartShowing);
+  }
+
   function shoppingCartSelected() {
     if (window.screen.width > 1200) {
       // if desktop, show/hide popout
-      setCartShowing((prevCartShowing) => !prevCartShowing);
+      togglePopout();
+      
       console.log(cartShowing);
     } else {
       // if mobile / tablet, navigate to cart page
@@ -97,7 +102,7 @@ const Header: FC<HeaderProps> = ({}) => {
               shopping_cart
             </span>
           </button>
-          <CartPopout isShown={cartShowing} ref={cartPopoutRef} />
+          <CartPopout isShown={cartShowing} ref={cartPopoutRef} togglePopout={togglePopout}/>
         </section>
       </div>
     </section>
