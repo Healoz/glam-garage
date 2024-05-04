@@ -1,11 +1,11 @@
 import styles from "./CartPopout.module.css";
-import React from "react";
+import {RefObject, useRef, forwardRef} from "react";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 
 interface CartPopoutProps {
-    isShown: boolean;
+  isShown: boolean;
 }
 
 const CartItem = () => {
@@ -36,9 +36,14 @@ const CartItem = () => {
   );
 };
 
-const CartPopout: React.FC<CartPopoutProps> = ({isShown}) => {
+const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps> = ({isShown}, ref ) => {
+
+  // Create local ref if no ref is provided
+  const localRef = useRef<HTMLDivElement>(null);
+  const popoutRef = ref || localRef;
+
   return (
-    <div className={`${styles.cartPopout} ${isShown ? '' : styles.hidden} `}>
+    <div className={`${styles.cartPopout} ${isShown ? "" : styles.hidden} `} ref={popoutRef}>
       <div className={styles.cartArrow}></div>
       <div className={styles.cartContainer}>
         <div className={styles.heading}>
@@ -82,4 +87,4 @@ const CartPopout: React.FC<CartPopoutProps> = ({isShown}) => {
   );
 };
 
-export default CartPopout;
+export default forwardRef(CartPopout);
