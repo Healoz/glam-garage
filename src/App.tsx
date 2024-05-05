@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import productsData from "./data/products.json";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Product } from "./data/types";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   // importing products from temp json file
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="" element={<Home products={products} />} />
             <Route path="/product/:id" element={<ProductPage products={products} />} />
+            <Route path="/cart" element={<Cart cartItems={products}></Cart>} />
           </Routes>
         </div>
         <Footer />

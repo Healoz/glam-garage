@@ -70,9 +70,10 @@ const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps
             buttonText="Cart"
             colourScheme={ColourScheme.Secondary}
             iconCode="arrow_forward"
-            buttonLink="/"
+            buttonLink="/cart"
             isCircle={false}
             fillsSpace={true}
+            onClickFunction={togglePopout} // hide popout when navigating page
           />
           <Button
             buttonText="Checkout"
