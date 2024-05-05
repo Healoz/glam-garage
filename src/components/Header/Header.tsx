@@ -2,6 +2,7 @@ import styles from "./Header.module.css";
 import React, { useEffect, useRef, useState, FC } from "react";
 import CartPopout from "../CartPopout/CartPopout";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   // isMobile: boolean;
@@ -12,6 +13,7 @@ const Header: FC<HeaderProps> = ({}) => {
   // reference to the cart popout to detect clicks outside of the popout when its open to close it
   const cartPopoutRef = useRef<HTMLDivElement>(null);
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
 
   function togglePopout() {
     setCartShowing((prevCartShowing) => !prevCartShowing);
@@ -25,6 +27,7 @@ const Header: FC<HeaderProps> = ({}) => {
       console.log(cartShowing);
     } else {
       // if mobile / tablet, navigate to cart page
+      navigate('/cart');
     }
   }
 
