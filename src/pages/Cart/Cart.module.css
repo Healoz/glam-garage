@@ -50,3 +50,40 @@
 .totalBox p {
     text-align: center;
 }
+
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .cartGridContainer {
+        padding: 5rem 10vw 5rem 10vw;
+    }
+
+    .totalBox {
+        padding: 5rem 10vw 5rem 10vw;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+    .cartPage {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 4rem;
+        padding: 5rem 10vw 5rem 10vw;
+    }
+
+    .totalBox {
+        height: 30%;
+        padding: 50px;
+        border-radius: 20px;
+    }
+
+    .cartGridContainer {
+        padding: 5rem 10vw 5rem 10vw;
+        padding: 0;
+    }
+
+    .cartPage h1 {
+        margin-top: 0;
+    }
+}
