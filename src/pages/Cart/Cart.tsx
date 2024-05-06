@@ -22,30 +22,32 @@ const Cart: React.FC<CartProps> = ({ cartItems }) => {
         </div>
       </div>
       <div className={styles.totalBox}>
-        <h2 className={styles.totalTitle}>Total</h2>
-        <div className={styles.totalGrid}>
-          <div>
-            <h4>Sub-total</h4>
+        <div className={styles.totalBoxContainer}>
+          <h2 className={styles.totalTitle}>Total</h2>
+          <div className={styles.totalGrid}>
+            <div>
+              <h4>Sub-total</h4>
+            </div>
+            <div className={styles.price}>
+              <h2>$283</h2>
+            </div>
+            <div>
+              <h4>Shipping</h4>
+            </div>
+            <div className={styles.price}>
+              <h2>$27</h2>
+            </div>
           </div>
-          <div className={styles.price}>
-            <h2>$283</h2>
-          </div>
-          <div>
-            <h4>Shipping</h4>
-          </div>
-          <div className={styles.price}>
-            <h2>$27</h2>
-          </div>
+          <Button
+            buttonText="Checkout"
+            colourScheme={ColourScheme.Primary}
+            iconCode="arrow_forward"
+            buttonLink="/"
+            isCircle={false}
+            fillsSpace={true}
+          />
+          <p>Lorem ipsum dolor sit amet</p>
         </div>
-        <Button
-          buttonText="Checkout"
-          colourScheme={ColourScheme.Primary}
-          iconCode="arrow_forward"
-          buttonLink="/"
-          isCircle={false}
-          fillsSpace={true}
-        />
-        <p>Lorem ipsum dolor sit amet</p>
       </div>
     </main>
   );
