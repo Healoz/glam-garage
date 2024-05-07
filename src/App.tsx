@@ -12,6 +12,15 @@ import Cart from "./pages/Cart/Cart";
 function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+
+  function addProductToCart(product: Product): void {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = [...prevCartItems, product];
+
+      return updatedCartItems;
+    });
+  }
 
   return (
     <div className="App">
@@ -20,7 +29,10 @@ function App() {
         <div className="pageContent">
           <Routes>
             <Route path="" element={<Home products={products} />} />
-            <Route path="/product/:id" element={<ProductPage products={products} />} />
+            <Route
+              path="/product/:id"
+              element={<ProductPage products={products} />}
+            />
             <Route path="/cart" element={<Cart cartItems={products}></Cart>} />
           </Routes>
         </div>

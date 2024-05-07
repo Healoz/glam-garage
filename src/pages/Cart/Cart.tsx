@@ -15,10 +15,10 @@ const Cart: React.FC<CartProps> = ({ cartItems }) => {
       <div className={styles.cartGridContainer}>
         <h1>Your Cart</h1>
         <div className={styles.cartGrid}>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          <CartItem quantityAdjust={true} />
+          <CartItem quantityAdjust={true} />
+          <CartItem quantityAdjust={true} />
+          <CartItem quantityAdjust={true} />
         </div>
       </div>
       <div className={styles.totalBox}>

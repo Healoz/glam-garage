@@ -27,12 +27,12 @@ const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps
           </button>
         </div>
         <div className={styles.cartScroll}>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          <CartItem quantityAdjust={false} />
+          <CartItem quantityAdjust={false} />
+          <CartItem quantityAdjust={false} />
+          <CartItem quantityAdjust={false} />
+          <CartItem quantityAdjust={false} />
+          <CartItem quantityAdjust={false} />
         </div>
         <div className={styles.total}>
           <h4>Total</h4>

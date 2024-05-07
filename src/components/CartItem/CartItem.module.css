@@ -40,3 +40,14 @@
 .productInfo .info h4 {
     font-size: 0.9rem;
 }
+
+.quantityAdjust {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-right: 2rem;
+}
+
+.quantityAdjust h2 {
+  font-size: 16px;
+}

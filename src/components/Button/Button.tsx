@@ -11,6 +11,7 @@ interface ButtonProps {
   fontSize?: number;
   isCircle: boolean;
   fillsSpace: boolean;
+  customPadding?: number;
   onClickFunction?: () => void;
 }
 
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   fontSize,
   isCircle,
   fillsSpace,
+  customPadding,
   onClickFunction,
 }) => {
   const colourSchemeClass =
@@ -33,7 +35,11 @@ const Button: React.FC<ButtonProps> = ({
       ? styles.white
       : styles.defaultColour;
 
-  const fontSizeClass = { fontSize: fontSize };
+  // check if custom font size or padding have been provided
+  const fontSizeStyle = fontSize ? { fontSize: fontSize } : {};
+  const paddingStyle = customPadding ? { padding: customPadding } : {};
+
+  const combinedStyles = { ...fontSizeStyle, ...paddingStyle };
 
   return (
     <div
@@ -42,7 +48,11 @@ const Button: React.FC<ButtonProps> = ({
       } ${styles.button}`}
       onClick={onClickFunction}
     >
-      <Link className={colourSchemeClass} to={buttonLink} style={fontSizeClass}>
+      <Link
+        className={colourSchemeClass}
+        to={buttonLink}
+        style={combinedStyles}
+      >
         {buttonText}
         <span className="material-symbols-outlined">{iconCode}</span>
       </Link>
