@@ -6,3 +6,18 @@ export interface Product {
     price: number;
     imageUrls: string[];
 }
+
+export enum Size {
+    XS = 'XS',
+    S = 'S',
+    M = 'M',
+    L = 'L',
+    XL= 'XL'
+}
+
+export interface CartItem {
+    id: number;
+    product: Product;
+    quantity: number;
+    size: Size;
+}

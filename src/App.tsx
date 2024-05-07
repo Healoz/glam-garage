@@ -6,52 +6,55 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import Footer from "./components/Footer/Footer";
 import productsData from "./data/products.json";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Product } from "./data/types";
+import { Product, CartItem } from "./data/types";
 import Cart from "./pages/Cart/Cart";
 
 // define shape of context value
 interface CartContextValue {
-  cartItems: Product[];
-  addProductToCart: (product: Product) => void;
-  removeProductFromCart: (productId: number) => void;
-  // updateProductInCart: (productId: string, newQuantity: number) => void;
+  cartItems: CartItem[];
+  addCartItemToCart: (cartItem: CartItem) => void;
+  removeCartItemFromCart: (cartItemId: number) => void;
+  updateProductInCart: (cartItemId: number, newQuantity: number) => void;
 }
 
 // creating a context
 export const CartContext = createContext<CartContextValue>({
   cartItems: [],
-  addProductToCart: () => {},
-  removeProductFromCart: () => {},
-  // updateProductInCart: () => {}
+  addCartItemToCart: () => {},
+  removeCartItemFromCart: () => {},
+  updateProductInCart: () => {}
 });
 
 function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addProductToCart = (product: Product): void => {
-    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  const addCartItemToCart = (cartItem: CartItem): void => {
+    setCartItems((prevCartItems) => [...prevCartItems, cartItem]);
   };
 
-  const removeProductFromCart = (productId: number): void => {
+  const removeCartItemFromCart = (cartItemId: number): void => {
     setCartItems((prevCartItems) =>
-      prevCartItems.filter((item) => item.id !== productId)
+      prevCartItems.filter((item) => item.id !== cartItemId)
     );
   };
+
+  const updateProductInCart = (cartItemId: number, newQuantity: number): void => {
+    setCartItems((prevCartItems) =>
+    prevCartItems.map((item) =>
+      item.id === cartItemId ? { ...item, quantity: newQuantity } : item))
+  }
 
   // creating an object with all cartItems and functions
   const cartContextValue: CartContextValue = {
     cartItems,
-    addProductToCart,
-    removeProductFromCart,
+    addCartItemToCart: addCartItemToCart,
+    removeCartItemFromCart: removeCartItemFromCart,
+    updateProductInCart: updateProductInCart,
   };
 
-  // const updateProductInCart = (productId: number, newQuantity: number): void => {
-  //   setCartItems((prevCartItems) =>
-  //   prevCartItems.map((item) =>
-  //     item.id === productId ? { ...item, quantity: newQuantity } : item))
-  // }
+  
 
   return (
     <CartContext.Provider value={cartContextValue}>
