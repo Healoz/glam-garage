@@ -6,7 +6,7 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import Footer from "./components/Footer/Footer";
 import productsData from "./data/products.json";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Product, CartItem } from "./data/types";
+import { Product, CartItem, Size } from "./data/types";
 import Cart from "./pages/Cart/Cart";
 
 // define shape of context value
@@ -28,7 +28,8 @@ export const CartContext = createContext<CartContextValue>({
 function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const [cartItems, setCartItems] = useState<CartItem[]>(createTestCartItems);
 
   const addCartItemToCart = (cartItem: CartItem): void => {
     setCartItems((prevCartItems) => [...prevCartItems, cartItem]);
@@ -54,7 +55,25 @@ function App() {
     updateProductInCart: updateProductInCart,
   };
 
-  
+  function createTestCartItems(): CartItem[] {
+    const cartItemArray: CartItem[] = [];
+
+    const product = products[0];
+
+    for (let i = 0; i < 2; i++) {
+      const cartItem: CartItem = {
+        id: i + 1,
+        product: product,
+        quantity: 1,
+        size: Size.XL
+      }
+
+      cartItemArray.push(cartItem);
+    }
+
+    return cartItemArray;
+  }
+
 
   return (
     <CartContext.Provider value={cartContextValue}>

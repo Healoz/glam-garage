@@ -1,27 +1,43 @@
 import styles from "./CartPopout.module.css";
-import {RefObject, useRef, forwardRef, useContext} from "react";
+import { RefObject, useRef, forwardRef, useContext } from "react";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
-import CartItem from "../CartItem/CartItem";
+import CartItemElement from "../CartItem/CartItemElement";
 import { CartContext } from "../../App";
+import { CartItem } from "../../data/types";
 
 interface CartPopoutProps {
   isShown: boolean;
   togglePopout: () => void;
 }
 
-const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps> = ({isShown, togglePopout}, ref ) => {
-
+const CartPopout: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  CartPopoutProps
+> = ({ isShown, togglePopout }, ref) => {
   // retrieving cart items from cartContext
   const { cartItems } = useContext(CartContext);
+
+  const CartItemElements = () => {
+    return (
+      <div className={styles.cartScroll}>
+        {cartItems.map((cartItem: CartItem) => (
+          <CartItemElement quantityAdjust={false} key={cartItem.id} />
+        ))}
+      </div>
+    );
+  };
 
   // Create local ref if no ref is provided
   const localRef = useRef<HTMLDivElement>(null);
   const popoutRef = ref || localRef;
 
   return (
-    <div className={`${styles.cartPopout} ${isShown ? "" : styles.hidden} `} ref={popoutRef}>
+    <div
+      className={`${styles.cartPopout} ${isShown ? "" : styles.hidden} `}
+      ref={popoutRef}
+    >
       <div className={styles.cartArrow}></div>
       <div className={styles.cartContainer}>
         <div className={styles.heading}>
@@ -30,14 +46,7 @@ const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-        <div className={styles.cartScroll}>
-          <CartItem quantityAdjust={false} />
-          <CartItem quantityAdjust={false} />
-          <CartItem quantityAdjust={false} />
-          <CartItem quantityAdjust={false} />
-          <CartItem quantityAdjust={false} />
-          <CartItem quantityAdjust={false} />
-        </div>
+        <CartItemElements />
         <div className={styles.total}>
           <h4>Total</h4>
           <h4>$84</h4>

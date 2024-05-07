@@ -2,7 +2,7 @@ import styles from "./Cart.module.css";
 import React from "react";
 import Button from "../../components/Button/Button";
 import { Product } from "../../data/types";
-import CartItem from "../../components/CartItem/CartItem";
+import CartItemElement from "../../components/CartItem/CartItemElement";
 import ColourScheme from "../../enums/ColourScheme";
 
 interface CartProps {
@@ -15,10 +15,10 @@ const Cart: React.FC<CartProps> = ({ cartItems }) => {
       <div className={styles.cartGridContainer}>
         <h1>Your Cart</h1>
         <div className={styles.cartGrid}>
-          <CartItem quantityAdjust={true} />
-          <CartItem quantityAdjust={true} />
-          <CartItem quantityAdjust={true} />
-          <CartItem quantityAdjust={true} />
+          <CartItemElement quantityAdjust={true} />
+          <CartItemElement quantityAdjust={true} />
+          <CartItemElement quantityAdjust={true} />
+          
         </div>
       </div>
       <div className={styles.totalBox}>

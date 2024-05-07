@@ -1,4 +1,4 @@
-import styles from "./CartItem.module.css";
+import styles from "./CartItemElement.module.css";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
@@ -7,7 +7,7 @@ interface CartItemProps {
   quantityAdjust: boolean;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ quantityAdjust }) => {
+const CartItemElement: React.FC<CartItemProps> = ({ quantityAdjust }) => {
   return (
     <div className={styles.cartItem}>
       <div
@@ -62,4 +62,4 @@ const QuantityButtons = () => {
   );
 };
 
-export default CartItem;
+export default CartItemElement;
