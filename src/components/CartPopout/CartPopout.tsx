@@ -1,9 +1,10 @@
 import styles from "./CartPopout.module.css";
-import {RefObject, useRef, forwardRef} from "react";
+import {RefObject, useRef, forwardRef, useContext} from "react";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 import CartItem from "../CartItem/CartItem";
+import { CartContext } from "../../App";
 
 interface CartPopoutProps {
   isShown: boolean;
@@ -11,6 +12,9 @@ interface CartPopoutProps {
 }
 
 const CartPopout: React.ForwardRefRenderFunction<HTMLDivElement, CartPopoutProps> = ({isShown, togglePopout}, ref ) => {
+
+  // retrieving cart items from cartContext
+  const { cartItems } = useContext(CartContext);
 
   // Create local ref if no ref is provided
   const localRef = useRef<HTMLDivElement>(null);
