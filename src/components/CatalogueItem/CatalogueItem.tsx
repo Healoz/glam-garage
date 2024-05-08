@@ -20,17 +20,6 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
                 className={styles.productImage}
                 style={{backgroundImage: `url(${product.imageUrls[0]})`}}
             >
-                <div className={styles.catalogueAddToCartOverlay}>
-                    <Button 
-                        buttonText="Add to cart"
-                        colourScheme={ColourScheme.White}
-                        iconCode="arrow_forward"
-                        buttonLink="#"
-                        fontSize={12}
-                        isCircle={false}
-                        fillsSpace={false}
-                    />
-                </div>
                 <div className={styles.saveButton}>
                     <span className="material-symbols-outlined">favorite</span>
                 </div>

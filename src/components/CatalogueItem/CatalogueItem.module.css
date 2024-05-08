@@ -44,22 +44,6 @@
     color: var(--white);
 }
 
-.catalogueAddToCartOverlay {
-    /* background-color: var(--black-opacity-2); */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 1rem;
-    justify-content: flex-end;
-    display: none;
-}
-
-.catalogueItem:hover .catalogueAddToCartOverlay {
-    display: flex;
-}   
-
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
 

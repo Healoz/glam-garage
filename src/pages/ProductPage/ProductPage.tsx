@@ -1,10 +1,10 @@
 import Button from "../../components/Button/Button";
-import Select from "../../components/Select/Select";
+import SizeSelect from "../../components/Select/SizeSelect";
 import Accordion from "../../components/Accordion/Accordion";
 import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
@@ -61,6 +61,7 @@ const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
 
 const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   const { addProductToCart } = useContext(CartContext);
+  const [selectedSize, setSelectedSize] = useState<Size>(Size.XS);
 
   return (
     <div className={styles.productInfo}>
@@ -69,14 +70,14 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
       <p>{product.description}</p>
       <div className={styles.size}>
         <p>Size:</p>
-        <Select selectOptions={["XS", "S", "M", "L", "XL"]} />
+        <SizeSelect setSelectedSize={setSelectedSize} />
       </div>
       <div className={styles.buttons}>
         <Button
           buttonText="Add to cart"
           colourScheme={ColourScheme.Primary}
           iconCode="add"
-          onClickFunction={() => addProductToCart(product, Size.S)}
+          onClickFunction={() => addProductToCart(product, selectedSize)}
           isCircle={false}
           fillsSpace={true}
         />
