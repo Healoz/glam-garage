@@ -3,6 +3,8 @@ import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 import { CartItem } from "../../data/types";
+import { useContext } from "react";
+import { CartContext } from "../../App";
 
 interface CartItemProps {
   quantityAdjust: boolean;
@@ -13,14 +15,20 @@ interface CartItemProps {
 const CartItemElement: React.FC<CartItemProps> = ({
   quantityAdjust,
   cartItem,
-  isPopoutSize
+  isPopoutSize,
 }) => {
   const product = cartItem.product;
+
+  // getting context of cartItem function
+  const { removeCartItemFromCart, updateProductInCart } =
+    useContext(CartContext);
 
   return (
     <div className={styles.cartItem}>
       <div
-        className={`${isPopoutSize ? styles.productImgPopoutSize + ' ' : ''}${styles.productImg}`}
+        className={`${isPopoutSize ? styles.productImgPopoutSize + " " : ""}${
+          styles.productImg
+        }`}
         style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
       <div className={styles.productInfo}>
@@ -46,6 +54,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
               buttonLink=""
               isCircle={true}
               fillsSpace={false}
+              onClickFunction={() => removeCartItemFromCart(cartItem.id)}
             />
           </div>
         </div>
@@ -59,25 +68,35 @@ interface QuantityButtonsProps {
 }
 
 const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
+
+  const isQuantityOneOrLess = cartItem.quantity <= 1; 
+  const { updateProductInCart } = useContext(CartContext);
+
   return (
     <div className={styles.quantityAdjust}>
-      <Button
-        colourScheme={ColourScheme.Secondary}
-        iconCode="remove"
-        buttonLink=""
-        isCircle={true}
-        fillsSpace={false}
-        customPadding={4}
-      />
+      <div className={isQuantityOneOrLess ? styles.quantityBtnInnactive : ''}>
+        <Button
+          colourScheme={ColourScheme.Secondary}
+          iconCode="remove"
+          buttonLink=""
+          isCircle={true}
+          fillsSpace={false}
+          customPadding={4}
+          onClickFunction={!isQuantityOneOrLess ? () => updateProductInCart(cartItem.id, cartItem.quantity - 1) : undefined}
+        />
+      </div>
       <h2>{cartItem.quantity}</h2>
-      <Button
-        colourScheme={ColourScheme.Secondary}
-        iconCode="add"
-        buttonLink=""
-        isCircle={true}
-        fillsSpace={false}
-        customPadding={4}
-      />
+      <div>
+        <Button
+          colourScheme={ColourScheme.Secondary}
+          iconCode="add"
+          buttonLink=""
+          isCircle={true}
+          fillsSpace={false}
+          customPadding={4}
+          onClickFunction={() => updateProductInCart(cartItem.id, cartItem.quantity + 1)}
+        />
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const CartPopout: React.ForwardRefRenderFunction<
   CartPopoutProps
 > = ({ isShown, togglePopout }, ref) => {
   // retrieving cart items from cartContext
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   const CartItemElements = () => {
     return (
@@ -54,7 +54,7 @@ const CartPopout: React.ForwardRefRenderFunction<
         <CartItemElements />
         <div className={styles.total}>
           <h4>Total</h4>
-          <h4>$84</h4>
+          <h4>${cartTotal}</h4>
         </div>
         <div className={styles.buttons}>
           <Button

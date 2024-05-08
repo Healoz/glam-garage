@@ -13,7 +13,9 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({}) => {
 
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
+
+  const shippingPrice = 30;
 
   const CartItemGridElements = () => {
     return (
@@ -44,13 +46,13 @@ const Cart: React.FC<CartProps> = ({}) => {
               <h4>Sub-total</h4>
             </div>
             <div className={styles.price}>
-              <h2>$283</h2>
+              <h2>${cartTotal}</h2>
             </div>
             <div>
               <h4>Shipping</h4>
             </div>
             <div className={styles.price}>
-              <h2>$27</h2>
+              <h2>${shippingPrice}</h2>
             </div>
           </div>
           <Button

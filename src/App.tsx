@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 // define shape of context value
 interface CartContextValue {
   cartItems: CartItem[];
+  cartTotal: number;
   addProductToCart: (product: Product, size: Size) => void;
   removeCartItemFromCart: (cartItemId: string) => void;
   updateProductInCart: (cartItemId: string, newQuantity: number) => void;
@@ -21,6 +22,7 @@ interface CartContextValue {
 // creating a context
 export const CartContext = createContext<CartContextValue>({
   cartItems: [],
+  cartTotal: 0,
   addProductToCart: () => {},
   removeCartItemFromCart: () => {},
   updateProductInCart: () => {},
@@ -30,8 +32,22 @@ function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    return storedCartItems ? JSON.parse(storedCartItems) : [];
+  });
 
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
+  // loading cart data from local storage on app load
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  // useContext functions
   const addProductToCart = (product: Product, size: Size): void => {
     // first, it needs to check if current product (same id) with the same size is already in cart
     const sameProductInCart = cartItems.find(
@@ -77,9 +93,29 @@ function App() {
     );
   };
 
+  // Calculating cart total
+  const calculateCartTotal = (): number => {
+    let total = 0;
+
+    cartItems.forEach(
+      (cartItem) => (total += cartItem.product.price * cartItem.quantity)
+    );
+
+    return total;
+  };
+
+  // everytime cartItems changes, recalculate total + save to local storage
+  useEffect(() => {
+    // save to local storage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // calculate total
+    setCartTotal(calculateCartTotal());
+  }, [cartItems]);
+
   // creating an object with all cartItems and functions
   const cartContextValue: CartContextValue = {
     cartItems,
+    cartTotal,
     addProductToCart: addProductToCart,
     removeCartItemFromCart: removeCartItemFromCart,
     updateProductInCart: updateProductInCart,
