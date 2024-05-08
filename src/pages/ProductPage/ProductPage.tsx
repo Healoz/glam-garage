@@ -8,11 +8,9 @@ import React, { useContext } from "react";
 import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
+import { Size } from "../../data/types";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
-
-  const { cartItems, addProductToCart } = useContext(CartContext);
-
   return (
     <div>
       <div
@@ -62,13 +60,13 @@ const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
 };
 
 const ProductInfo: React.FC<ProductProps> = ({ product }) => {
+  const { addProductToCart } = useContext(CartContext);
+
   return (
     <div className={styles.productInfo}>
       <h3>{product.name}</h3>
       <h3>${product.price}</h3>
-      <p>
-        {product.description}
-      </p>
+      <p>{product.description}</p>
       <div className={styles.size}>
         <p>Size:</p>
         <Select selectOptions={["XS", "S", "M", "L", "XL"]} />
@@ -78,7 +76,7 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
           buttonText="Add to cart"
           colourScheme={ColourScheme.Primary}
           iconCode="add"
-          buttonLink="/"
+          onClickFunction={() => addProductToCart(product, Size.S)}
           isCircle={false}
           fillsSpace={true}
         />
