@@ -7,7 +7,7 @@ interface ButtonProps {
   buttonText?: string;
   colourScheme: ColourScheme;
   iconCode: string;
-  buttonLink: string;
+  buttonLink?: string;
   fontSize?: number;
   isCircle: boolean;
   fillsSpace: boolean;
@@ -48,14 +48,22 @@ const Button: React.FC<ButtonProps> = ({
       } ${styles.button}`}
       onClick={onClickFunction}
     >
-      <Link
-        className={colourSchemeClass}
-        to={buttonLink}
-        style={combinedStyles}
-      >
-        {buttonText}
-        <span className="material-symbols-outlined">{iconCode}</span>
-      </Link>
+      {/* rendering the button differently if link is provided */}
+      {buttonLink ? (
+        <Link
+          className={colourSchemeClass}
+          to={buttonLink}
+          style={combinedStyles}
+        >
+          {buttonText}
+          <span className="material-symbols-outlined">{iconCode}</span>
+        </Link>
+      ) : (
+        <a className={colourSchemeClass} style={combinedStyles}>
+          {buttonText}
+          <span className="material-symbols-outlined">{iconCode}</span>
+        </a>
+      )}
     </div>
   );
 };

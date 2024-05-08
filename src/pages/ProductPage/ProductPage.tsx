@@ -11,7 +11,7 @@ import { CartContext } from "../../App";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
 
-  const { cartItems, addCartItemToCart } = useContext(CartContext);
+  const { cartItems, addProductToCart } = useContext(CartContext);
 
   return (
     <div>
@@ -85,7 +85,6 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
         <Button
           colourScheme={ColourScheme.Secondary}
           iconCode="favorite"
-          buttonLink="/"
           isCircle={true}
           fillsSpace={false}
         />
