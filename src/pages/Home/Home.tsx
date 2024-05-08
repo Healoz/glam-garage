@@ -47,7 +47,6 @@ const HeroContent = () => {
           buttonText="Shop now"
           colourScheme={ColourScheme.Primary}
           iconCode="arrow_forward"
-          buttonLink="/"
           isCircle={false}
           fillsSpace={false}
         />
