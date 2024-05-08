@@ -8,13 +8,14 @@ import productsData from "./data/products.json";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Product, CartItem, Size } from "./data/types";
 import Cart from "./pages/Cart/Cart";
+import {v4 as uuidv4} from 'uuid';
 
 // define shape of context value
 interface CartContextValue {
   cartItems: CartItem[];
   addCartItemToCart: (cartItem: CartItem) => void;
-  removeCartItemFromCart: (cartItemId: number) => void;
-  updateProductInCart: (cartItemId: number, newQuantity: number) => void;
+  removeCartItemFromCart: (cartItemId: string) => void;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
 // creating a context
@@ -29,19 +30,20 @@ function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>(createTestCartItems);
+  const [cartItems, setCartItems] = useState<CartItem[]>(createTestCartItems());
 
   const addCartItemToCart = (cartItem: CartItem): void => {
+    // generate cartItem id
     setCartItems((prevCartItems) => [...prevCartItems, cartItem]);
   };
 
-  const removeCartItemFromCart = (cartItemId: number): void => {
+  const removeCartItemFromCart = (cartItemId: string): void => {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((item) => item.id !== cartItemId)
     );
   };
 
-  const updateProductInCart = (cartItemId: number, newQuantity: number): void => {
+  const updateProductInCart = (cartItemId: string, newQuantity: number): void => {
     setCartItems((prevCartItems) =>
     prevCartItems.map((item) =>
       item.id === cartItemId ? { ...item, quantity: newQuantity } : item))
@@ -62,7 +64,7 @@ function App() {
 
     for (let i = 0; i < 5; i++) {
       const cartItem: CartItem = {
-        id: i + 1,
+        id: uuidv4(),
         product: product,
         quantity: 3,
         size: Size.XL
@@ -71,6 +73,7 @@ function App() {
       cartItemArray.push(cartItem);
     }
 
+    console.log(cartItemArray);
     return cartItemArray;
   }
 

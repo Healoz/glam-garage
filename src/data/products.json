@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Enchanting Amethyst Dream Dress",
-    "description": "Elevate your style with this enchanting amethyst dream dress. Made from luxurious silk fabric, it features a flattering silhouette and delicate floral pattern. Whether you're attending a magical gala or a romantic dinner, this dress is sure to turn heads.",
+    "name": "Ethereal Sapphire Evening Gown",
+    "description": "Illuminate the night with this ethereal sapphire evening gown. Crafted from shimmering satin, it boasts a graceful silhouette and intricate lace detailing. Whether you're gracing a grand ball or a sophisticated dinner, this gown will captivate all eyes.",
     "price": 20,
     "category": "Women's Dresses",
     "imageUrls": [
@@ -13,8 +13,8 @@
   },
   {
     "id": 2,
-    "name": "Galactic Adventure Graphic Tee",
-    "description": "Embark on a galactic adventure with this cool graphic tee. Crafted from soft cotton, it features a unique design inspired by cosmic wonders. Pair it with your favorite jeans for a laid-back look that's out of this world.",
+    "name": "Celestial Odyssey Graphic Tee",
+    "description": "Embark on a celestial odyssey with this captivating graphic tee. Crafted from soft cotton, it features a mesmerizing design inspired by cosmic marvels. Pair it with your beloved jeans for an effortlessly chic look that transcends the ordinary.",
     "price": 25,
     "category": "T-Shirts",
     "imageUrls": [
@@ -25,9 +25,9 @@
   },
   {
     "id": 3,
-    "name": "Galactic Adventure Graphic Tee",
-    "description": "Embark on a galactic adventure with this cool graphic tee. Crafted from soft cotton, it features a unique design inspired by cosmic wonders. Pair it with your favorite jeans for a laid-back look that's out of this world.",
-    "price": 25,
+    "name": "Lunar Serenade Graphic Tee",
+    "description": "Serenade the night with this lunar-inspired graphic tee. Crafted from premium cotton, it showcases a spellbinding design reminiscent of moonlit adventures. Pair it effortlessly with your go-to jeans for an enchanting casual ensemble.",
+    "price": 40,
     "category": "T-Shirts",
     "imageUrls": [
       "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -37,9 +37,9 @@
   },
   {
     "id": 4,
-    "name": "Enchanting Amethyst Dream Dress",
-    "description": "Elevate your style with this enchanting amethyst dream dress. Made from luxurious silk fabric, it features a flattering silhouette and delicate floral pattern. Whether you're attending a magical gala or a romantic dinner, this dress is sure to turn heads.",
-    "price": 20,
+    "name": "Mystic Moonlight Maxi Dress",
+    "description": "Step into mystic moonlight with this captivating maxi dress. Crafted from sumptuous silk, it drapes elegantly, adorned with intricate celestial motifs. Whether it's a celestial soirée or an intimate dinner, this dress promises to leave a lasting impression.",
+    "price": 65,
     "category": "Women's Dresses",
     "imageUrls": [
       "https://images.unsplash.com/photo-1657549091422-3b748b8f72b2?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -49,9 +49,9 @@
   },
   {
     "id": 5,
-    "name": "Galactic Adventure Graphic Tee",
-    "description": "Embark on a galactic adventure with this cool graphic tee. Crafted from soft cotton, it features a unique design inspired by cosmic wonders. Pair it with your favorite jeans for a laid-back look that's out of this world.",
-    "price": 25,
+    "name": "Stellar Voyage Graphic Tee",
+    "description": "Embark on a stellar voyage with this captivating graphic tee. Crafted from soft cotton, it features an awe-inspiring design inspired by celestial wonders. Pair it effortlessly with your favorite jeans for a look that's truly out of this world.",
+    "price": 15,
     "category": "T-Shirts",
     "imageUrls": [
       "https://images.unsplash.com/photo-1565679871226-33cfa91bedae?q=80&w=1227&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -61,9 +61,9 @@
   },
   {
     "id": 6,
-    "name": "Galactic Adventure Graphic Tee",
-    "description": "Embark on a galactic adventure with this cool graphic tee. Crafted from soft cotton, it features a unique design inspired by cosmic wonders. Pair it with your favorite jeans for a laid-back look that's out of this world.",
-    "price": 25,
+    "name": "Galactic Odyssey Graphic Tee",
+    "description": "Embark on a galactic odyssey with this mesmerizing graphic tee. Crafted from soft cotton, it showcases an otherworldly design inspired by cosmic voyages. Pair it effortlessly with your favorite jeans for an interstellar style statement.",
+    "price": 72,
     "category": "T-Shirts",
     "imageUrls": [
       "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

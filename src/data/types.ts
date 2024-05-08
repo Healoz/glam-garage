@@ -16,7 +16,7 @@ export enum Size {
 }
 
 export interface CartItem {
-    id: number;
+    id: string;
     product: Product;
     quantity: number;
     size: Size;

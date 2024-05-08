@@ -4,11 +4,15 @@ import Accordion from "../../components/Accordion/Accordion";
 import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
-import React from "react";
+import React, { useContext } from "react";
 import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
+import { CartContext } from "../../App";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
+
+  const { cartItems, addCartItemToCart } = useContext(CartContext);
+
   return (
     <div>
       <div
