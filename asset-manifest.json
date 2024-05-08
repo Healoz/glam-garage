@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/glam-garage/static/css/main.40d211a1.css",
+    "main.js": "/glam-garage/static/js/main.021852f2.js",
+    "static/js/453.84e52122.chunk.js": "/glam-garage/static/js/453.84e52122.chunk.js",
+    "static/media/nimble-made-kMGX6UK06Ps-unsplash.jpg": "/glam-garage/static/media/nimble-made-kMGX6UK06Ps-unsplash.f593c26a98246db18dc5.jpg",
+    "static/media/kalea-morgan-ZmcHE6c7-7U-unsplash.jpg": "/glam-garage/static/media/kalea-morgan-ZmcHE6c7-7U-unsplash.7569d3b8f9b6e2a07a4f.jpg",
+    "static/media/carlos-vaz-KP4bxnxAilU-unsplash.jpg": "/glam-garage/static/media/carlos-vaz-KP4bxnxAilU-unsplash.6fc2a0475e28d83c9e42.jpg",
+    "static/media/circle-text.svg": "/glam-garage/static/media/circle-text.07f34ad75b303e13d759b2cefb69b8b0.svg",
+    "index.html": "/glam-garage/index.html",
+    "main.40d211a1.css.map": "/glam-garage/static/css/main.40d211a1.css.map",
+    "main.021852f2.js.map": "/glam-garage/static/js/main.021852f2.js.map",
+    "453.84e52122.chunk.js.map": "/glam-garage/static/js/453.84e52122.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40d211a1.css",
+    "static/js/main.021852f2.js"
+  ]
+}
