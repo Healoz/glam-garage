@@ -8,7 +8,7 @@ import productsData from "./data/products.json";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Product, CartItem, Size } from "./data/types";
 import Cart from "./pages/Cart/Cart";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 // define shape of context value
 interface CartContextValue {
@@ -23,7 +23,7 @@ export const CartContext = createContext<CartContextValue>({
   cartItems: [],
   addProductToCart: () => {},
   removeCartItemFromCart: () => {},
-  updateProductInCart: () => {}
+  updateProductInCart: () => {},
 });
 
 function App() {
@@ -33,19 +33,30 @@ function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const addProductToCart = (product: Product, size: Size): void => {
+    // first, it needs to check if current product (same id) with the same size is already in cart
+    const sameProductInCart = cartItems.find(
+      (foundCartItem) =>
+        foundCartItem.product.id === product.id && foundCartItem.size === size
+    );
 
-    // first, it needs to check if current product with the same size is already in cart
+    console.log(
+      sameProductInCart || "no duplicate product with same size found"
+    );
 
     // if it is, then just increment the quantity of the cart item by 1
+    if (sameProductInCart) {
+      updateProductInCart(sameProductInCart.id, sameProductInCart.quantity + 1);
+      return; // if found same product, exit out of the function
+    }
 
-    // if not, then create a new cartItem and add to the array of cartItems (even if there are matching products but DIFFERENT )
+    // if no duplicate product found, then create a new cartItem and add to the array of cartItems (even if there are matching products but DIFFERENT )
     const newCartItem: CartItem = {
       id: uuidv4(),
       product: product,
       quantity: 1,
-      size: size
-    }
-  
+      size: size,
+    };
+
     setCartItems((prevCartItems) => [...prevCartItems, newCartItem]);
   };
 
@@ -55,11 +66,16 @@ function App() {
     );
   };
 
-  const updateProductInCart = (cartItemId: string, newQuantity: number): void => {
+  const updateProductInCart = (
+    cartItemId: string,
+    newQuantity: number
+  ): void => {
     setCartItems((prevCartItems) =>
-    prevCartItems.map((item) =>
-      item.id === cartItemId ? { ...item, quantity: newQuantity } : item))
-  }
+      prevCartItems.map((item) =>
+        item.id === cartItemId ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
 
   // creating an object with all cartItems and functions
   const cartContextValue: CartContextValue = {
@@ -79,8 +95,8 @@ function App() {
         id: uuidv4(),
         product: product,
         quantity: 3,
-        size: Size.XL
-      }
+        size: Size.XL,
+      };
 
       cartItemArray.push(cartItem);
     }
@@ -89,7 +105,6 @@ function App() {
     return cartItemArray;
   }
 
-
   return (
     <CartContext.Provider value={cartContextValue}>
       <div className="App">
@@ -97,22 +112,12 @@ function App() {
           <Header />
           <div className="pageContent">
             <Routes>
-              <Route
-                path=""
-                element={
-                  <Home
-                    products={products}
-                  />
-                }
-              />
+              <Route path="" element={<Home products={products} />} />
               <Route
                 path="/product/:id"
                 element={<ProductPage products={products} />}
               />
-              <Route
-                path="/cart"
-                element={<Cart />}
-              />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
           </div>
           <Footer />

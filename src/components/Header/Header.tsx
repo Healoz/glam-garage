@@ -23,8 +23,6 @@ const Header: FC<HeaderProps> = ({}) => {
     if (window.screen.width > 1200) {
       // if desktop, show/hide popout
       togglePopout();
-      
-      console.log(cartShowing);
     } else {
       // if mobile / tablet, navigate to cart page
       navigate('/cart');
@@ -35,7 +33,6 @@ const Header: FC<HeaderProps> = ({}) => {
 
     // if clicked on shopping cart icon, do nothing
     if (shoppingCartBtnRef.current?.contains(event.target as Node)) {
-      console.log("clicked on shopping cart icon")
       return;
     }
 
@@ -46,23 +43,19 @@ const Header: FC<HeaderProps> = ({}) => {
         !cartPopoutRef.current.contains(event.target as Node)
       )
     ) {
-      console.log("mouse clicked inside of popout");
       return;
     }
 
-    console.log("clicked outside of popout");
     setCartShowing(false);
   };
 
   // UseEffect to handle click events outside of cartPopout
   useEffect(() => {
-    console.log("useEffect triggered");
 
     if (cartShowing) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     else {
-      console.log("event listener removed")
       document.removeEventListener("mousedown", handleClickOutside);
     }
 

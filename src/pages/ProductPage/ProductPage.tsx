@@ -147,7 +147,6 @@ function getProductById(
 const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   const { id } = useParams();
   const productSelected = getProductById(id, products);
-  console.log(productSelected);
 
   return (
     <section className={`${styles.productPage} pageContentContainerWide`}>
