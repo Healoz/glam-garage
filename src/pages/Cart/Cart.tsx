@@ -23,6 +23,7 @@ const Cart: React.FC<CartProps> = ({}) => {
             quantityAdjust={true}
             key={cartItem.id}
             cartItem={cartItem}
+            isPopoutSize={false}
           />
         ))}
       </div>

@@ -7,28 +7,38 @@ import { CartItem } from "../../data/types";
 interface CartItemProps {
   quantityAdjust: boolean;
   cartItem: CartItem;
+  isPopoutSize: boolean;
 }
 
-const CartItemElement: React.FC<CartItemProps> = ({ quantityAdjust, cartItem }) => {
-  
+const CartItemElement: React.FC<CartItemProps> = ({
+  quantityAdjust,
+  cartItem,
+  isPopoutSize
+}) => {
   const product = cartItem.product;
-  
+
   return (
     <div className={styles.cartItem}>
       <div
-        className={styles.productImg}
+        className={`${isPopoutSize ? styles.productImgPopoutSize + ' ' : ''}${styles.productImg}`}
         style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
       <div className={styles.productInfo}>
-        <div className={styles.info}>
-          <h4>${product.price}</h4>
-          <h4>{product.name}</h4>
-          <p>{product.category}</p>
-          <p>{cartItem.size}</p>
+        <div className={styles.infoContainer}>
+          <div className={styles.info}>
+            <h4>${product.price}</h4>
+            <h4>{product.name}</h4>
+            <p>{product.category}</p>
+            <p>{cartItem.size}</p>
+          </div>
           <div className={styles.qntyAndBtn}>
             <div className={styles.quantity}>
               {/* render quantity depending on if you can adjust it or not */}
-              {quantityAdjust ? <QuantityButtons cartItem={cartItem} /> : <p>Qty: {cartItem.quantity}</p>}
+              {quantityAdjust ? (
+                <QuantityButtons cartItem={cartItem} />
+              ) : (
+                <p>Qty: {cartItem.quantity}</p>
+              )}
             </div>
             <Button
               colourScheme={ColourScheme.Secondary}

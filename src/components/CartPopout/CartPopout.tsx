@@ -27,6 +27,7 @@ const CartPopout: React.ForwardRefRenderFunction<
             quantityAdjust={false}
             key={cartItem.id}
             cartItem={cartItem}
+            isPopoutSize={true}
           />
         ))}
       </div>

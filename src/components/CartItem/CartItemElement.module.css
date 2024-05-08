@@ -1,18 +1,21 @@
 .cartItem {
     /* background-color: blue; */
     width: 100%;
-
     margin-bottom: 1rem;
     display: flex;
     gap: 20px;
   }
 
   .productImg {
-    width: 30%;
-    height: inherit;
+    aspect-ratio: 2 / 3;
+    width: 20%;
     background-position: center center;
     background-size: cover;
     border-radius: 20px;
+}
+
+.productImgPopoutSize {
+  width: 30%;
 }
 
 .productInfo {
@@ -34,7 +37,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+}
 
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .productInfo .info h4 {
