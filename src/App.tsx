@@ -60,11 +60,11 @@ function App() {
 
     const product = products[0];
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 5; i++) {
       const cartItem: CartItem = {
         id: i + 1,
         product: product,
-        quantity: 1,
+        quantity: 3,
         size: Size.XL
       }
 
@@ -96,7 +96,7 @@ function App() {
               />
               <Route
                 path="/cart"
-                element={<Cart cartItems={products}></Cart>}
+                element={<Cart />}
               />
             </Routes>
           </div>

@@ -2,27 +2,33 @@ import styles from "./CartItemElement.module.css";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
+import { CartItem } from "../../data/types";
 
 interface CartItemProps {
   quantityAdjust: boolean;
+  cartItem: CartItem;
 }
 
-const CartItemElement: React.FC<CartItemProps> = ({ quantityAdjust }) => {
+const CartItemElement: React.FC<CartItemProps> = ({ quantityAdjust, cartItem }) => {
+  
+  const product = cartItem.product;
+  
   return (
     <div className={styles.cartItem}>
       <div
         className={styles.productImg}
-        style={{ backgroundImage: `url(${dummyImg})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
       ></div>
       <div className={styles.productInfo}>
         <div className={styles.info}>
-          <h4>$27</h4>
-          <h4>Product named sad awfawf</h4>
-          <p>Women's Dresses Women's Dresses</p>
+          <h4>${product.price}</h4>
+          <h4>{product.name}</h4>
+          <p>{product.category}</p>
+          <p>{cartItem.size}</p>
           <div className={styles.qntyAndBtn}>
             <div className={styles.quantity}>
               {/* render quantity depending on if you can adjust it or not */}
-              {quantityAdjust ? <QuantityButtons /> : <p>Qty: 1</p>}
+              {quantityAdjust ? <QuantityButtons cartItem={cartItem} /> : <p>Qty: {cartItem.quantity}</p>}
             </div>
             <Button
               colourScheme={ColourScheme.Secondary}
@@ -38,7 +44,11 @@ const CartItemElement: React.FC<CartItemProps> = ({ quantityAdjust }) => {
   );
 };
 
-const QuantityButtons = () => {
+interface QuantityButtonsProps {
+  cartItem: CartItem;
+}
+
+const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
   return (
     <div className={styles.quantityAdjust}>
       <Button
@@ -47,16 +57,16 @@ const QuantityButtons = () => {
         buttonLink=""
         isCircle={true}
         fillsSpace={false}
-        customPadding={8}
+        customPadding={4}
       />
-      <h2>1</h2>
+      <h2>{cartItem.quantity}</h2>
       <Button
         colourScheme={ColourScheme.Secondary}
         iconCode="add"
         buttonLink=""
         isCircle={true}
         fillsSpace={false}
-        customPadding={8}
+        customPadding={4}
       />
     </div>
   );

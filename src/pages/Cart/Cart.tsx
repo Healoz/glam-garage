@@ -1,25 +1,39 @@
 import styles from "./Cart.module.css";
-import React from "react";
+import React, {useContext} from "react";
 import Button from "../../components/Button/Button";
 import { Product } from "../../data/types";
 import CartItemElement from "../../components/CartItem/CartItemElement";
 import ColourScheme from "../../enums/ColourScheme";
+import { CartContext } from "../../App";
+import { CartItem } from "../../data/types";
 
 interface CartProps {
-  cartItems: Product[];
+  
 }
 
-const Cart: React.FC<CartProps> = ({ cartItems }) => {
+const Cart: React.FC<CartProps> = ({}) => {
+
+  const { cartItems } = useContext(CartContext);
+
+  const CartItemGridElements = () => {
+    return (
+      <div className={styles.cartGrid}>
+        {cartItems.map((cartItem: CartItem) => (
+          <CartItemElement
+            quantityAdjust={true}
+            key={cartItem.id}
+            cartItem={cartItem}
+          />
+        ))}
+      </div>
+    );
+  };
+
   return (
     <main className={styles.cartPage}>
       <div className={styles.cartGridContainer}>
         <h1>Your Cart</h1>
-        <div className={styles.cartGrid}>
-          <CartItemElement quantityAdjust={true} />
-          <CartItemElement quantityAdjust={true} />
-          <CartItemElement quantityAdjust={true} />
-          
-        </div>
+        <CartItemGridElements />
       </div>
       <div className={styles.totalBox}>
         <div className={styles.totalBoxContainer}>

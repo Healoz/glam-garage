@@ -23,7 +23,11 @@ const CartPopout: React.ForwardRefRenderFunction<
     return (
       <div className={styles.cartScroll}>
         {cartItems.map((cartItem: CartItem) => (
-          <CartItemElement quantityAdjust={false} key={cartItem.id} />
+          <CartItemElement
+            quantityAdjust={false}
+            key={cartItem.id}
+            cartItem={cartItem}
+          />
         ))}
       </div>
     );
