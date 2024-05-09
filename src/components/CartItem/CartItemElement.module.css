@@ -1,17 +1,17 @@
 .cartItem {
-    /* background-color: blue; */
-    width: 100%;
-    margin-bottom: 1rem;
-    display: flex;
-    gap: 20px;
-  }
+  /* background-color: blue; */
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 20px;
+}
 
-  .productImg {
-    aspect-ratio: 2 / 3;
-    width: 16%;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 20px;
+.productImg {
+  aspect-ratio: 2 / 3;
+  width: 28%;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 20px;
 }
 
 .productImgPopoutSize {
@@ -19,24 +19,24 @@
 }
 
 .productInfo {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-right: 1rem;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 1rem;
 }
 
 .qntyAndBtn {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-  .productInfo .info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+.productInfo .info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .infoContainer {
@@ -47,7 +47,7 @@
 }
 
 .productInfo .info h4 {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .quantityAdjust {
@@ -67,4 +67,11 @@
 
 .quantityBtnInnactive a:hover {
   cursor: default;
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+  .productImg {
+    width: 16%;
+  }
 }

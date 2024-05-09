@@ -9,6 +9,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Product, CartItem, Size } from "./data/types";
 import Cart from "./pages/Cart/Cart";
 import { v4 as uuidv4 } from "uuid";
+import Lenis from "lenis";
 
 // define shape of context value
 interface CartContextValue {
@@ -33,18 +34,28 @@ function App() {
   const [products, setProductsData] = useState<Product[]>(productsData);
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCartItems = localStorage.getItem('cartItems');
+    const storedCartItems = localStorage.getItem("cartItems");
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
 
   const [cartTotal, setCartTotal] = useState<number>(0);
 
-  // loading cart data from local storage on app load
   useEffect(() => {
+    // loading cart data from local storage on app load
     const storedCartItems = localStorage.getItem("cartItems");
     if (storedCartItems) {
       setCartItems(JSON.parse(storedCartItems));
     }
+
+    // smooth scroll behaiviour
+    const lenis = new Lenis();
+
+    function raf(time: any) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
   }, []);
 
   // useContext functions
@@ -107,7 +118,7 @@ function App() {
   // everytime cartItems changes, recalculate total + save to local storage
   useEffect(() => {
     // save to local storage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
     // calculate total
     setCartTotal(calculateCartTotal());
   }, [cartItems]);
