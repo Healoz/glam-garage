@@ -10,6 +10,7 @@ import { Product, CartItem, Size } from "./data/types";
 import Cart from "./pages/Cart/Cart";
 import { v4 as uuidv4 } from "uuid";
 import Lenis from "lenis";
+import { motion } from "framer-motion";
 
 // define shape of context value
 interface CartContextValue {

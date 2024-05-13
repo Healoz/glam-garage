@@ -34,6 +34,15 @@ select {
   
 }
 
+/* image reset */
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  font-style: italic;
+  
+}
+
 /* removing default a styling */
 a:-webkit-any-link {
   text-decoration: none;

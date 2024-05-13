@@ -18,15 +18,22 @@
     margin-bottom: var(--spacing-3);
 }
 
-.imageCollage .img:first-child {
-    background-color: blue;
+.imageCollage div:first-child {
     grid-row: span 2;
 }
 
+.imageContainer {
+    position: relative;
+}
+
 .imageCollage .img {
-    display: flex;
-    background-size: cover;
-    background-position: center center;
+    position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
     border-radius: 130px;
 }
 

@@ -11,25 +11,54 @@ import shirtImg from "../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg";
 import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ImageCollage = () => {
+  const collageContainerVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.4,
+      },
+    },
+  };
+
+  const collageImageVariants = {
+    hidden: { opacity: 0, y: -100 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <div className={styles.imageCollageContainer}>
       <CircleSticker />
-      <div className={styles.imageCollage}>
-        <div
-          className={styles.img}
-          style={{ backgroundImage: `url(${womanImg})` }}
-        ></div>
-        <div
-          className={styles.img}
-          style={{ backgroundImage: `url(${glassesImg})` }}
-        ></div>
-        <div
-          className={styles.img}
-          style={{ backgroundImage: `url(${shirtImg})` }}
-        ></div>
-      </div>
+      <motion.div
+        variants={collageContainerVariants}
+        initial="hidden"
+        animate="show"
+        className={styles.imageCollage}
+      >
+        <motion.div
+          className={styles.imageContainer}
+          variants={collageImageVariants}
+        >
+          <img className={styles.img} src={womanImg}></img>
+        </motion.div>
+        <motion.div
+          className={styles.imageContainer}
+          variants={collageImageVariants}
+        >
+          <img className={styles.img} src={glassesImg}></img>
+        </motion.div>
+        <motion.div
+          className={styles.imageContainer}
+          variants={collageImageVariants}
+        >
+          <img className={styles.img} src={shirtImg}></img>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
@@ -74,16 +103,11 @@ interface CatalogueGridProps {
 }
 
 const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
+  const catalogueItems = products.map((product) => (
+    <CatalogueItem key={product.id} product={product} />
+  ));
 
-    const catalogueItems = products.map((product) => (
-        <CatalogueItem key={product.id} product={product} />
-    ))
-
-  return (
-    <div className={styles.catalogueGrid}>
-      {catalogueItems}
-    </div>
-  );
+  return <div className={styles.catalogueGrid}>{catalogueItems}</div>;
 };
 
 interface HomeProps {
