@@ -11,6 +11,7 @@ import shirtImg from "../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg";
 import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { motion } from "framer-motion";
 
 const ImageCollage = () => {
@@ -21,7 +22,7 @@ const ImageCollage = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.4,
+        staggerChildren: 0.5,
       },
     },
   };
@@ -34,15 +35,14 @@ const ImageCollage = () => {
   return (
     <div className={styles.imageCollageContainer}>
       <CircleSticker />
-      <motion.div
-        variants={collageContainerVariants}
-        initial="hidden"
-        animate="show"
+      <div
         className={styles.imageCollage}
       >
         <motion.div
           className={styles.imageContainer}
           variants={collageImageVariants}
+          initial="hidden"
+          animate="show"
         >
           <img className={styles.img} src={womanImg}></img>
         </motion.div>
@@ -58,7 +58,7 @@ const ImageCollage = () => {
         >
           <img className={styles.img} src={shirtImg}></img>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
