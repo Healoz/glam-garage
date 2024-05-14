@@ -35,8 +35,9 @@ const ImageCollage = () => {
   return (
     <div className={styles.imageCollageContainer}>
       <CircleSticker />
-      <div
+      <motion.div
         className={styles.imageCollage}
+        variants={collageContainerVariants}
       >
         <motion.div
           className={styles.imageContainer}
@@ -44,7 +45,7 @@ const ImageCollage = () => {
           initial="hidden"
           animate="show"
         >
-          <img className={styles.img} src={womanImg}></img>
+          <LazyLoadImage className={styles.img} src={womanImg}></LazyLoadImage>
         </motion.div>
         <motion.div
           className={styles.imageContainer}
@@ -58,7 +59,7 @@ const ImageCollage = () => {
         >
           <img className={styles.img} src={shirtImg}></img>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };
