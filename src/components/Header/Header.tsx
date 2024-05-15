@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState, FC } from "react";
 import CartPopout from "../CartPopout/CartPopout";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 interface HeaderProps {
   // isMobile: boolean;
@@ -25,12 +26,11 @@ const Header: FC<HeaderProps> = ({}) => {
       togglePopout();
     } else {
       // if mobile / tablet, navigate to cart page
-      navigate('/cart');
+      navigate("/cart");
     }
   }
 
   const handleClickOutside = (event: MouseEvent) => {
-
     // if clicked on shopping cart icon, do nothing
     if (shoppingCartBtnRef.current?.contains(event.target as Node)) {
       return;
@@ -51,11 +51,9 @@ const Header: FC<HeaderProps> = ({}) => {
 
   // UseEffect to handle click events outside of cartPopout
   useEffect(() => {
-
     if (cartShowing) {
       document.addEventListener("mousedown", handleClickOutside);
-    }
-    else {
+    } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
@@ -98,7 +96,11 @@ const Header: FC<HeaderProps> = ({}) => {
               shopping_cart
             </span>
           </button>
-          <CartPopout isShown={cartShowing} ref={cartPopoutRef} togglePopout={togglePopout}/>
+          <AnimatePresence>
+            {cartShowing && (
+              <CartPopout ref={cartPopoutRef} togglePopout={togglePopout} />
+            )}
+          </AnimatePresence>
         </section>
       </div>
     </section>
