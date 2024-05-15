@@ -10,57 +10,54 @@ import glassesImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg"
 import shirtImg from "../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg";
 import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
-import { Link } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { motion } from "framer-motion";
 
 const ImageCollage = () => {
-  const collageContainerVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.5,
-      },
-    },
-  };
-
-  const collageImageVariants = {
-    hidden: { opacity: 0, y: -100 },
-    show: { opacity: 1, y: 0 },
-  };
+  const collageImages = [{}];
 
   return (
-    <div className={styles.imageCollageContainer}>
+    <motion.div
+      className={styles.imageCollageContainer}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <CircleSticker />
-      <motion.div
-        className={styles.imageCollage}
-        variants={collageContainerVariants}
-      >
-        <motion.div
-          className={styles.imageContainer}
-          variants={collageImageVariants}
-          initial="hidden"
-          animate="show"
-        >
-          <LazyLoadImage className={styles.img} src={womanImg}></LazyLoadImage>
-        </motion.div>
-        <motion.div
-          className={styles.imageContainer}
-          variants={collageImageVariants}
-        >
-          <img className={styles.img} src={glassesImg}></img>
-        </motion.div>
-        <motion.div
-          className={styles.imageContainer}
-          variants={collageImageVariants}
-        >
-          <img className={styles.img} src={shirtImg}></img>
-        </motion.div>
-      </motion.div>
-    </div>
+      <div className={styles.imageCollage}>
+        <div className={styles.imageContainer}>
+          <motion.img
+            className={styles.img}
+            src={womanImg}
+            role="presentation"
+            loading="lazy"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1.5, type: "spring", delay: 0.5 }}
+          ></motion.img>
+        </div>
+        <div className={styles.imageContainer}>
+          <motion.img
+            className={styles.img}
+            src={glassesImg}
+            role="presentation"
+            loading="lazy"
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1.5, delay: 1, type: "spring" }}
+          ></motion.img>
+        </div>
+        <div className={styles.imageContainer}>
+          <motion.img
+            className={styles.img}
+            src={shirtImg}
+            role="presentation"
+            loading="lazy"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.5, delay: 1.5, type: "spring" }}
+          ></motion.img>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -87,7 +84,12 @@ const HeroContent = () => {
 
 const CircleSticker = () => {
   return (
-    <div className={styles.circleSticker}>
+    <motion.div
+      className={styles.circleSticker}
+      initial={{ opacity: 0, x: -100, y: -100 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ delay: 2, duration: 1.5, type: "spring"}}
+    >
       <img
         src={circleText}
         className={`${styles.circleTextSvg} ${styles.rotateForever}`}
@@ -95,7 +97,7 @@ const CircleSticker = () => {
       <span className={`material-symbols-outlined ${styles.icon}`}>
         garage_home
       </span>
-    </div>
+    </motion.div>
   );
 };
 

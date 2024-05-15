@@ -72,6 +72,7 @@
     height: 6rem;
     border-radius: 100%;
     border: 1px var(--black) solid;
+    z-index: 100;
 }
 
 .circleTextSvg {
