@@ -17,10 +17,10 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
             className={styles.catalogueItem}
             to={`product/${product.id}`}
         >
-            <LazyLoadImage className={styles.productImage} src={product.imageUrls[0]} effect="blur"></LazyLoadImage>
-            <div className={styles.saveButton}>
+            <img className={styles.productImage} src={product.imageUrls[0]} loading="lazy"></img>
+            {/* <div className={styles.saveButton}>
                     <span className="material-symbols-outlined">favorite</span>
-                </div>
+            </div> */}
             <div className={styles.itemInfo}>
                 <div>
                     <h4>{product.name}</h4>

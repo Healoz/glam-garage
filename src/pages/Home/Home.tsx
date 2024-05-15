@@ -66,17 +66,37 @@ const HeroContent = () => {
     <div className={styles.heroContent}>
       <div className={styles.heroText}>
         <div className={styles.titleText}>
-          <h1>ALL NEW</h1>
-          <h1>RANGES</h1>
+          <motion.h1
+            initial={{ opacity: 0, x: -500 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ type: "spring", duration: 0.5, delay: 1 }}
+          >
+            ALL NEW
+          </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, x: 500 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ type: "spring", duration: 0.5, delay: 1.5 }}
+          >
+            RANGES
+          </motion.h1>
         </div>
-        <h4>Lorem ipsum dolor sit amet consect etur.</h4>
-        <Button
-          buttonText="Shop now"
-          colourScheme={ColourScheme.Primary}
-          iconCode="arrow_forward"
-          isCircle={false}
-          fillsSpace={false}
-        />
+        <motion.h4
+          initial={{ opacity: 0, y: 300 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", duration: 1, delay: 2 }}
+        >
+          Lorem ipsum dolor sit amet consect etur.
+        </motion.h4>
+        <div>
+          <Button
+            buttonText="Shop now"
+            colourScheme={ColourScheme.Primary}
+            iconCode="arrow_forward"
+            isCircle={false}
+            fillsSpace={false}
+          />
+        </div>
       </div>
     </div>
   );
@@ -88,7 +108,7 @@ const CircleSticker = () => {
       className={styles.circleSticker}
       initial={{ opacity: 0, x: -100, y: -100 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ delay: 2, duration: 1.5, type: "spring"}}
+      transition={{ delay: 2, duration: 1.5, type: "spring" }}
     >
       <img
         src={circleText}
@@ -106,8 +126,31 @@ interface CatalogueGridProps {
 }
 
 const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
-  const catalogueItems = products.map((product) => (
-    <CatalogueItem key={product.id} product={product} />
+  const fadeInAnimationVariants = {
+    initial: {
+      opacity: 0,
+      y: 100,
+    },
+    animate: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.1 * index
+      }
+    }),
+  };
+
+  const catalogueItems = products.map((product, index) => (
+    <motion.div
+      variants={fadeInAnimationVariants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true }}
+      custom={index}
+    >
+      <CatalogueItem key={product.id} product={product} />
+    </motion.div>
   ));
 
   return <div className={styles.catalogueGrid}>{catalogueItems}</div>;
