@@ -18,8 +18,6 @@ const ImageCollage = () => {
   return (
     <motion.div
       className={styles.imageCollageContainer}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
     >
       <CircleSticker />
       <div className={styles.imageCollage}>

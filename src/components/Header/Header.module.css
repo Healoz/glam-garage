@@ -57,6 +57,27 @@
     position: relative;
 }
 
+.cartButton {
+    position: relative;
+}
+
+.cartNumber {
+    position: absolute;
+    background-color: var(--fluro-yellow);
+    display: flex;
+    width: 1rem;
+    height: 1rem;
+    padding: 0.6rem;
+    top: -10px;
+    right: -5px;
+    margin-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+
+
 /* Tablet */
 @media screen and (min-width: 768px) {
     .logo h3 {

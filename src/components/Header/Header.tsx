@@ -1,9 +1,10 @@
 import styles from "./Header.module.css";
-import React, { useEffect, useRef, useState, FC } from "react";
+import React, { useEffect, useRef, useState, FC, useContext } from "react";
 import CartPopout from "../CartPopout/CartPopout";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { CartContext } from "../../App";
 
 interface HeaderProps {
   // isMobile: boolean;
@@ -15,6 +16,7 @@ const Header: FC<HeaderProps> = ({}) => {
   const cartPopoutRef = useRef<HTMLDivElement>(null);
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
+  const { cartItems } = useContext(CartContext);
 
   function togglePopout() {
     setCartShowing((prevCartShowing) => !prevCartShowing);
@@ -91,7 +93,14 @@ const Header: FC<HeaderProps> = ({}) => {
           </button>
         </div>
         <section className={styles.cartSection}>
-          <button onClick={shoppingCartSelected} ref={shoppingCartBtnRef}>
+          <button
+            onClick={shoppingCartSelected}
+            ref={shoppingCartBtnRef}
+            className={styles.cartButton}
+          >
+            {cartItems.length > 0 && (
+              <p className={styles.cartNumber}>{cartItems.length}</p>
+            )}
             <span className={`material-symbols-outlined ${styles.iconSmall}`}>
               shopping_cart
             </span>

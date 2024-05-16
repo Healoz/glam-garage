@@ -5,6 +5,7 @@ import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 import { CartItem } from "../../data/types";
 import { useContext } from "react";
 import { CartContext } from "../../App";
+import { motion } from "framer-motion";
 
 interface CartItemProps {
   quantityAdjust: boolean;
@@ -24,7 +25,20 @@ const CartItemElement: React.FC<CartItemProps> = ({
     useContext(CartContext);
 
   return (
-    <div className={styles.cartItem}>
+    <motion.div
+      className={styles.cartItem}
+      initial={{ height: 0, opacity: 0 }}
+      animate={{
+        height: "auto",
+        opacity: 1,
+        transition: {
+          type: "spring",
+          bounce: 0.3,
+          duration: 1
+        },
+      }}
+      exit={{ opacity: 0, height: 0 }}
+    >
       <div
         className={`${isPopoutSize ? styles.productImgPopoutSize + " " : ""}${
           styles.productImg
@@ -59,7 +73,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -68,13 +82,12 @@ interface QuantityButtonsProps {
 }
 
 const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
-
-  const isQuantityOneOrLess = cartItem.quantity <= 1; 
+  const isQuantityOneOrLess = cartItem.quantity <= 1;
   const { updateProductInCart } = useContext(CartContext);
 
   return (
     <div className={styles.quantityAdjust}>
-      <div className={isQuantityOneOrLess ? styles.quantityBtnInnactive : ''}>
+      <div className={isQuantityOneOrLess ? styles.quantityBtnInnactive : ""}>
         <Button
           colourScheme={ColourScheme.Secondary}
           iconCode="remove"
@@ -82,7 +95,11 @@ const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
           isCircle={true}
           fillsSpace={false}
           customPadding={4}
-          onClickFunction={!isQuantityOneOrLess ? () => updateProductInCart(cartItem.id, cartItem.quantity - 1) : undefined}
+          onClickFunction={
+            !isQuantityOneOrLess
+              ? () => updateProductInCart(cartItem.id, cartItem.quantity - 1)
+              : undefined
+          }
         />
       </div>
       <h2>{cartItem.quantity}</h2>
@@ -94,7 +111,9 @@ const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
           isCircle={true}
           fillsSpace={false}
           customPadding={4}
-          onClickFunction={() => updateProductInCart(cartItem.id, cartItem.quantity + 1)}
+          onClickFunction={() =>
+            updateProductInCart(cartItem.id, cartItem.quantity + 1)
+          }
         />
       </div>
     </div>

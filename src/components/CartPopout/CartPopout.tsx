@@ -22,14 +22,16 @@ const CartPopout: React.ForwardRefRenderFunction<
   const CartItemElements = () => {
     return (
       <div className={styles.cartScroll}>
-        {cartItems.map((cartItem: CartItem) => (
-          <CartItemElement
-            quantityAdjust={false}
-            key={cartItem.id}
-            cartItem={cartItem}
-            isPopoutSize={true}
-          />
-        ))}
+        <AnimatePresence>
+          {cartItems.map((cartItem: CartItem) => (
+            <CartItemElement
+              quantityAdjust={true}
+              key={cartItem.id}
+              cartItem={cartItem}
+              isPopoutSize={true}
+            />
+          ))}
+        </AnimatePresence>
       </div>
     );
   };
@@ -39,49 +41,49 @@ const CartPopout: React.ForwardRefRenderFunction<
   const popoutRef = ref || localRef;
 
   return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1, type: "spring" }}
-        ref={popoutRef}
-      >
-        <div className={styles.cartPopout}>
-          <div className={styles.cartArrow}></div>
-          <div className={styles.cartContainer}>
-            <div className={styles.heading}>
-              <h3>My Cart</h3>
-              <button onClick={togglePopout}>
-                <span className="material-symbols-outlined">close</span>
-              </button>
-            </div>
-            <CartItemElements />
-            <div className={styles.total}>
-              <h4>Total</h4>
-              <h4>${cartTotal}</h4>
-            </div>
-            <div className={styles.buttons}>
-              <Button
-                buttonText="Cart"
-                colourScheme={ColourScheme.Secondary}
-                iconCode="arrow_forward"
-                buttonLink="/cart"
-                isCircle={false}
-                fillsSpace={true}
-                onClickFunction={togglePopout} // hide popout when navigating page
-              />
-              <Button
-                buttonText="Checkout"
-                colourScheme={ColourScheme.Primary}
-                iconCode="arrow_forward"
-                buttonLink="/"
-                isCircle={false}
-                fillsSpace={true}
-              />
-            </div>
+    <motion.div
+      initial={{ scaleY: 0, opacity: 0.5 }}
+      animate={{ scaleY: 1, opacity: 1 }}
+      exit={{ scaleY: 0, opacity: 0.5 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      ref={popoutRef}
+    >
+      <div className={styles.cartPopout}>
+        <div className={styles.cartArrow}></div>
+        <div className={styles.cartContainer}>
+          <div className={styles.heading}>
+            <h3>My Cart</h3>
+            <button onClick={togglePopout}>
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <CartItemElements />
+          <div className={styles.total}>
+            <h4>Total</h4>
+            <h4>${cartTotal}</h4>
+          </div>
+          <div className={styles.buttons}>
+            <Button
+              buttonText="Cart"
+              colourScheme={ColourScheme.Secondary}
+              iconCode="arrow_forward"
+              buttonLink="/cart"
+              isCircle={false}
+              fillsSpace={true}
+              onClickFunction={togglePopout} // hide popout when navigating page
+            />
+            <Button
+              buttonText="Checkout"
+              colourScheme={ColourScheme.Primary}
+              iconCode="arrow_forward"
+              buttonLink="/"
+              isCircle={false}
+              fillsSpace={true}
+            />
           </div>
         </div>
-      </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
