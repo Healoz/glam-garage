@@ -24,12 +24,27 @@ const CartPopout: React.ForwardRefRenderFunction<
       <div className={styles.cartScroll}>
         <AnimatePresence>
           {cartItems.map((cartItem: CartItem) => (
-            <CartItemElement
-              quantityAdjust={true}
-              key={cartItem.id}
-              cartItem={cartItem}
-              isPopoutSize={true}
-            />
+            <motion.div
+              className={styles.cartItem}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{
+                height: "auto",
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  bounce: 0.3,
+                  duration: 1,
+                },
+              }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <CartItemElement
+                quantityAdjust={true}
+                key={cartItem.id}
+                cartItem={cartItem}
+                isPopoutSize={true}
+              />
+            </motion.div>
           ))}
         </AnimatePresence>
       </div>

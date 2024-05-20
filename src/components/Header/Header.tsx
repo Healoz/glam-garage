@@ -17,6 +17,7 @@ const Header: FC<HeaderProps> = ({}) => {
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
   const { cartItems } = useContext(CartContext);
+  const [amountInCart, setAmountInCart] = useState(0);
 
   function togglePopout() {
     setCartShowing((prevCartShowing) => !prevCartShowing);
@@ -51,6 +52,8 @@ const Header: FC<HeaderProps> = ({}) => {
     setCartShowing(false);
   };
 
+  
+
   // UseEffect to handle click events outside of cartPopout
   useEffect(() => {
     if (cartShowing) {
@@ -63,6 +66,16 @@ const Header: FC<HeaderProps> = ({}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [cartShowing]);
+
+  const calculateTotalCartNumber = (): number => {
+    let cartItemNumber = 0;
+    cartItems.forEach(cartItem => cartItemNumber += cartItem.quantity)
+    return cartItemNumber;
+  }
+
+  useEffect(() => {
+    setAmountInCart(calculateTotalCartNumber());
+  }, [cartItems])
 
   return (
     <section className={styles.header}>
@@ -99,7 +112,7 @@ const Header: FC<HeaderProps> = ({}) => {
             className={styles.cartButton}
           >
             {cartItems.length > 0 && (
-              <p className={styles.cartNumber}>{cartItems.length}</p>
+              <p className={styles.cartNumber}>{amountInCart}</p>
             )}
             <span className={`material-symbols-outlined ${styles.iconSmall}`}>
               shopping_cart

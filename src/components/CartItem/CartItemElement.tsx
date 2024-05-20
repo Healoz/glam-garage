@@ -25,20 +25,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
     useContext(CartContext);
 
   return (
-    <motion.div
-      className={styles.cartItem}
-      initial={{ height: 0, opacity: 0 }}
-      animate={{
-        height: "auto",
-        opacity: 1,
-        transition: {
-          type: "spring",
-          bounce: 0.3,
-          duration: 1
-        },
-      }}
-      exit={{ opacity: 0, height: 0 }}
-    >
+    <div className={styles.cartItem}>
       <div
         className={`${isPopoutSize ? styles.productImgPopoutSize + " " : ""}${
           styles.productImg
@@ -73,7 +60,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
