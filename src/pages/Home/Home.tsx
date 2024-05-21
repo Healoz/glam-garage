@@ -29,7 +29,7 @@ const ImageCollage = () => {
             loading="lazy"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.5, type: "spring", delay: 0.5 }}
+            transition={{ duration: 1, type: "spring", delay: 0.5 }}
           ></motion.img>
         </div>
         <div className={styles.imageContainer}>
@@ -40,7 +40,7 @@ const ImageCollage = () => {
             loading="lazy"
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.5, delay: 1, type: "spring" }}
+            transition={{ duration: 1, delay: 0.5, type: "spring" }}
           ></motion.img>
         </div>
         <div className={styles.imageContainer}>
@@ -51,7 +51,7 @@ const ImageCollage = () => {
             loading="lazy"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.5, delay: 1.5, type: "spring" }}
+            transition={{ duration: 1, delay: 1, type: "spring" }}
           ></motion.img>
         </div>
       </div>

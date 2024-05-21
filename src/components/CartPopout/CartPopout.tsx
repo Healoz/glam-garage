@@ -1,4 +1,5 @@
 import styles from "./CartPopout.module.css";
+import { useEffect } from "react";
 import { RefObject, useRef, forwardRef, useContext } from "react";
 import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
@@ -7,6 +8,7 @@ import CartItemElement from "../CartItem/CartItemElement";
 import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
 import { motion, AnimatePresence } from "framer-motion";
+import { v4 as uuidv4 } from "uuid";
 
 interface CartPopoutProps {
   togglePopout: () => void;
@@ -19,34 +21,21 @@ const CartPopout: React.ForwardRefRenderFunction<
   // retrieving cart items from cartContext
   const { cartItems, cartTotal } = useContext(CartContext);
 
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+
   const CartItemElements = () => {
     return (
       <div className={styles.cartScroll}>
-        <AnimatePresence>
-          {cartItems.map((cartItem: CartItem) => (
-            <motion.div
-              className={styles.cartItem}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{
-                height: "auto",
-                opacity: 1,
-                transition: {
-                  type: "spring",
-                  bounce: 0.3,
-                  duration: 1,
-                },
-              }}
-              exit={{ opacity: 0, height: 0 }}
-            >
-              <CartItemElement
-                quantityAdjust={true}
-                key={cartItem.id}
-                cartItem={cartItem}
-                isPopoutSize={true}
-              />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {cartItems.map((cartItem: CartItem) => (
+          <CartItemElement
+            key={cartItem.id}
+            quantityAdjust={true}
+            cartItem={cartItem}
+            isPopoutSize={true}
+          />
+        ))}
       </div>
     );
   };

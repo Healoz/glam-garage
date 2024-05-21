@@ -4,11 +4,13 @@ import Accordion from "../../components/Accordion/Accordion";
 import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import { Size } from "../../data/types";
+import {motion} from "framer-motion";
+import { useAnimationControls } from "framer-motion";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
   return (
@@ -63,6 +65,27 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   const { addProductToCart } = useContext(CartContext);
   const [selectedSize, setSelectedSize] = useState<Size>(Size.XS);
 
+  const controls = useAnimationControls();
+
+
+  const handleAddToCart = () => {
+    // complete functionality
+    addProductToCart(product, selectedSize);
+
+    // play animation
+    controls.start("addToCartAnimation");
+  };
+
+  const variants = {
+    initial: {
+      color: '#000'
+    },
+    addToCartAnimation: {
+      x: 100,
+      color: '#00FF00'
+    }
+  }
+
   return (
     <div className={styles.productInfo}>
       <h3>{product.name}</h3>
@@ -73,14 +96,17 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
         <SizeSelect setSelectedSize={setSelectedSize} />
       </div>
       <div className={styles.buttons}>
-        <Button
-          buttonText="Add to cart"
-          colourScheme={ColourScheme.Primary}
-          iconCode="add"
-          onClickFunction={() => addProductToCart(product, selectedSize)}
-          isCircle={false}
-          fillsSpace={true}
-        />
+        <div className={styles.addToCartBtn}>
+          <Button
+            buttonText="Add to cart"
+            colourScheme={ColourScheme.Primary}
+            iconCode="add"
+            onClickFunction={handleAddToCart}
+            isCircle={false}
+            fillsSpace={true}
+          />
+          <motion.div className={styles.cartGraphic} animate={controls} variants={variants} initial={variants.initial}></motion.div>
+        </div>
         <Button
           colourScheme={ColourScheme.Secondary}
           iconCode="favorite"

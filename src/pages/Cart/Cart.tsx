@@ -1,19 +1,20 @@
 import styles from "./Cart.module.css";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Button from "../../components/Button/Button";
 import { Product } from "../../data/types";
 import CartItemElement from "../../components/CartItem/CartItemElement";
 import ColourScheme from "../../enums/ColourScheme";
 import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface CartProps {
-  
+  cartItems: CartItem[];
+  cartTotal: number;
 }
 
-const Cart: React.FC<CartProps> = ({}) => {
-
-  const { cartItems, cartTotal } = useContext(CartContext);
+const Cart: React.FC<CartProps> = ({ cartItems, cartTotal }) => {
+  // const { cartItems, cartTotal } = useContext(CartContext);
 
   const shippingPrice = 30;
 
@@ -21,12 +22,13 @@ const Cart: React.FC<CartProps> = ({}) => {
     return (
       <div className={styles.cartGrid}>
         {cartItems.map((cartItem: CartItem) => (
-          <CartItemElement
-            quantityAdjust={true}
-            key={cartItem.id}
-            cartItem={cartItem}
-            isPopoutSize={false}
-          />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={cartItem.id}>
+            <CartItemElement
+              quantityAdjust={true}
+              cartItem={cartItem}
+              isPopoutSize={false}
+            />
+          </motion.div>
         ))}
       </div>
     );

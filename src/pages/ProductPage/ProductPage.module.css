@@ -1,59 +1,76 @@
 .productImageCarousel {
-    height: 50vh;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 250px 250px 70px 70px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 10%;
-    margin-bottom: var(--spacing-3);
-    filter: brightness(95%);
+  height: 50vh;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 250px 250px 70px 70px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10%;
+  margin-bottom: var(--spacing-3);
+  filter: brightness(95%);
 }
 
 .carouselArrows {
-    display: none;
+  display: none;
 }
 
 .carouselIndicators {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .carouselIndicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    border: 1px var(--white) solid;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: 1px var(--white) solid;
 }
 
 .filledIndicator {
-    background-color: var(--white-opacity);
+  background-color: var(--white-opacity);
 }
 
 .productInfo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
-    margin-bottom: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
 }
 
 .buttons {
-    display: flex;
-    gap: var(--spacing-2);
+  display: flex;
+  gap: var(--spacing-2);
 }
 
 .size p {
-    margin-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
 }
 
 .divider {
-    width: 100%;
-    border-bottom: 1px var(--black) solid;
+  width: 100%;
+  border-bottom: 1px var(--black) solid;
 }
 
 .desktopGallery {
-    display: none;
+  display: none;
+}
+
+.addToCartBtn {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.cartGraphic {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  background-color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Mobile tweaks */
@@ -62,67 +79,65 @@
 
 /* Tablet */
 @media screen and (min-width: 768px) {
-    .productPageContent {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--spacing-5);
-    }
+  .productPageContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-5);
+  }
 
-    .productImageCarousel {
-        height: 60vh;
-    }
+  .productImageCarousel {
+    height: 60vh;
+  }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
-    .productPageContent {
-        grid-template-columns: 1.5fr 1fr;
-        gap: 100px;
-    }
+  .productPageContent {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 100px;
+  }
 
-    .carouselIndicators {
-        display: none;
-    }
+  .carouselIndicators {
+    display: none;
+  }
 
-    .productImageCarousel {
-        justify-content: center;
-        align-items: center;
-        padding-bottom: unset;
-        padding-top: 3rem;
-    }
+  .productImageCarousel {
+    justify-content: center;
+    align-items: center;
+    padding-bottom: unset;
+    padding-top: 3rem;
+  }
 
-    .carouselArrows {
-        color: white;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 6%;
-    }
+  .carouselArrows {
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 6%;
+  }
 
-    .carouselArrows span {
-        font-size: 30px;
-    }
+  .carouselArrows span {
+    font-size: 30px;
+  }
 
-    .desktopGallery {
-        display: block;
-        width: 100%;
-        height: 8rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: var(--spacing-3);
-    }
+  .desktopGallery {
+    display: block;
+    width: 100%;
+    height: 8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-3);
+  }
 
-    .desktopGalleryImg {
-        background-position: center center;
-        background-size: cover;
-        border-radius: 30px 30px 70px 70px;
-    }
+  .desktopGalleryImg {
+    background-position: center center;
+    background-size: cover;
+    border-radius: 30px 30px 70px 70px;
+  }
 
-    .selectedImg {
-        box-shadow: 
-            0 0 0 8px var(--fluro-yellow),
-            0 0 0 9px var(--black)
-    }
+  .selectedImg {
+    box-shadow: 0 0 0 8px var(--fluro-yellow), 0 0 0 9px var(--black);
+  }
 }
 
 /* Desktop - wider screen */

@@ -85,12 +85,12 @@ function App() {
       size: size,
     };
 
-    setCartItems((prevCartItems) => [...prevCartItems, newCartItem]);
+    setCartItems([...cartItems, newCartItem]);
   };
 
   const removeCartItemFromCart = (cartItemId: string): void => {
     setCartItems((prevCartItems) =>
-      prevCartItems.filter((item) => item.id !== cartItemId)
+      prevCartItems.filter(item => item.id !== cartItemId)
     );
   };
 
@@ -165,7 +165,7 @@ function App() {
                 path="/product/:id"
                 element={<ProductPage products={products} />}
               />
-              <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<Cart cartItems={cartItems} cartTotal={cartTotal}/>} />
             </Routes>
           </div>
           <Footer />

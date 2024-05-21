@@ -21,7 +21,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
   const product = cartItem.product;
 
   // getting context of cartItem function
-  const { removeCartItemFromCart, updateProductInCart } =
+  const { removeCartItemFromCart } =
     useContext(CartContext);
 
   return (
