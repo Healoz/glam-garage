@@ -4,12 +4,18 @@ import Accordion from "../../components/Accordion/Accordion";
 import ColourScheme from "../../enums/ColourScheme";
 import styles from "./ProductPage.module.css";
 import purpleDressImg from "../../assets/images/purple-dress.jpg";
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  RefObject,
+} from "react";
 import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import { Size } from "../../data/types";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { useAnimationControls } from "framer-motion";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
@@ -67,24 +73,62 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
 
   const controls = useAnimationControls();
 
+  const addToCartAnimationDiv = useRef<HTMLDivElement>(null);
+
+  const [addToCartAnimationPosition, setAddToCartAnimationPosition] =
+    useState<DOMRect | null>(null);
+
+  // this will run once since addToCartAnimationDiv is a consistent ref
+  // needs to run this everytime the window changes size
+  useEffect(() => {
+    updateCartBtnPosition();
+
+    window.addEventListener('resize', updateCartBtnPosition);
+
+    return () => {
+      window.removeEventListener('resize', updateCartBtnPosition);
+    }
+  }, []);
+
+  const updateCartBtnPosition = () => {
+    if (addToCartAnimationDiv.current) {
+      setAddToCartAnimationPosition(
+        addToCartAnimationDiv.current.getBoundingClientRect()
+      );
+    }
+  };
+
+  useEffect(() => {
+    console.log(addToCartAnimationPosition);
+  }, [addToCartAnimationPosition]);
 
   const handleAddToCart = () => {
     // complete functionality
     addProductToCart(product, selectedSize);
 
-    // play animation
+    // play animation. DOM object might not exist but will do nothing if so
     controls.start("addToCartAnimation");
   };
 
-  const variants = {
+  const baseVariants = {
     initial: {
-      color: '#000'
+      x: 0,
+      y: 0,
+      scale: 1,
     },
-    addToCartAnimation: {
-      x: 100,
-      color: '#00FF00'
-    }
-  }
+  };
+
+  const variants = {
+    ...baseVariants,
+    ...(addToCartAnimationPosition && {
+      addToCartAnimation: {
+        x: window.innerWidth - addToCartAnimationPosition.right - 50,
+        y: -addToCartAnimationPosition.top + 20,
+        scale: 1,
+        transition: { ease: "easeInOut", duration: 1 },
+      },
+    }),
+  };
 
   return (
     <div className={styles.productInfo}>
@@ -105,7 +149,14 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
             isCircle={false}
             fillsSpace={true}
           />
-          <motion.div className={styles.cartGraphic} animate={controls} variants={variants} initial={variants.initial}></motion.div>
+          <motion.div
+            className={styles.cartGraphic}
+            animate={controls}
+            variants={variants}
+            initial={variants.initial}
+            style={{ position: "absolute", zIndex: 1000 }}
+            ref={addToCartAnimationDiv}
+          ></motion.div>
         </div>
         <Button
           colourScheme={ColourScheme.Secondary}

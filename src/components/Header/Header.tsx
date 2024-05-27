@@ -1,22 +1,39 @@
 import styles from "./Header.module.css";
-import React, { useEffect, useRef, useState, FC, useContext } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  FC,
+  useContext,
+  RefObject,
+} from "react";
 import CartPopout from "../CartPopout/CartPopout";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CartContext } from "../../App";
+import { CartItem } from "../../data/types";
+// import { CartContext } from "../../App";
 
 interface HeaderProps {
   // isMobile: boolean;
+  cartItems: CartItem[];
+  cartTotal: number;
+  removeCartItemFromCart: (cartItemId: string) => void;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
-const Header: FC<HeaderProps> = ({}) => {
+const Header: FC<HeaderProps> = ({
+  removeCartItemFromCart,
+  updateProductInCart,
+  cartItems,
+  cartTotal
+}) => {
   const [cartShowing, setCartShowing] = useState<boolean>(false);
   // reference to the cart popout to detect clicks outside of the popout when its open to close it
   const cartPopoutRef = useRef<HTMLDivElement>(null);
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
-  const { cartItems } = useContext(CartContext);
+  // const { cartItems } = useContext(CartContext);
   const [amountInCart, setAmountInCart] = useState(0);
 
   function togglePopout() {
@@ -52,8 +69,6 @@ const Header: FC<HeaderProps> = ({}) => {
     setCartShowing(false);
   };
 
-  
-
   // UseEffect to handle click events outside of cartPopout
   useEffect(() => {
     if (cartShowing) {
@@ -69,13 +84,13 @@ const Header: FC<HeaderProps> = ({}) => {
 
   const calculateTotalCartNumber = (): number => {
     let cartItemNumber = 0;
-    cartItems.forEach(cartItem => cartItemNumber += cartItem.quantity)
+    cartItems.forEach((cartItem) => (cartItemNumber += cartItem.quantity));
     return cartItemNumber;
-  }
+  };
 
   useEffect(() => {
     setAmountInCart(calculateTotalCartNumber());
-  }, [cartItems])
+  }, [cartItems]);
 
   return (
     <section className={styles.header}>
@@ -112,7 +127,9 @@ const Header: FC<HeaderProps> = ({}) => {
             className={styles.cartButton}
           >
             {cartItems.length > 0 && (
-              <p className={styles.cartNumber}>{amountInCart}</p>
+              <p className={styles.cartNumber}>
+                {amountInCart}
+              </p>
             )}
             <span className={`material-symbols-outlined ${styles.iconSmall}`}>
               shopping_cart
@@ -120,7 +137,14 @@ const Header: FC<HeaderProps> = ({}) => {
           </button>
           <AnimatePresence>
             {cartShowing && (
-              <CartPopout ref={cartPopoutRef} togglePopout={togglePopout} />
+              <CartPopout
+                ref={cartPopoutRef}
+                togglePopout={togglePopout}
+                updateProductInCart={updateProductInCart}
+                removeCartItemFromCart={removeCartItemFromCart}
+                cartItems={cartItems}
+                cartTotal={cartTotal}
+              />
             )}
           </AnimatePresence>
         </section>

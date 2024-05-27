@@ -11,9 +11,11 @@ import { motion, AnimatePresence } from "framer-motion";
 interface CartProps {
   cartItems: CartItem[];
   cartTotal: number;
+  removeCartItemFromCart: (cartItemId: string) => void;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
-const Cart: React.FC<CartProps> = ({ cartItems, cartTotal }) => {
+const Cart: React.FC<CartProps> = ({ cartItems, cartTotal, removeCartItemFromCart, updateProductInCart }) => {
   // const { cartItems, cartTotal } = useContext(CartContext);
 
   const shippingPrice = 30;
@@ -27,6 +29,8 @@ const Cart: React.FC<CartProps> = ({ cartItems, cartTotal }) => {
               quantityAdjust={true}
               cartItem={cartItem}
               isPopoutSize={false}
+              removeCartItemFromCart={removeCartItemFromCart}
+              updateProductInCart={updateProductInCart}
             />
           </motion.div>
         ))}

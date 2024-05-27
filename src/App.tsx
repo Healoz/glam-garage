@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useRef } from "react";
 import "./assets/App.css";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
@@ -38,6 +38,8 @@ function App() {
     const storedCartItems = localStorage.getItem("cartItems");
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
+
+  const cartNumberDiv = useRef<HTMLDivElement>(null);
 
   const [cartTotal, setCartTotal] = useState<number>(0);
 
@@ -90,7 +92,7 @@ function App() {
 
   const removeCartItemFromCart = (cartItemId: string): void => {
     setCartItems((prevCartItems) =>
-      prevCartItems.filter(item => item.id !== cartItemId)
+      prevCartItems.filter((item) => item.id !== cartItemId)
     );
   };
 
@@ -157,7 +159,12 @@ function App() {
     <CartContext.Provider value={cartContextValue}>
       <div className="App">
         <div className="appContainer">
-          <Header />
+          <Header
+            updateProductInCart={updateProductInCart}
+            removeCartItemFromCart={removeCartItemFromCart}
+            cartItems={cartItems}
+            cartTotal={cartTotal}
+          />
           <div className="pageContent">
             <Routes>
               <Route path="/" element={<Home products={products} />} />
@@ -165,7 +172,17 @@ function App() {
                 path="/product/:id"
                 element={<ProductPage products={products} />}
               />
-              <Route path="/cart" element={<Cart cartItems={cartItems} cartTotal={cartTotal}/>} />
+              <Route
+                path="/cart"
+                element={
+                  <Cart
+                    cartItems={cartItems}
+                    cartTotal={cartTotal}
+                    removeCartItemFromCart={removeCartItemFromCart}
+                    updateProductInCart={updateProductInCart}
+                  />
+                }
+              />
             </Routes>
           </div>
           <Footer />

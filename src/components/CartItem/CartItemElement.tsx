@@ -3,26 +3,24 @@ import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 import { CartItem } from "../../data/types";
-import { useContext } from "react";
-import { CartContext } from "../../App";
 import { motion } from "framer-motion";
 
 interface CartItemProps {
   quantityAdjust: boolean;
   cartItem: CartItem;
   isPopoutSize: boolean;
+  removeCartItemFromCart: (cartItemId: string) => void;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
 const CartItemElement: React.FC<CartItemProps> = ({
   quantityAdjust,
   cartItem,
   isPopoutSize,
+  removeCartItemFromCart,
+  updateProductInCart
 }) => {
   const product = cartItem.product;
-
-  // getting context of cartItem function
-  const { removeCartItemFromCart } =
-    useContext(CartContext);
 
   return (
     <div className={styles.cartItem}>
@@ -44,7 +42,7 @@ const CartItemElement: React.FC<CartItemProps> = ({
             <div className={styles.quantity}>
               {/* render quantity depending on if you can adjust it or not */}
               {quantityAdjust ? (
-                <QuantityButtons cartItem={cartItem} />
+                <QuantityButtons cartItem={cartItem} updateProductInCart={updateProductInCart} />
               ) : (
                 <p>Qty: {cartItem.quantity}</p>
               )}
@@ -66,11 +64,12 @@ const CartItemElement: React.FC<CartItemProps> = ({
 
 interface QuantityButtonsProps {
   cartItem: CartItem;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
+  
 }
 
-const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem }) => {
+const QuantityButtons: React.FC<QuantityButtonsProps> = ({ cartItem, updateProductInCart }) => {
   const isQuantityOneOrLess = cartItem.quantity <= 1;
-  const { updateProductInCart } = useContext(CartContext);
 
   return (
     <div className={styles.quantityAdjust}>

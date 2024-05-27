@@ -5,21 +5,24 @@ import Button from "../Button/Button";
 import ColourScheme from "../../enums/ColourScheme";
 import dummyImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg";
 import CartItemElement from "../CartItem/CartItemElement";
-import { CartContext } from "../../App";
+// import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 
 interface CartPopoutProps {
   togglePopout: () => void;
+  cartItems: CartItem[];
+  cartTotal: number;
+  removeCartItemFromCart: (cartItemId: string) => void;
+  updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
 const CartPopout: React.ForwardRefRenderFunction<
   HTMLDivElement,
   CartPopoutProps
-> = ({ togglePopout }, ref) => {
-  // retrieving cart items from cartContext
-  const { cartItems, cartTotal } = useContext(CartContext);
+> = ({ togglePopout, removeCartItemFromCart, updateProductInCart, cartItems, cartTotal }, ref) => {
+ 
 
   useEffect(() => {
     console.log(cartItems);
@@ -34,6 +37,8 @@ const CartPopout: React.ForwardRefRenderFunction<
             quantityAdjust={true}
             cartItem={cartItem}
             isPopoutSize={true}
+            removeCartItemFromCart={removeCartItemFromCart}
+            updateProductInCart={updateProductInCart}
           />
         ))}
       </div>
