@@ -119,22 +119,8 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
       x: 0,
       y: 0,
       scale: 1,
-      opacity: 1,
+      opacity: 0,
     },
-  };
-
-  interface Position {
-    x: number;
-    y: number;
-  }
-
-  const calculateTopRightCorner = (): Position | void => {
-    if (addToCartAnimationPosition) {
-      return {
-        x: addToCartAnimationPosition.right - 50,
-        y: -addToCartAnimationPosition.top + 20,
-      };
-    }
   };
 
   const variants = {
@@ -153,11 +139,11 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
           -addToCartAnimationPosition.top + 20,
           0,
         ],
-        opacity: [0.3, 1, 0, 0],
-        scale: [1, 0.3, 0, 0],
+        opacity: [0.5, 1, 0, 0],
+        scale: [1, 0.3, 0.3, 1],
         transition: {
           ease: "easeInOut",
-          duration: 1.6,
+          duration: 1,
           times: [0, 0.8, 0.999, 1],
         },
       },

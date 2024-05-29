@@ -10,8 +10,9 @@ import React, {
 import CartPopout from "../CartPopout/CartPopout";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, useAnimationControls } from "framer-motion";
 import { CartItem } from "../../data/types";
+import { motion } from "framer-motion";
 // import { CartContext } from "../../App";
 
 interface HeaderProps {
@@ -26,7 +27,7 @@ const Header: FC<HeaderProps> = ({
   removeCartItemFromCart,
   updateProductInCart,
   cartItems,
-  cartTotal
+  cartTotal,
 }) => {
   const [cartShowing, setCartShowing] = useState<boolean>(false);
   // reference to the cart popout to detect clicks outside of the popout when its open to close it
@@ -35,6 +36,33 @@ const Header: FC<HeaderProps> = ({
   const navigate = useNavigate();
   // const { cartItems } = useContext(CartContext);
   const [amountInCart, setAmountInCart] = useState(0);
+
+  const [amountInCartDisplay, setAmountInCartDisplay] = useState(amountInCart);
+
+  const controls = useAnimationControls();
+
+  const cartVariants = {
+    initial: {
+      scale: 1
+    },
+    cartAnimation: {
+      scale: [1, 1.5, 1],
+      transition: {
+        delay: 0.8,
+        duration: 0.3,
+      }
+    }
+  }
+
+  useEffect(() => {
+    // play cart animation everytime cart number goes up
+    controls.start("cartAnimation");
+
+    // only change cart number to current number after 0.8 seconds
+    setTimeout(() => {
+      setAmountInCartDisplay(amountInCart);
+    }, 800)
+  }, [amountInCart]);
 
   function togglePopout() {
     setCartShowing((prevCartShowing) => !prevCartShowing);
@@ -127,9 +155,12 @@ const Header: FC<HeaderProps> = ({
             className={styles.cartButton}
           >
             {cartItems.length > 0 && (
-              <p className={styles.cartNumber}>
-                {amountInCart}
-              </p>
+              <motion.p 
+                className={styles.cartNumber}
+                animate={controls}
+                variants={cartVariants}
+                initial={cartVariants.initial}
+                >{amountInCartDisplay}</motion.p>
             )}
             <span className={`material-symbols-outlined ${styles.iconSmall}`}>
               shopping_cart
