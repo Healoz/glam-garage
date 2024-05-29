@@ -83,11 +83,13 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   useEffect(() => {
     updateCartBtnPosition();
 
-    window.addEventListener('resize', updateCartBtnPosition);
+    window.addEventListener("resize", updateCartBtnPosition);
+    window.addEventListener("scroll", updateCartBtnPosition);
 
     return () => {
-      window.removeEventListener('resize', updateCartBtnPosition);
-    }
+      window.removeEventListener("resize", updateCartBtnPosition);
+      window.removeEventListener("scroll", updateCartBtnPosition);
+    };
   }, []);
 
   const updateCartBtnPosition = () => {
@@ -106,6 +108,8 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
     // complete functionality
     addProductToCart(product, selectedSize);
 
+    updateCartBtnPosition();
+
     // play animation. DOM object might not exist but will do nothing if so
     controls.start("addToCartAnimation");
   };
@@ -115,17 +119,47 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
       x: 0,
       y: 0,
       scale: 1,
+      opacity: 1,
     },
+  };
+
+  interface Position {
+    x: number;
+    y: number;
+  }
+
+  const calculateTopRightCorner = (): Position | void => {
+    if (addToCartAnimationPosition) {
+      return {
+        x: addToCartAnimationPosition.right - 50,
+        y: -addToCartAnimationPosition.top + 20,
+      };
+    }
   };
 
   const variants = {
     ...baseVariants,
     ...(addToCartAnimationPosition && {
       addToCartAnimation: {
-        x: window.innerWidth - addToCartAnimationPosition.right - 50,
-        y: -addToCartAnimationPosition.top + 20,
-        scale: 1,
-        transition: { ease: "easeInOut", duration: 1 },
+        x: [
+          0,
+          window.innerWidth - addToCartAnimationPosition.right - 50,
+          window.innerWidth - addToCartAnimationPosition.right - 50,
+          0,
+        ],
+        y: [
+          0,
+          -addToCartAnimationPosition.top + 20,
+          -addToCartAnimationPosition.top + 20,
+          0,
+        ],
+        opacity: [0.3, 1, 0, 0],
+        scale: [1, 0.3, 0, 0],
+        transition: {
+          ease: "easeInOut",
+          duration: 1.6,
+          times: [0, 0.8, 0.999, 1],
+        },
       },
     }),
   };
