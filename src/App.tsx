@@ -11,6 +11,7 @@ import Cart from "./pages/Cart/Cart";
 import { v4 as uuidv4 } from "uuid";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
+import Search from "./pages/Search/Search";
 
 // define shape of context value
 interface CartContextValue {
@@ -183,6 +184,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/search/?q=:searchQuery" element={<Search products={products} />} />
             </Routes>
           </div>
           <Footer />

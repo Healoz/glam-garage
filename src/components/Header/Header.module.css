@@ -125,7 +125,7 @@
     }
 
     .searchBarBtn {
-        cursor: unset;
+        cursor: pointer;
     }
 
     .searchBar {

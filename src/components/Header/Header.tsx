@@ -41,18 +41,20 @@ const Header: FC<HeaderProps> = ({
 
   const controls = useAnimationControls();
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const cartVariants = {
     initial: {
-      scale: 1
+      scale: 1,
     },
     cartAnimation: {
       scale: [1, 1.5, 1],
       transition: {
         delay: 0.8,
         duration: 0.3,
-      }
-    }
-  }
+      },
+    },
+  };
 
   useEffect(() => {
     // play cart animation everytime cart number goes up
@@ -61,7 +63,7 @@ const Header: FC<HeaderProps> = ({
     // only change cart number to current number after 0.8 seconds
     setTimeout(() => {
       setAmountInCartDisplay(amountInCart);
-    }, 800)
+    }, 800);
   }, [amountInCart]);
 
   function togglePopout() {
@@ -120,6 +122,15 @@ const Header: FC<HeaderProps> = ({
     setAmountInCart(calculateTotalCartNumber());
   }, [cartItems]);
 
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate(`/search/?q=${encodeURIComponent(searchQuery)}`);
+  }
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <section className={styles.header}>
       <div className={styles.menuItems}>
@@ -140,14 +151,18 @@ const Header: FC<HeaderProps> = ({
 
       <div className={styles.menuBtns}>
         <div className={styles.searchBar}>
-          <button className={styles.searchBarBtn}>
-            <span
-              className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
-            >
-              search
-            </span>
-          </button>
+          <form onSubmit={handleSearch}>
+            <input value={searchQuery} onChange={handleSearchChange}></input>
+            <button className={styles.searchBarBtn} type="submit">
+              <span
+                className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
+              >
+                search
+              </span>
+            </button>
+          </form>
         </div>
+
         <section className={styles.cartSection}>
           <button
             onClick={shoppingCartSelected}
@@ -155,12 +170,14 @@ const Header: FC<HeaderProps> = ({
             className={styles.cartButton}
           >
             {cartItems.length > 0 && (
-              <motion.p 
+              <motion.p
                 className={styles.cartNumber}
                 animate={controls}
                 variants={cartVariants}
                 initial={cartVariants.initial}
-                >{amountInCartDisplay}</motion.p>
+              >
+                {amountInCartDisplay}
+              </motion.p>
             )}
             <span className={`material-symbols-outlined ${styles.iconSmall}`}>
               shopping_cart
