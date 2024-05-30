@@ -15,7 +15,7 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
     return (
         <Link
             className={styles.catalogueItem}
-            to={`product/${product.id}`}
+            to={`/product/${product.id}`}
         >
             <img className={styles.productImage} src={product.imageUrls[0]} loading="lazy"></img>
             {/* <div className={styles.saveButton}>

@@ -184,7 +184,10 @@ function App() {
                   />
                 }
               />
-              <Route path="/search/?q=:searchQuery" element={<Search products={products} />} />
+              <Route
+                path="/search"
+                element={<Search products={products} />}
+              />
             </Routes>
           </div>
           <Footer />

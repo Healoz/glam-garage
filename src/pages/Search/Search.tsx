@@ -7,6 +7,8 @@ import ColourScheme from "../../enums/ColourScheme";
 import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
 
 interface SearchProps {
   products: Product[];
@@ -14,7 +16,19 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({ products }) => {
-  return <main></main>;
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("q");
+
+  return (
+    <main className={styles.searchPage}>
+      <div className={styles.title}>
+        <h3>Your search results for:</h3>
+        <h1>{searchQuery}</h1>
+      </div>
+      <CatalogueGrid products={products} />
+    </main>
+  );
 };
 
 export default Search;

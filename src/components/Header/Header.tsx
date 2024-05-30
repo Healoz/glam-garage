@@ -124,7 +124,7 @@ const Header: FC<HeaderProps> = ({
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate(`/search/?q=${encodeURIComponent(searchQuery)}`);
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
   }
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {

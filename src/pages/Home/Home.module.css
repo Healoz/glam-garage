@@ -111,12 +111,6 @@
     margin-top: calc(var(--spacing-4) - 10px);
 }
 
-.catalogueGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
     .hero {
@@ -154,10 +148,6 @@
     .heroContent {
         display: flex;
         align-items: center;
-    }
-
-    .catalogueGrid {
-        grid-template-columns: repeat(3, 1fr);
     }
 
     .catalogue {
@@ -199,10 +189,6 @@
 
     .catalogue {
         padding: 5rem 10vw 5rem 10vw;
-    }
-
-    .catalogueGrid {
-        grid-template-columns: repeat(4, 1fr);
     }
 
     .catalogue h3 {

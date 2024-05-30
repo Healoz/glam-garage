@@ -11,6 +11,7 @@ import shirtImg from "../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg";
 import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
 import { motion } from "framer-motion";
+import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
 
 const ImageCollage = () => {
   const collageImages = [{}];
@@ -119,40 +120,40 @@ const CircleSticker = () => {
   );
 };
 
-interface CatalogueGridProps {
-  products: Product[];
-}
+// interface CatalogueGridProps {
+//   products: Product[];
+// }
 
-const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
-  const fadeInAnimationVariants = {
-    initial: {
-      opacity: 0,
-      y: 100,
-    },
-    animate: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: 0.1 * index
-      }
-    }),
-  };
+// const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
+//   const fadeInAnimationVariants = {
+//     initial: {
+//       opacity: 0,
+//       y: 100,
+//     },
+//     animate: (index: number) => ({
+//       opacity: 1,
+//       y: 0,
+//       transition: {
+//         duration: 0.5,
+//         delay: 0.1 * index
+//       }
+//     }),
+//   };
 
-  const catalogueItems = products.map((product, index) => (
-    <motion.div
-      variants={fadeInAnimationVariants}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-      custom={index}
-    >
-      <CatalogueItem key={product.id} product={product} />
-    </motion.div>
-  ));
+//   const catalogueItems = products.map((product, index) => (
+//     <motion.div
+//       variants={fadeInAnimationVariants}
+//       initial="initial"
+//       whileInView="animate"
+//       viewport={{ once: true }}
+//       custom={index}
+//     >
+//       <CatalogueItem key={product.id} product={product} />
+//     </motion.div>
+//   ));
 
-  return <div className={styles.catalogueGrid}>{catalogueItems}</div>;
-};
+//   return <div className={styles.catalogueGrid}>{catalogueItems}</div>;
+// };
 
 interface HomeProps {
   products: Product[];
