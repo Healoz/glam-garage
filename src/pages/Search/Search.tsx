@@ -20,13 +20,23 @@ const Search: React.FC<SearchProps> = ({ products }) => {
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("q");
 
+  const filteredProducts = products.filter(product => {
+
+    // return if no search query
+    if (!searchQuery) return;
+
+    const lowerCaseProductName = product.name.toLowerCase();
+    
+    return lowerCaseProductName.includes(searchQuery.toLowerCase());
+  });
+
   return (
     <main className={styles.searchPage}>
       <div className={styles.title}>
         <h3>Your search results for:</h3>
         <h1>{searchQuery}</h1>
       </div>
-      <CatalogueGrid products={products} />
+      <CatalogueGrid products={filteredProducts} />
     </main>
   );
 };

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, useAnimationControls } from "framer-motion";
 import { CartItem } from "../../data/types";
 import { motion } from "framer-motion";
+import SearchBar from "../SearchBar/SearchBar";
 // import { CartContext } from "../../App";
 
 interface HeaderProps {
@@ -124,8 +125,11 @@ const Header: FC<HeaderProps> = ({
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (searchQuery === "") return;
+
     navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-  }
+  };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -150,18 +154,8 @@ const Header: FC<HeaderProps> = ({
       </div>
 
       <div className={styles.menuBtns}>
-        <div className={styles.searchBar}>
-          <form onSubmit={handleSearch}>
-            <input value={searchQuery} onChange={handleSearchChange}></input>
-            <button className={styles.searchBarBtn} type="submit">
-              <span
-                className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
-              >
-                search
-              </span>
-            </button>
-          </form>
-        </div>
+        <SearchBar />
+        
 
         <section className={styles.cartSection}>
           <button

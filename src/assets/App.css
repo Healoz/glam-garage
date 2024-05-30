@@ -43,6 +43,21 @@ img {
   
 }
 
+/* Reset default input styles */
+input {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  /* Add any additional styles you need */
+}
+
+
 /* removing default a styling */
 a:-webkit-any-link {
   text-decoration: none;
