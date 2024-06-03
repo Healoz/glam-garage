@@ -3,17 +3,23 @@
   cursor: pointer;
 }
 
+.searchBarContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
 .searchBar {
-  /* border: 1px var(--black) solid; */
+  border: 1px var(--black) solid;
   border-radius: 50px;
   width: 100%;
-  /* padding: 0.4rem 1.3rem; */
+  padding: 0.4rem 1.3rem;
   display: flex;
   align-items: center;
 }
 
 .searchBarIcon {
-  /* margin-top: 3px; */
   font-size: 2rem;
 }
 
@@ -24,11 +30,13 @@
 
 .searchBar input {
   width: 100%;
-  display: none;
+  /* display: none; */
 }
 
-.clearTextBtn {
-    display: none;       
+.searchBtns {
+  display: flex;
+  gap: 0.4rem;
+  padding-left: 0.4rem;
 }
 
 /* Tablet */
@@ -57,11 +65,7 @@
         font-size: 1.6rem;
       }
 
-      .searchBtns {
-        display: flex;
-        gap: 0.4rem;
-        padding-left: 0.4rem;
-      }
+      
 
       .clearTextBtn {
         display: unset;       
