@@ -81,64 +81,49 @@ const Header: FC<HeaderProps> = ({
     }
   }
 
-  const handleClickOutsideCartPopup = (event: MouseEvent) => {
-    // if clicked on shopping cart icon, do nothing
-    if (shoppingCartBtnRef.current?.contains(event.target as Node)) {
-      return;
-    }
+  const useClickOutside = (
+    mainRef: RefObject<HTMLElement>,
+    toggleState: boolean,
+    setToggleState: (state: boolean) => void,
+    additionalRefs: RefObject<HTMLElement>[]
+  ) => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // if clicked on any of the additional elements, do nothing
+      if (
+        additionalRefs.some((ref) =>
+          ref.current?.contains(event.target as Node)
+        )
+      ) {
+        return;
+      }
 
-    // mouse clicked inside of popout, do nothing
-    if (
-      !(
-        cartPopoutRef.current &&
-        !cartPopoutRef.current.contains(event.target as Node)
-      )
-    ) {
-      return;
-    }
+      // if clicked inside the main element, do nothing
+      if (mainRef.current?.contains(event.target as Node)) {
+        return;
+      }
 
-    // hide cart
-    setCartShowing(false);
-  };
-
-  
-
-  // UseEffect to handle click events outside of cartPopout
-  useEffect(() => {
-    if (cartShowing) {
-      document.addEventListener("mousedown", handleClickOutsideCartPopup);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutsideCartPopup);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutsideCartPopup);
+      // hide the element if clicked outside
+      setToggleState(false);
     };
-  }, [cartShowing]);
 
-  const handleClickOutsideSearchBar = (event: MouseEvent) => {
-    // if clicked on searchbar, do nothing
-    if (searchBarRef.current?.contains(event.target as Node)) {
-      return;
-    }
+    useEffect(() => {
+      if (toggleState) {
+        document.addEventListener("mousedown", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
 
-    // hide searchbar if clicked outside
-    setSearchShowing(false);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [toggleState]);
   };
 
-  // same with search bar. only add event listener when search is showing.
-  useEffect(() => {
-    if (searchShowing) {
-      document.addEventListener("mousedown", handleClickOutsideSearchBar);
-    }
-    else {
-      document.removeEventListener("mousedown", handleClickOutsideSearchBar);
-    }
+  // close popup when clicking outside popup
+  useClickOutside(cartPopoutRef, cartShowing, setCartShowing, [shoppingCartBtnRef]);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutsideSearchBar);
-    }
-  }, [searchShowing])
+  // close searchbar when clicking outside
+  useClickOutside(searchBarRef, searchShowing, setSearchShowing, []);
 
   const calculateTotalCartNumber = (): number => {
     let cartItemNumber = 0;
@@ -149,7 +134,6 @@ const Header: FC<HeaderProps> = ({
   useEffect(() => {
     setAmountInCart(calculateTotalCartNumber());
   }, [cartItems]);
-
 
   return (
     <section className={styles.header}>
@@ -170,10 +154,10 @@ const Header: FC<HeaderProps> = ({
       </div>
 
       <div className={styles.menuBtns}>
-        <SearchBar 
+        <SearchBar
           searchShowing={searchShowing}
           setSearchShowing={setSearchShowing}
-          ref={searchBarRef} 
+          ref={searchBarRef}
         />
         <section className={styles.cartSection}>
           <button
