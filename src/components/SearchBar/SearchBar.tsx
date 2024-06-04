@@ -6,18 +6,28 @@ import React, {
   FC,
   useContext,
   RefObject,
+  ForwardRefRenderFunction,
+  forwardRef,
 } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 
-const SearchBar: FC = () => {
+interface SearchBarProps {
+  searchShowing: boolean;
+  setSearchShowing: (isShowing: boolean) => void;
+}
+
+const SearchBar: ForwardRefRenderFunction<HTMLDivElement, SearchBarProps> = (
+  { searchShowing, setSearchShowing },
+  ref
+) => {
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState("");
 
   const [isDesktop, setIsDesktop] = useState(true);
-  const [searchIsOpen, setSearchIsOpen] = useState(false);
+  // const [searchIsOpen, setSearchIsOpen] = useState(false);
 
   const searchControls = useAnimationControls();
 
@@ -57,16 +67,20 @@ const SearchBar: FC = () => {
   };
 
   const openSearch = () => {
-    setSearchIsOpen(true);
-  }
+    setSearchShowing(true);
+  };
+
+  const localRef = useRef<HTMLDivElement>(null);
+  const searchBarRef = ref || localRef;
 
   return (
     <div className={styles.searchBarContainer}>
-      {isDesktop || searchIsOpen ? (
+      {isDesktop || searchShowing ? (
         <motion.div
           className={styles.searchBar}
           transition={{ duration: 0.3 }}
           style={{ transformOrigin: "right" }}
+          ref={searchBarRef}
         >
           <form onSubmit={handleSearchBtn}>
             <motion.input
@@ -118,4 +132,4 @@ const SearchBar: FC = () => {
   );
 };
 
-export default SearchBar;
+export default forwardRef(SearchBar);
