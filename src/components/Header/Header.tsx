@@ -14,6 +14,7 @@ import { AnimatePresence, useAnimationControls } from "framer-motion";
 import { CartItem } from "../../data/types";
 import { motion } from "framer-motion";
 import SearchBar from "../SearchBar/SearchBar";
+import useClickOutside from "../useClickOutside";
 // import { CartContext } from "../../App";
 
 interface HeaderProps {
@@ -30,20 +31,25 @@ const Header: FC<HeaderProps> = ({
   cartItems,
   cartTotal,
 }) => {
+
+  // State hooks
   const [cartShowing, setCartShowing] = useState<boolean>(false);
   const [searchShowing, setSearchShowing] = useState(false);
-  // reference to the cart popout to detect clicks outside of the popout when its open to close it
+  const [amountInCart, setAmountInCart] = useState(0);
+  const [amountInCartDisplay, setAmountInCartDisplay] = useState(amountInCart);
+  
+  // refs
   const cartPopoutRef = useRef<HTMLDivElement>(null);
   const shoppingCartBtnRef = useRef<HTMLButtonElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
+
+  // navigation hook
   const navigate = useNavigate();
-  // const { cartItems } = useContext(CartContext);
-  const [amountInCart, setAmountInCart] = useState(0);
 
-  const [amountInCartDisplay, setAmountInCartDisplay] = useState(amountInCart);
-
+  // animation controls
   const controls = useAnimationControls();
 
+  // Animation variants
   const cartVariants = {
     initial: {
       scale: 1,
@@ -57,6 +63,7 @@ const Header: FC<HeaderProps> = ({
     },
   };
 
+  // Effect hooks
   useEffect(() => {
     // play cart animation everytime cart number goes up
     controls.start("cartAnimation");
@@ -67,9 +74,23 @@ const Header: FC<HeaderProps> = ({
     }, 800);
   }, [amountInCart]);
 
-  function togglePopout() {
-    setCartShowing((prevCartShowing) => !prevCartShowing);
-  }
+  useEffect(() => {
+    setAmountInCart(calculateTotalCartNumber());
+  }, [cartItems]);
+
+  // Custom hooks for handling clicks outside
+  // close popup when clicking outside popup
+  useClickOutside(cartPopoutRef, cartShowing, setCartShowing, [shoppingCartBtnRef]);
+
+  // close searchbar when clicking outside
+  useClickOutside(searchBarRef, searchShowing, setSearchShowing, []);
+
+  // Functions
+  const calculateTotalCartNumber = (): number => {
+    let cartItemNumber = 0;
+    cartItems.forEach((cartItem) => (cartItemNumber += cartItem.quantity));
+    return cartItemNumber;
+  };
 
   function shoppingCartSelected() {
     if (window.screen.width > 1200) {
@@ -81,59 +102,9 @@ const Header: FC<HeaderProps> = ({
     }
   }
 
-  const useClickOutside = (
-    mainRef: RefObject<HTMLElement>,
-    toggleState: boolean,
-    setToggleState: (state: boolean) => void,
-    additionalRefs: RefObject<HTMLElement>[]
-  ) => {
-    const handleClickOutside = (event: MouseEvent) => {
-      // if clicked on any of the additional elements, do nothing
-      if (
-        additionalRefs.some((ref) =>
-          ref.current?.contains(event.target as Node)
-        )
-      ) {
-        return;
-      }
-
-      // if clicked inside the main element, do nothing
-      if (mainRef.current?.contains(event.target as Node)) {
-        return;
-      }
-
-      // hide the element if clicked outside
-      setToggleState(false);
-    };
-
-    useEffect(() => {
-      if (toggleState) {
-        document.addEventListener("mousedown", handleClickOutside);
-      } else {
-        document.removeEventListener("mousedown", handleClickOutside);
-      }
-
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [toggleState]);
-  };
-
-  // close popup when clicking outside popup
-  useClickOutside(cartPopoutRef, cartShowing, setCartShowing, [shoppingCartBtnRef]);
-
-  // close searchbar when clicking outside
-  useClickOutside(searchBarRef, searchShowing, setSearchShowing, []);
-
-  const calculateTotalCartNumber = (): number => {
-    let cartItemNumber = 0;
-    cartItems.forEach((cartItem) => (cartItemNumber += cartItem.quantity));
-    return cartItemNumber;
-  };
-
-  useEffect(() => {
-    setAmountInCart(calculateTotalCartNumber());
-  }, [cartItems]);
+  function togglePopout() {
+    setCartShowing((prevCartShowing) => !prevCartShowing);
+  }
 
   return (
     <section className={styles.header}>
@@ -175,7 +146,7 @@ const Header: FC<HeaderProps> = ({
                 {amountInCartDisplay}
               </motion.p>
             )}
-            <span className={`material-symbols-outlined ${styles.iconSmall}`}>
+            <span className={`material-symbols-outlined ${styles.iconSmall} ${styles.shoppingCartIcon}`}>
               shopping_cart
             </span>
           </button>

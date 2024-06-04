@@ -31,6 +31,10 @@
     font-size: 2rem;
 }
 
+.shoppingCartIcon {
+    font-size: 1.8rem;
+}
+
 .menuBtns {
     display: flex;
     gap: var(--spacing-3);
@@ -55,6 +59,9 @@
 .cartSection {
     /* background-color: red; */
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cartButton {
@@ -122,6 +129,10 @@
 
     .menuBtns {
         width: 30%;
+    }
+
+    .shoppingCartIcon {
+        font-size: 2rem;
     }
    
 }

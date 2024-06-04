@@ -27,9 +27,6 @@ const SearchBar: ForwardRefRenderFunction<HTMLDivElement, SearchBarProps> = (
   const [searchQuery, setSearchQuery] = useState("");
 
   const [isDesktop, setIsDesktop] = useState(true);
-  // const [searchIsOpen, setSearchIsOpen] = useState(false);
-
-  const searchControls = useAnimationControls();
 
   useEffect(() => {
     checkIsDesktop();
@@ -73,61 +70,102 @@ const SearchBar: ForwardRefRenderFunction<HTMLDivElement, SearchBarProps> = (
   const localRef = useRef<HTMLDivElement>(null);
   const searchBarRef = ref || localRef;
 
+  const searchBarVariants = {
+    initial: {
+      paddingRight: 0,
+      scaleX: 0,
+      borderColor: "var(--transparent)",
+    },
+    animate: {
+      paddingRight: "1.3rem",
+      scaleX: 1,
+      transition: { duration: 0.3 },
+      borderColor: "var(--black)",
+    },
+    exit: {
+      paddingRight: 0,
+      scaleX: 0,
+      transition: { duration: 0.3 },
+      borderColor: "var(--transparent)",
+    },
+  };
+
   return (
     <div className={styles.searchBarContainer}>
-      {isDesktop || searchShowing ? (
-        <motion.div
-          className={styles.searchBar}
-          transition={{ duration: 0.3 }}
-          style={{ transformOrigin: "right" }}
-          ref={searchBarRef}
-        >
-          <form onSubmit={handleSearchBtn}>
-            <motion.input
-              value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Search"
-            ></motion.input>
-            <div className={styles.searchBtns}>
-              <AnimatePresence>
-                {searchQuery !== "" && (
-                  <motion.button
-                    className={`${styles.searchBarBtn} ${styles.clearTextBtn}`}
-                    type="button"
-                    onClick={clearSearch}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 10 }}
-                    transition={{ duration: 0.3, type: "spring" }}
-                  >
-                    <span
-                      className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
-                    >
-                      close
-                    </span>
-                  </motion.button>
-                )}
-              </AnimatePresence>
-              <button className={styles.searchBarBtn} type="submit">
-                <span
-                  className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
-                >
-                  search
-                </span>
-              </button>
-            </div>
-          </form>
-        </motion.div>
-      ) : (
-        // shown if search is closed
-        <button className={styles.searchBarBtnClosed} onClick={openSearch}>
-          <span
-            className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
+      <AnimatePresence>
+        {isDesktop || searchShowing ? (
+          <motion.div
+            className={styles.searchBar}
+            transition={{ duration: 0.3 }}
+            style={{ transformOrigin: "right" }}
+            ref={searchBarRef}
+            variants={searchBarVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            key="searchBar"
           >
-            search
-          </span>
-        </button>
-      )}
+            <form onSubmit={handleSearchBtn}>
+              <AnimatePresence>
+                <motion.input
+                  value={searchQuery}
+                  key="searchBarInput"
+                  onChange={handleSearchChange}
+                  placeholder="Search"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                ></motion.input>
+              </AnimatePresence>
+              <div className={styles.searchBtns}>
+                <AnimatePresence>
+                  {searchQuery !== "" && (
+                    <motion.button
+                      className={`${styles.searchBarBtn} ${styles.clearTextBtn}`}
+                      type="button"
+                      onClick={clearSearch}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.3, type: "spring" }}
+                    >
+                      <span
+                        className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
+                      >
+                        close
+                      </span>
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+                <button className={styles.searchBarBtn} type="submit">
+                  <span
+                    className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
+                  >
+                    search
+                  </span>
+                </button>
+              </div> 
+            </form>
+          </motion.div>
+        ) : (
+          // shown if search is closed
+          <motion.button
+            className={styles.searchBarBtnClosed}
+            onClick={openSearch}
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "auto", opacity: 1 }}
+            transition={{ duration: 0, delay: 0.3 }}
+            key="searchBarBtnClosed"
+          >
+            <span
+              className={`material-symbols-outlined ${styles.iconSmall} ${styles.searchBarIcon}`}
+            >
+              search
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

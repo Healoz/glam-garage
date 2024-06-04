@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   margin-left: 0.5rem;
+  justify-content: flex-end;
 }
 
 .searchBar {
@@ -58,10 +59,13 @@
   font-size: 1.6rem;
 }
 
-
-
 .clearTextBtn {
   display: unset;       
+}
+
+.searchBarBtnClosed {
+  padding-top: calc(0.4rem + 1px);
+  padding-bottom: calc(0.4rem + 1px); 
 }
 
 /* Tablet */

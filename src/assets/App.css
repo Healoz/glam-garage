@@ -75,6 +75,7 @@ a:-webkit-any-link {
   --white: #fff9ff;
   --white-opacity: #fff9ff85;
   --black: #130719;
+  --transparent: #13071900;
   --black-opacity: #13071979;
   --black-opacity-2: rgba(19, 7, 25, 0.221);
   --grey: #555458;
