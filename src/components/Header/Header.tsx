@@ -118,9 +118,9 @@ const Header: FC<HeaderProps> = ({
           </Link>
         </div>
         <ul className={styles.desktopMenuItems}>
-          <li>Menu Item 1</li>
-          <li>Menu Item 2</li>
-          <li>Menu Item 3</li>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
         </ul>
       </div>
 

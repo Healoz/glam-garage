@@ -21,15 +21,24 @@ import { useAnimationControls } from "framer-motion";
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
   return (
     <div>
-      <div
-        className={styles.productImageCarousel}
-        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
-      >
-        <div className={styles.carouselArrows}>
+      <div className={styles.carouselContainer}>
+        <motion.div drag="x" className={styles.carousel}>
+          {product.imageUrls.map((imageUrl, index) => (
+            <div
+              className={styles.productImage}
+              key={index}
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* <div className={styles.carouselArrows}>
           <span className="material-symbols-outlined">arrow_back_ios</span>
           <span className="material-symbols-outlined">arrow_forward_ios</span>
-        </div>
-        <CarouselIndicators />
+        </div> */}
+        {/* <CarouselIndicators /> */}
       </div>
       <DesktopGallery product={product} />
     </div>
@@ -57,11 +66,11 @@ const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
       ></div>
       <div
         className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[1]})` }}
       ></div>
       <div
         className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
+        style={{ backgroundImage: `url(${product.imageUrls[2]})` }}
       ></div>
     </div>
   );
