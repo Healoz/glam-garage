@@ -2,9 +2,9 @@
   height: 50vh;
   border-radius: 250px 250px 70px 70px;
   margin-bottom: var(--spacing-3);
-  filter: brightness(95%);
   overflow: hidden;
-  
+  background-color: var(--purple-light-2);
+  position: relative;
 }
 
 .carousel {
@@ -17,24 +17,29 @@
 .productImage {
   height: 100%;
   width: 100%;
+  filter: brightness(95%);
   flex-shrink: 0;
   background-size: cover;
   background-position: center;
   object-fit: cover;
 }
 
-.carouselContainer:active {
+.carousel:active {
   cursor: grabbing;
-}
-
-.carouselArrows {
-  display: none;
 }
 
 .carouselIndicators {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+  left: 0;
 }
+
+
 
 .carouselIndicator {
   width: 12px;
@@ -90,6 +95,10 @@
   pointer-events: none;
 }
 
+.carouselArrows {
+  display: none;
+}
+
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
 }
@@ -125,12 +134,23 @@
     padding-top: 3rem;
   }
 
+  
+
   .carouselArrows {
     color: white;
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 6%;
+    position: absolute;
+    top: 45%;
+    pointer-events: none;
+  }
+
+  .carouselArrows button {
+    display: flex;
+    color: white;
+    pointer-events: all;
   }
 
   .carouselArrows span {

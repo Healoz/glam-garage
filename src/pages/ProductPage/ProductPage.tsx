@@ -15,14 +15,52 @@ import { Product } from "../../data/types";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import { Size } from "../../data/types";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useAnimationControls } from "framer-motion";
 
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
+  const DRAG_BUFFER = 50;
+
+  const [dragging, setDragging] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
+
+  const dragX = useMotionValue(0);
+
+  const onDragStart = () => {
+    setDragging(true);
+  };
+
+  const onDragEnd = () => {
+    setDragging(false);
+
+    const x = dragX.get();
+
+    if (x <= -DRAG_BUFFER && imgIndex < product.imageUrls.length - 1) {
+      setImgIndex((prevIndex) => prevIndex + 1);
+    } else if (x >= DRAG_BUFFER && imgIndex > 0) {
+      setImgIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
   return (
     <div>
       <div className={styles.carouselContainer}>
-        <motion.div drag="x" className={styles.carousel}>
+        <motion.div
+          className={styles.carousel}
+          drag="x"
+          dragConstraints={{
+            left: 0,
+            right: 0,
+          }}
+          style={{
+            x: dragX,
+          }}
+          animate={{
+            translateX: `-${imgIndex * 100}%`,
+          }}
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+        >
           {product.imageUrls.map((imageUrl, index) => (
             <div
               className={styles.productImage}
@@ -34,25 +72,59 @@ const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
           ))}
         </motion.div>
 
-        {/* <div className={styles.carouselArrows}>
-          <span className="material-symbols-outlined">arrow_back_ios</span>
-          <span className="material-symbols-outlined">arrow_forward_ios</span>
-        </div> */}
-        {/* <CarouselIndicators /> */}
+        <div className={styles.carouselArrows}>
+          <button
+            onClick={
+              imgIndex > 0
+                ? () => setImgIndex((prevIndex) => prevIndex - 1)
+                : () => console.log("null")
+            }
+          >
+            <span className="material-symbols-outlined">arrow_back_ios</span>
+          </button>
+          <button
+            onClick={
+              imgIndex < product.imageUrls.length - 1
+                ? () => setImgIndex((prevIndex) => prevIndex + 1)
+                : () => console.log("null")
+            }
+          >
+            <span className="material-symbols-outlined">arrow_forward_ios</span>
+          </button>
+        </div>
+        <CarouselIndicators
+          setImgIndex={setImgIndex}
+          imgIndex={imgIndex}
+          product={product}
+        />
       </div>
       <DesktopGallery product={product} />
     </div>
   );
 };
 
-const CarouselIndicators = () => {
+interface CarouselIndicatorProps {
+  setImgIndex: (index: number) => void;
+  imgIndex: number;
+  product: Product;
+}
+
+const CarouselIndicators: React.FC<CarouselIndicatorProps> = ({
+  setImgIndex,
+  imgIndex,
+  product,
+}) => {
   return (
     <div className={styles.carouselIndicators}>
-      <div
-        className={`${styles.carouselIndicator} ${styles.filledIndicator}`}
-      ></div>
-      <div className={`${styles.carouselIndicator}`}></div>
-      <div className={`${styles.carouselIndicator}`}></div>
+      {product.imageUrls.map((_, index) => (
+        <button
+          key={index}
+          className={`${styles.carouselIndicator} ${
+            imgIndex === index ? styles.filledIndicator : ""
+          }`}
+          onClick={() => setImgIndex(index)}
+        ></button>
+      ))}
     </div>
   );
 };

@@ -71,9 +71,10 @@ a:-webkit-any-link {
 :root {
   --purple-dark: #b89ee3;
   --purple-light: #f1e8ff;
+  --purple-light-2: #f9f5ff;
   --fluro-yellow: #e8ff57;
   --white: #fff9ff;
-  --white-opacity: #fff9ff85;
+  --white-opacity: #fff9ffc0;
   --black: #130719;
   --transparent: #13071900;
   --black-opacity: #13071979;
