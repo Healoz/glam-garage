@@ -79,6 +79,11 @@ const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
                 ? () => setImgIndex((prevIndex) => prevIndex - 1)
                 : () => console.log("null")
             }
+            style={
+              imgIndex > 0
+                ? { opacity: 1 }
+                : { opacity: 0, pointerEvents: "none" }
+            }
           >
             <span className="material-symbols-outlined">arrow_back_ios</span>
           </button>
@@ -87,6 +92,11 @@ const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
               imgIndex < product.imageUrls.length - 1
                 ? () => setImgIndex((prevIndex) => prevIndex + 1)
                 : () => console.log("null")
+            }
+            style={
+              imgIndex < product.imageUrls.length - 1
+                ? { opacity: 1 }
+                : { opacity: 0, pointerEvents: "none" }
             }
           >
             <span className="material-symbols-outlined">arrow_forward_ios</span>
