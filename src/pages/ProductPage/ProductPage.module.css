@@ -170,6 +170,7 @@
     background-position: center center;
     background-size: cover;
     border-radius: 30px 30px 70px 70px;
+    cursor: pointer;
   }
 
   .selectedImg {

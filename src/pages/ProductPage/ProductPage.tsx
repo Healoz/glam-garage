@@ -108,7 +108,11 @@ const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
           product={product}
         />
       </div>
-      <DesktopGallery product={product} />
+      <DesktopGallery
+        product={product}
+        setImgIndex={setImgIndex}
+        imgIndex={imgIndex}
+      />
     </div>
   );
 };
@@ -138,22 +142,30 @@ const CarouselIndicators: React.FC<CarouselIndicatorProps> = ({
     </div>
   );
 };
+interface DesktopGalleryProps {
+  setImgIndex: (index: number) => void;
+  imgIndex: number;
+  product: Product;
+}
 
-const DesktopGallery: React.FC<ProductProps> = ({ product }) => {
+const DesktopGallery: React.FC<DesktopGalleryProps> = ({
+  product,
+  imgIndex,
+  setImgIndex,
+}) => {
   return (
     <div className={styles.desktopGallery}>
-      <div
-        className={`${styles.desktopGalleryImg} ${styles.selectedImg}`}
-        style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
-      ></div>
-      <div
-        className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${product.imageUrls[1]})` }}
-      ></div>
-      <div
-        className={`${styles.desktopGalleryImg}`}
-        style={{ backgroundImage: `url(${product.imageUrls[2]})` }}
-      ></div>
+      {product.imageUrls.map((imageUrl, index) => {
+        return (
+          <div
+            className={`${styles.desktopGalleryImg} ${
+              imgIndex === index ? styles.selectedImg : ""
+            }`}
+            style={{ backgroundImage: `url(${imageUrl})` }}
+            onClick={() => setImgIndex(index)}
+          ></div>
+        );
+      })}
     </div>
   );
 };
