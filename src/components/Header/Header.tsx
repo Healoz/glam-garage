@@ -23,6 +23,7 @@ interface HeaderProps {
   cartTotal: number;
   removeCartItemFromCart: (cartItemId: string) => void;
   updateProductInCart: (cartItemId: string, newQuantity: number) => void;
+  categoryNames: string[];
 }
 
 const Header: FC<HeaderProps> = ({
@@ -30,6 +31,7 @@ const Header: FC<HeaderProps> = ({
   updateProductInCart,
   cartItems,
   cartTotal,
+  categoryNames,
 }) => {
 
   // State hooks
@@ -118,9 +120,9 @@ const Header: FC<HeaderProps> = ({
           </Link>
         </div>
         <ul className={styles.desktopMenuItems}>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
+          {categoryNames.map(categoryName => (
+            <Link to={`/category/${categoryName}`}><li>{categoryName}</li></Link>
+          ))}
         </ul>
       </div>
 

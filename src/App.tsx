@@ -45,12 +45,17 @@ function App() {
 
   const [cartTotal, setCartTotal] = useState(0);
 
+  const [categoryNames, setCategoryNames] = useState<string[]>([]);
+
   useEffect(() => {
     // loading cart data from local storage on app load
     const storedCartItems = localStorage.getItem("cartItems");
     if (storedCartItems) {
       setCartItems(JSON.parse(storedCartItems));
     }
+
+    // get all the category names from the products data
+    getCategoryNames();
 
     // smooth scroll behaiviour
     // const lenis = new Lenis();
@@ -61,6 +66,7 @@ function App() {
     // }
 
     // requestAnimationFrame(raf);
+
   }, []);
 
   // useContext functions
@@ -175,6 +181,24 @@ function App() {
     return cartItemArray;
   }
 
+  // get category names
+  const getCategoryNames = () => {
+
+    const uniqueCategories: string[] = [];
+    products.forEach(product => {
+      if (!uniqueCategories.includes(product.category)) {
+        uniqueCategories.push(product.category);
+      }
+    });
+
+    // Update the categoryNames state with unique category names
+    setCategoryNames(uniqueCategories);
+  }
+
+  useEffect(() => {
+    getCategoryNames();
+  }, [products])
+
   return (
     <CartContext.Provider value={cartContextValue}>
       <div className="App">
@@ -184,6 +208,7 @@ function App() {
             removeCartItemFromCart={removeCartItemFromCart}
             cartItems={cartItems}
             cartTotal={cartTotal}
+            categoryNames={categoryNames}
           />
           <div className="pageContent">
             <Routes>
@@ -195,6 +220,7 @@ function App() {
                     checkIfProductInFavourites={checkIfProductInFavourites}
                     addProductToFavourites={addProductToFavourites}
                     removeProductFromFavourites={removeProductFromFavourites}
+                    categoryNames={categoryNames}
                   />
                 }
               />

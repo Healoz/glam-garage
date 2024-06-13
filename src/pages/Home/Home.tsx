@@ -118,11 +118,29 @@ const CircleSticker = () => {
   );
 };
 
+interface CategoryCallToActionProps {
+  categoryNames: string[];
+}
+
+const CategoryCallToAction: React.FC<CategoryCallToActionProps> = ({
+  categoryNames
+}) => {
+  return (
+    <div>
+      <h3>Categories</h3>
+      {categoryNames.map((category, index) => {
+        return <p key={index}>{category}</p>;
+      })}
+    </div>
+  );
+};
+
 interface HomeProps {
   products: Product[];
   addProductToFavourites: (newProduct: Product) => void;
   removeProductFromFavourites: (removedProduct: Product) => void;
   checkIfProductInFavourites: (product: Product) => boolean;
+  categoryNames: string[];
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -130,6 +148,7 @@ const Home: React.FC<HomeProps> = ({
   addProductToFavourites,
   removeProductFromFavourites,
   checkIfProductInFavourites,
+  categoryNames,
 }) => {
   const heroContainerRef = useRef(null);
   const homeMainRef = useRef(null);
@@ -150,6 +169,7 @@ const Home: React.FC<HomeProps> = ({
           <HeroContent />
         </section>
       </section>
+      <CategoryCallToAction categoryNames={categoryNames} />
       <section className={styles.catalogue}>
         <h3>View our new range</h3>
         <CatalogueGrid
