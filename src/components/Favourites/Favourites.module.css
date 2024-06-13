@@ -1,0 +1,27 @@
+.favouritesContainer {
+    padding: 20px;
+    background-color: var(--purple-light);
+}
+
+.favouritesContainer h2 {
+    margin-bottom: 3rem;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+
+.favouritesContainer {
+    padding: var(--spacing-4) 10vw;
+}
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+
+.favouritesContainer {
+    padding: 5rem 10vw 5rem 10vw;
+}
+
+}
+

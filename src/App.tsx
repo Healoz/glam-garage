@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
 import Search from "./pages/Search/Search";
+import Favourites from "./components/Favourites/Favourites";
 
 // define shape of context value
 interface CartContextValue {
@@ -34,15 +35,14 @@ export const CartContext = createContext<CartContextValue>({
 function App() {
   // importing products from temp json file
   const [products, setProductsData] = useState<Product[]>(productsData);
+  const [favourites, setFavourites] = useState<Product[]>([]);
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
 
-  const cartNumberDiv = useRef<HTMLDivElement>(null);
-
-  const [cartTotal, setCartTotal] = useState<number>(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     // loading cart data from local storage on app load
@@ -108,6 +108,22 @@ function App() {
     );
   };
 
+  const addProductToFavourites = (newProduct: Product): void => {
+    // do nothing if product already in favourites
+    if (checkIfProductInFavourites(newProduct)) { return };
+    setFavourites((prevFavourites) => [...prevFavourites, newProduct]);
+  };
+
+  const removeProductFromFavourites = (removedProduct: Product): void => {
+    setFavourites((prevFavourites) =>
+      prevFavourites.filter((favourite) => favourite.id !== removedProduct.id)
+    );
+  };
+
+  const checkIfProductInFavourites = (product: Product): boolean => {
+    return favourites.some((favourite) => favourite.id === product.id);
+  };
+
   // Calculating cart total
   const calculateCartTotal = (): number => {
     let total = 0;
@@ -168,7 +184,17 @@ function App() {
           />
           <div className="pageContent">
             <Routes>
-              <Route path="/" element={<Home products={products} />} />
+              <Route
+                path="/"
+                element={
+                  <Home
+                    products={products}
+                    checkIfProductInFavourites={checkIfProductInFavourites}
+                    addProductToFavourites={addProductToFavourites}
+                    removeProductFromFavourites={removeProductFromFavourites}
+                  />
+                }
+              />
               <Route
                 path="/product/:id"
                 element={<ProductPage products={products} />}
@@ -186,9 +212,22 @@ function App() {
               />
               <Route
                 path="/search"
-                element={<Search products={products} />}
+                element={
+                  <Search
+                    products={products}
+                    addProductToFavourites={addProductToFavourites}
+                    removeProductFromFavourites={removeProductFromFavourites}
+                    checkIfProductInFavourites={checkIfProductInFavourites}
+                  />
+                }
               />
             </Routes>
+            <Favourites
+              favourites={favourites}
+              checkIfProductInFavourites={checkIfProductInFavourites}
+              addProductToFavourites={addProductToFavourites}
+              removeProductFromFavourites={removeProductFromFavourites}
+            />
           </div>
           <Footer />
         </div>

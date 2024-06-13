@@ -15,7 +15,12 @@ interface CartProps {
   updateProductInCart: (cartItemId: string, newQuantity: number) => void;
 }
 
-const Cart: React.FC<CartProps> = ({ cartItems, cartTotal, removeCartItemFromCart, updateProductInCart }) => {
+const Cart: React.FC<CartProps> = ({
+  cartItems,
+  cartTotal,
+  removeCartItemFromCart,
+  updateProductInCart,
+}) => {
   // const { cartItems, cartTotal } = useContext(CartContext);
 
   const shippingPrice = 30;
@@ -23,17 +28,35 @@ const Cart: React.FC<CartProps> = ({ cartItems, cartTotal, removeCartItemFromCar
   const CartItemGridElements = () => {
     return (
       <div className={styles.cartGrid}>
-        {cartItems.map((cartItem: CartItem) => (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={cartItem.id}>
-            <CartItemElement
-              quantityAdjust={true}
-              cartItem={cartItem}
-              isPopoutSize={false}
-              removeCartItemFromCart={removeCartItemFromCart}
-              updateProductInCart={updateProductInCart}
+        {cartItems.length > 0 ? (
+          cartItems.map((cartItem: CartItem) => (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              key={cartItem.id}
+            >
+              <CartItemElement
+                quantityAdjust={true}
+                cartItem={cartItem}
+                isPopoutSize={false}
+                removeCartItemFromCart={removeCartItemFromCart}
+                updateProductInCart={updateProductInCart}
+              />
+            </motion.div>
+          ))
+        ) : (
+          <div>
+            <h1>There are no cart items.</h1>
+            <Button
+              buttonText="Browse store"
+              colourScheme={ColourScheme.Primary}
+              iconCode="arrow_forward"
+              isCircle={false}
+              fillsSpace={false}
+              buttonLink="/"
             />
-          </motion.div>
-        ))}
+          </div>
+        )}
       </div>
     );
   };

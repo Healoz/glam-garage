@@ -9,7 +9,7 @@
     background-color: var(--purple-light);
     position: fixed;
     width: 100%;
-    z-index: 3;
+    z-index: 1000;
 }
 
 .logo a {

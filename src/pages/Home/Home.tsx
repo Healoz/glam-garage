@@ -120,16 +120,23 @@ const CircleSticker = () => {
 
 interface HomeProps {
   products: Product[];
+  addProductToFavourites: (newProduct: Product) => void;
+  removeProductFromFavourites: (removedProduct: Product) => void;
+  checkIfProductInFavourites: (product: Product) => boolean;
 }
 
-const Home: React.FC<HomeProps> = ({ products }) => {
+const Home: React.FC<HomeProps> = ({
+  products,
+  addProductToFavourites,
+  removeProductFromFavourites,
+  checkIfProductInFavourites,
+}) => {
   const heroContainerRef = useRef(null);
   const homeMainRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: homeMainRef,
     offset: ["start end", "end start"],
   });
-
 
   const smallParallax = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const mediumParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
@@ -139,13 +146,18 @@ const Home: React.FC<HomeProps> = ({ products }) => {
     <main className={styles.homeMain} ref={homeMainRef}>
       <section className={styles.navAndHero}>
         <section className={styles.hero} ref={heroContainerRef}>
-          <ImageCollage/>
+          <ImageCollage />
           <HeroContent />
         </section>
       </section>
       <section className={styles.catalogue}>
         <h3>View our new range</h3>
-        <CatalogueGrid products={products} />
+        <CatalogueGrid
+          products={products}
+          addProductToFavourites={addProductToFavourites}
+          removeProductFromFavourites={removeProductFromFavourites}
+          checkIfProductInFavourites={checkIfProductInFavourites}
+        />
       </section>
     </main>
   );

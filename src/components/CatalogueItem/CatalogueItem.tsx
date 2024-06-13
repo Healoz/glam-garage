@@ -9,15 +9,40 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface CatalogueItemProps {
   product: Product;
+  addProductToFavourites: (newProduct: Product) => void;
+  removeProductFromFavourites: (removedProduct: Product) => void;
+  checkIfProductInFavourites: (product: Product) => boolean;
 }
 
-const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
+const CatalogueItem: React.FC<CatalogueItemProps> = ({
+  product,
+  addProductToFavourites,
+  removeProductFromFavourites,
+  checkIfProductInFavourites,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleFavClick = () => {
+    if (checkIfProductInFavourites(product)) {
+      removeProductFromFavourites(product);
+    } else {
+      addProductToFavourites(product);
+    }
+  };
+
+  const favBtnAppearance = checkIfProductInFavourites(product)
+    ? {
+        fontVariationSettings: '"FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24',
+      }
+    : {
+        fontVariationSettings: '"FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24',
+      };
 
   return (
     <motion.div
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      className={styles.catalogueItemContainer}
     >
       <Link className={styles.catalogueItem} to={`/product/${product.id}`}>
         <div className={styles.productImgContainer}>
@@ -31,20 +56,14 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
               <motion.img
                 className={`${styles.productImage} ${styles.secondImage}`}
                 src={product.imageUrls[1]}
-                initial={{ opacity: 0}}
+                initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0}}
+                exit={{ opacity: 0 }}
                 loading="lazy"
               ></motion.img>
             )}
           </AnimatePresence>
         </div>
-
-        <button>
-          <div className={styles.saveButton}>
-            <span className="material-symbols-outlined">favorite</span>
-          </div>
-        </button>
 
         <div className={styles.itemInfo}>
           <div>
@@ -54,6 +73,14 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({ product }) => {
           <h4 className={styles.price}>${product.price}</h4>
         </div>
       </Link>
+
+      <button onClick={handleFavClick}>
+        <div className={styles.saveButton}>
+          <span className="material-symbols-outlined" style={favBtnAppearance}>
+            favorite
+          </span>
+        </div>
+      </button>
     </motion.div>
   );
 };

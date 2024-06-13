@@ -21,9 +21,16 @@ interface CartPopoutProps {
 const CartPopout: React.ForwardRefRenderFunction<
   HTMLDivElement,
   CartPopoutProps
-> = ({ togglePopout, removeCartItemFromCart, updateProductInCart, cartItems, cartTotal }, ref) => {
- 
-
+> = (
+  {
+    togglePopout,
+    removeCartItemFromCart,
+    updateProductInCart,
+    cartItems,
+    cartTotal,
+  },
+  ref
+) => {
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
@@ -31,16 +38,22 @@ const CartPopout: React.ForwardRefRenderFunction<
   const CartItemElements = () => {
     return (
       <div className={styles.cartScroll}>
-        {cartItems.map((cartItem: CartItem) => (
-          <CartItemElement
-            key={cartItem.id}
-            quantityAdjust={true}
-            cartItem={cartItem}
-            isPopoutSize={true}
-            removeCartItemFromCart={removeCartItemFromCart}
-            updateProductInCart={updateProductInCart}
-          />
-        ))}
+        {cartItems.length > 0 ? (
+          cartItems.map((cartItem: CartItem) => (
+            <CartItemElement
+              key={cartItem.id}
+              quantityAdjust={true}
+              cartItem={cartItem}
+              isPopoutSize={true}
+              removeCartItemFromCart={removeCartItemFromCart}
+              updateProductInCart={updateProductInCart}
+            />
+          ))
+        ) : (
+          <div className={styles.cartEmpty}>
+            <h3>Your cart is empty</h3>
+          </div>
+        )}
       </div>
     );
   };
@@ -54,7 +67,7 @@ const CartPopout: React.ForwardRefRenderFunction<
       initial={{ scaleY: 0, opacity: 0.5 }}
       animate={{ scaleY: 1, opacity: 1 }}
       exit={{ scaleY: 0, opacity: 0.5 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.2, type: "tween", ease: "easeInOut" }}
       ref={popoutRef}
     >
       <div className={styles.cartPopout}>
