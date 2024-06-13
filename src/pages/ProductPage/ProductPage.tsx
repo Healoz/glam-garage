@@ -12,7 +12,7 @@ import React, {
   RefObject,
 } from "react";
 import { Product } from "../../data/types";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import { Size } from "../../data/types";
 import { motion, useMotionValue } from "framer-motion";
@@ -257,6 +257,7 @@ const ProductInfo: React.FC<ProductProps> = ({ product }) => {
     <div className={styles.productInfo}>
       <h3>{product.name}</h3>
       <h3>${product.price}</h3>
+      <p><Link to={`/category/${product.category}`}>{product.category}</Link></p>
       <p>{product.description}</p>
       <div className={styles.size}>
         <p>Size:</p>
@@ -300,7 +301,7 @@ const Accordions: React.FC<ProductProps> = ({ product }) => {
   return (
     <motion.div className={styles.accordionContainer} layout>
       <Accordion
-        key='1'
+        key="1"
         accordionTitle="Details"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
@@ -308,7 +309,7 @@ const Accordions: React.FC<ProductProps> = ({ product }) => {
         contentShowing={true}
       />
       <Accordion
-        key='2'
+        key="2"
         accordionTitle="Shipping & Returns"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
@@ -316,7 +317,7 @@ const Accordions: React.FC<ProductProps> = ({ product }) => {
         contentShowing={false}
       />
       <Accordion
-        key='3'
+        key="3"
         accordionTitle="Menu 3"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam

@@ -13,6 +13,7 @@ import Lenis from "lenis";
 import { motion } from "framer-motion";
 import Search from "./pages/Search/Search";
 import Favourites from "./components/Favourites/Favourites";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 
 // define shape of context value
 interface CartContextValue {
@@ -110,7 +111,9 @@ function App() {
 
   const addProductToFavourites = (newProduct: Product): void => {
     // do nothing if product already in favourites
-    if (checkIfProductInFavourites(newProduct)) { return };
+    if (checkIfProductInFavourites(newProduct)) {
+      return;
+    }
     setFavourites((prevFavourites) => [...prevFavourites, newProduct]);
   };
 
@@ -198,6 +201,17 @@ function App() {
               <Route
                 path="/product/:id"
                 element={<ProductPage products={products} />}
+              />
+              <Route
+                path="/category/:id"
+                element={
+                  <CategoryPage
+                    products={products}
+                    checkIfProductInFavourites={checkIfProductInFavourites}
+                    addProductToFavourites={addProductToFavourites}
+                    removeProductFromFavourites={removeProductFromFavourites}
+                  />
+                }
               />
               <Route
                 path="/cart"

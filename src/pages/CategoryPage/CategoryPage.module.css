@@ -1,0 +1,21 @@
+.searchPage {
+    padding: 20px;
+}
+
+.title {
+    margin-bottom: 4rem;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .searchPage {
+        padding: var(--spacing-4) 10vw;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+    .searchPage {
+        padding: 5rem 10vw 5rem 10vw;
+    }
+}

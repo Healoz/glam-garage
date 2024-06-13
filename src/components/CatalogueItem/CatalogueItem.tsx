@@ -68,7 +68,7 @@ const CatalogueItem: React.FC<CatalogueItemProps> = ({
         <div className={styles.itemInfo}>
           <div>
             <h4>{product.name}</h4>
-            <p>{product.category}</p>
+            <p><Link to={`/category/${product.category}`}>{product.category}</Link></p>
           </div>
           <h4 className={styles.price}>${product.price}</h4>
         </div>
