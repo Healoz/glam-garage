@@ -1,6 +1,7 @@
 import styles from "./Button.module.css";
 import ColourScheme from "../../enums/ColourScheme";
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 interface ButtonProps {
@@ -42,11 +43,12 @@ const Button: React.FC<ButtonProps> = ({
   const combinedStyles = { ...fontSizeStyle, ...paddingStyle };
 
   return (
-    <div
+    <motion.div
       className={`${isCircle ? styles.isCircle : ""} ${
         fillsSpace ? styles.fillsSpace : ""
       } ${styles.button}`}
       onClick={onClickFunction}
+      
     >
       {/* rendering the button differently if link is provided */}
       {buttonLink ? (
@@ -64,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
           <span className="material-symbols-outlined">{iconCode}</span>
         </a>
       )}
-    </div>
+    </motion.div>
   );
 };
 

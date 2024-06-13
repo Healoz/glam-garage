@@ -11,10 +11,7 @@
 }
 
 .content {
-    transition: ease-in-out;
+    
     padding-top: var(--spacing-3);
 }
 
-.hideContent {
-    display: none;
-}

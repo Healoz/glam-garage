@@ -11,6 +11,11 @@
     border: 1px var(--black) solid;
     cursor: pointer;
     user-select: none;
+    transition: all 0.2s ease-out;
+}
+
+.button a:hover {
+    scale: 1.05;
 }
 
 .isCircle a {

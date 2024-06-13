@@ -1,5 +1,6 @@
 import styles from "./Accordion.module.css";
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface AccordionProps {
   accordionTitle: string;
@@ -23,12 +24,23 @@ const Accordion: React.FC<AccordionProps> = ({
       <button className={styles.accordionButton} onClick={accordionClicked}>
         <p>{accordionTitle}</p>
         <div>
-          <span className="material-symbols-outlined">{isShowing ? 'remove' : 'add'}</span>
+          <span className="material-symbols-outlined">
+            {isShowing ? "remove" : "add"}
+          </span>
         </div>
       </button>
-      <div className={`${styles.content} ${!isShowing ? styles.hideContent : ''}`}>
-        <p>{accordionContent}</p>
-      </div>
+      <AnimatePresence>
+        {isShowing && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className={styles.content}
+          >
+            <p>{accordionContent}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

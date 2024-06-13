@@ -1,72 +1,84 @@
 /* Mobile */
 
 .catalogueItem h4 {
-    font-size: 0.8rem;
-    margin-bottom: var(--spacing-1);
+  font-size: 0.8rem;
+  margin-bottom: var(--spacing-1);
 }
 
 .catalogueItem {
-    margin-bottom: 10px;
-    cursor: pointer;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
 }
 
 .itemInfo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.productImgContainer {
+  position: relative;
+  
 }
 
 .productImage {
-    aspect-ratio: 2 / 3;
-    margin-bottom: 15px;
-    border-radius: 50px 50px 15px 15px;
-    position: relative;
-    overflow: hidden;
-    object-fit: cover;
+  aspect-ratio: 2 / 3;
+  border-radius: 50px 50px 15px 15px;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.secondImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
 }
 
 .saveButton {
-    background-color: var(--black-opacity);
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 23px;
-    margin-top: 23px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 13px;
-    border-radius: 100%;
+  background-color: var(--black-opacity);
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 23px;
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  border-radius: 100%;
 }
 
 .saveButton span {
-    color: var(--white);
+  color: var(--white);
 }
 
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
-
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) {
-    .productImage {
-        aspect-ratio: 4 / 5;
-    }
+  .productImage {
+    aspect-ratio: 4 / 5;
+  }
 
-    .itemInfo {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 1rem;
-    }
+  .itemInfo {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+  }
 
-    .itemInfo .price {
-        text-align: end;
-    }
+  .itemInfo .price {
+    text-align: end;
+  }
 
-    .catalogueAddToCartOverlay {
-        padding-bottom: 2rem;
-    }
+  .catalogueAddToCartOverlay {
+    padding-bottom: 2rem;
+  }
 }
 
 /* Desktop */

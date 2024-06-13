@@ -1,5 +1,5 @@
 import styles from "./Home.module.css";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import CatalogueItem from "../../components/CatalogueItem/CatalogueItem";
@@ -10,16 +10,14 @@ import glassesImg from "../../assets/images/carlos-vaz-KP4bxnxAilU-unsplash.jpg"
 import shirtImg from "../../assets/images/nimble-made-kMGX6UK06Ps-unsplash.jpg";
 import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
-import { motion } from "framer-motion";
+import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
 
 const ImageCollage = () => {
   const collageImages = [{}];
 
   return (
-    <motion.div
-      className={styles.imageCollageContainer}
-    >
+    <motion.div className={styles.imageCollageContainer}>
       <CircleSticker />
       <div className={styles.imageCollage}>
         <div className={styles.imageContainer}>
@@ -120,51 +118,28 @@ const CircleSticker = () => {
   );
 };
 
-// interface CatalogueGridProps {
-//   products: Product[];
-// }
-
-// const CatalogueGrid: React.FC<CatalogueGridProps> = ({ products }) => {
-//   const fadeInAnimationVariants = {
-//     initial: {
-//       opacity: 0,
-//       y: 100,
-//     },
-//     animate: (index: number) => ({
-//       opacity: 1,
-//       y: 0,
-//       transition: {
-//         duration: 0.5,
-//         delay: 0.1 * index
-//       }
-//     }),
-//   };
-
-//   const catalogueItems = products.map((product, index) => (
-//     <motion.div
-//       variants={fadeInAnimationVariants}
-//       initial="initial"
-//       whileInView="animate"
-//       viewport={{ once: true }}
-//       custom={index}
-//     >
-//       <CatalogueItem key={product.id} product={product} />
-//     </motion.div>
-//   ));
-
-//   return <div className={styles.catalogueGrid}>{catalogueItems}</div>;
-// };
-
 interface HomeProps {
   products: Product[];
 }
 
 const Home: React.FC<HomeProps> = ({ products }) => {
+  const heroContainerRef = useRef(null);
+  const homeMainRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: homeMainRef,
+    offset: ["start end", "end start"],
+  });
+
+
+  const smallParallax = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const mediumParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const largeParallax = useTransform(scrollYProgress, [0, 1], [0, -250]);
+
   return (
-    <main className={styles.homeMain}>
+    <main className={styles.homeMain} ref={homeMainRef}>
       <section className={styles.navAndHero}>
-        <section className={styles.hero}>
-          <ImageCollage />
+        <section className={styles.hero} ref={heroContainerRef}>
+          <ImageCollage/>
           <HeroContent />
         </section>
       </section>

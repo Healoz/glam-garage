@@ -114,13 +114,22 @@
   .productImageCarousel {
     height: 60vh;
   }
+
+  .carouselContainer {
+    height: 60vh;
+
+  }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
   .productPageContent {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 100px;
+  }
+
+  .carouselContainer {
+    height: 50vh;
   }
 
   .carouselIndicators {
@@ -133,8 +142,6 @@
     padding-bottom: unset;
     padding-top: 3rem;
   }
-
-  
 
   .carouselArrows {
     color: white;
@@ -176,8 +183,23 @@
   .selectedImg {
     box-shadow: 0 0 0 8px var(--fluro-yellow), 0 0 0 9px var(--black);
   }
+
+  .productPage {
+    padding-top: 2rem;
+  }
+
+  
 }
 
 /* Desktop - wider screen */
 @media screen and (min-width: 1500px) {
+
+  .productPageContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 150px;
+  }
+
+  .carouselContainer {
+    height: 50vh;
+  }
 }

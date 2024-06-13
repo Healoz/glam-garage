@@ -298,8 +298,9 @@ interface ProductProps {
 
 const Accordions: React.FC<ProductProps> = ({ product }) => {
   return (
-    <div className={styles.accordionContainer}>
+    <motion.div className={styles.accordionContainer} layout>
       <Accordion
+        key='1'
         accordionTitle="Details"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
@@ -307,6 +308,7 @@ const Accordions: React.FC<ProductProps> = ({ product }) => {
         contentShowing={true}
       />
       <Accordion
+        key='2'
         accordionTitle="Shipping & Returns"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
@@ -314,13 +316,14 @@ const Accordions: React.FC<ProductProps> = ({ product }) => {
         contentShowing={false}
       />
       <Accordion
+        key='3'
         accordionTitle="Menu 3"
         accordionContent="Lorem ipsum dolor sit amet consectetur. Eget egestas ante etiam eu a
         auctor. Nulla et amet ultricies sed velit risus faucibus eget. Aliquam
         pretium elit vitae egestas mauris condimentum."
         contentShowing={false}
       />
-    </div>
+    </motion.div>
   );
 };
 

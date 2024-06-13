@@ -24,6 +24,11 @@
 
 .imageContainer {
     position: relative;
+    overflow: hidden;
+    border-radius: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .imageCollage .img {
@@ -34,7 +39,7 @@
 	height: 100%;
 	object-fit: cover;
 	z-index: 0;
-    border-radius: 130px;
+    
 }
 
 .heroText h1 {
