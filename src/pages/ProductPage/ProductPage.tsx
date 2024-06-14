@@ -18,6 +18,8 @@ import { Size } from "../../data/types";
 import { motion, useMotionValue } from "framer-motion";
 import { useAnimationControls } from "framer-motion";
 
+import transition from "../../assets/transition";
+
 const ProductImageCarousel: React.FC<ProductProps> = ({ product }) => {
   const DRAG_BUFFER = 50;
 

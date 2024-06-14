@@ -7,7 +7,7 @@ import ColourScheme from "../../enums/ColourScheme";
 import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
 
 interface SearchProps {
@@ -37,8 +37,17 @@ const Search: React.FC<SearchProps> = ({
     return lowerCaseProductName.includes(searchQuery.toLowerCase());
   });
 
+  const navigate = useNavigate();
+
   return (
     <main className={styles.searchPage}>
+      <Button
+        colourScheme={ColourScheme.Secondary}
+        iconCode="arrow_back"
+        onClickFunction={() => navigate(-1)}
+        isCircle={true}
+        fillsSpace={false}
+      />
       <div className={styles.title}>
         {filteredProducts.length > 0 ? (
           <h3>Your search results for:</h3>

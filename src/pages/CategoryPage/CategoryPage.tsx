@@ -7,7 +7,7 @@ import ColourScheme from "../../enums/ColourScheme";
 import { CartContext } from "../../App";
 import { CartItem } from "../../data/types";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
 
 interface CategoryPageProps {
@@ -29,9 +29,18 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   const currentCategory = id;
 
   const filteredProductsByCategory = products.filter((product) => product.category === currentCategory);
+
+  const navigate = useNavigate();
   
   return (
     <main className={styles.searchPage}>
+      <Button
+        colourScheme={ColourScheme.Secondary}
+        iconCode="arrow_back"
+        onClickFunction={() => navigate(-1)}
+        isCircle={true}
+        fillsSpace={false}
+      />
       <h1 className={styles.title}>{currentCategory}</h1>
       <CatalogueGrid
         products={filteredProductsByCategory}
