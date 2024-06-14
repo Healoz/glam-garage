@@ -123,15 +123,26 @@ interface CategoryCallToActionProps {
 }
 
 const CategoryCallToAction: React.FC<CategoryCallToActionProps> = ({
-  categoryNames
+  categoryNames,
 }) => {
   return (
-    <div>
+    <section className={`${styles.catalogue} ${styles.categories}`}>
       <h3>Categories</h3>
-      {categoryNames.map((category, index) => {
-        return <p key={index}>{category}</p>;
-      })}
-    </div>
+      <div className={styles.categoryGridContainer}>
+        <div className={styles.categoryGrid}>
+          {categoryNames.map((category) => {
+            return (
+              <div className={styles.categoryItem} key={category}>
+                <div className={styles.categoryImgContainer}>
+                  <img className={styles.categoryImg} src={glassesImg} />
+                </div>
+                <p>{category}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -161,6 +172,10 @@ const Home: React.FC<HomeProps> = ({
   const mediumParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const largeParallax = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
+  const retrieveCategoryImg = (categoryName: string): string | void => {
+
+  }
+
   return (
     <main className={styles.homeMain} ref={homeMainRef}>
       <section className={styles.navAndHero}>
@@ -169,15 +184,17 @@ const Home: React.FC<HomeProps> = ({
           <HeroContent />
         </section>
       </section>
-      <CategoryCallToAction categoryNames={categoryNames} />
-      <section className={styles.catalogue}>
-        <h3>View our new range</h3>
-        <CatalogueGrid
-          products={products}
-          addProductToFavourites={addProductToFavourites}
-          removeProductFromFavourites={removeProductFromFavourites}
-          checkIfProductInFavourites={checkIfProductInFavourites}
-        />
+      <section className={styles.categoriesAndCatalogue}>
+        <CategoryCallToAction categoryNames={categoryNames} />
+        <section className={styles.catalogue}>
+          <h3>View our new range</h3>
+          <CatalogueGrid
+            products={products}
+            addProductToFavourites={addProductToFavourites}
+            removeProductFromFavourites={removeProductFromFavourites}
+            checkIfProductInFavourites={checkIfProductInFavourites}
+          />
+        </section>
       </section>
     </main>
   );

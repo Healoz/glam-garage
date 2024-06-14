@@ -23,12 +23,16 @@ const Favourites: React.FC<FavouritesProps> = ({
   return (
     <section className={styles.favouritesContainer}>
       <h2>Saved Items</h2>
-      <CatalogueGrid
-        products={favourites}
-        addProductToFavourites={addProductToFavourites}
-        removeProductFromFavourites={removeProductFromFavourites}
-        checkIfProductInFavourites={checkIfProductInFavourites}
-      />
+      {favourites.length > 0 ? (
+        <CatalogueGrid
+          products={favourites}
+          addProductToFavourites={addProductToFavourites}
+          removeProductFromFavourites={removeProductFromFavourites}
+          checkIfProductInFavourites={checkIfProductInFavourites}
+        />
+      ) : (
+        <h3>You have no saved items.</h3>
+      )}
     </section>
   );
 };

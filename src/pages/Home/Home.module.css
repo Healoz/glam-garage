@@ -116,6 +116,56 @@
     margin-top: calc(var(--spacing-4) - 10px);
 }
 
+.categoryGridContainer {
+    display: flex;  
+    justify-content: center;
+}
+
+.categoryGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* background-color: red; */
+    width: 90%;
+    gap: 1.5rem;
+}
+
+.categoryItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.categoryItem p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.categoryImgContainer {
+    background-color: blue;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    overflow: hidden;
+    /* height: 15rem; */
+}
+
+.categoryImg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.categories {
+    padding-bottom:  0rem;
+}
+
+.categoriesAndCatalogue {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 /* Mobile tweaks */
 @media screen and (min-width: 500px) {
     .hero {
@@ -125,6 +175,14 @@
 
     .heroText h1 {
         font-size: 2.2rem;
+    }
+
+    .categoryGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        /* background-color: red; */
+        width: 90%;
+        gap: 3rem;
     }
 }
 
@@ -156,7 +214,7 @@
     }
 
     .catalogue {
-        padding: var(--spacing-4) 10vw;
+        padding: 2rem 10vw;
     }
 
     .catalogue h3 {
@@ -167,6 +225,14 @@
 
     .catalogueGrid {
         gap: 25px;
+    }
+
+    
+    .categoryGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 90%;
+        gap: 3rem;
     }
 
     
@@ -193,11 +259,23 @@
     }
 
     .catalogue {
-        padding: 5rem 10vw 5rem 10vw;
+        padding: 2rem 10vw 2rem 10vw;
     }
 
     .catalogue h3 {
         font-size: 1.4rem;
+    }
+
+    .categoryGridContainer {
+        display: flex;  
+        justify-content: center;
+    }
+    
+    .categoryGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 60%;
+        gap: 3rem;
     }
 }
 
@@ -206,5 +284,12 @@
     .hero {
         /* padding: 5rem 20vw 8rem 20vw; */
         padding: 5rem 20vw 8rem 20vw;
+    }
+
+    .categoryGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 45%;
+        gap: 4rem;
     }
 }
