@@ -148,12 +148,15 @@
     aspect-ratio: 1 / 1;
     border-radius: 100%;
     overflow: hidden;
+    display: flex;
+    
     /* height: 15rem; */
 }
 
 .categoryImg {
     height: 100%;
     width: 100%;
+    object-position: center center;
     object-fit: cover;
 }
 

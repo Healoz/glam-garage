@@ -12,6 +12,7 @@ import circleText from "../../assets/images/circle-text.svg";
 import { Product } from "../../data/types";
 import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import CatalogueGrid from "../../components/CatalogueGrid/CatalogueGrid";
+import { Link } from "react-router-dom";
 
 const ImageCollage = () => {
   const collageImages = [{}];
@@ -120,24 +121,86 @@ const CircleSticker = () => {
 
 interface CategoryCallToActionProps {
   categoryNames: string[];
+  products: Product[];
 }
 
 const CategoryCallToAction: React.FC<CategoryCallToActionProps> = ({
   categoryNames,
+  products,
 }) => {
+  const retrieveCategoryImg = (categoryName: string): string => {
+    // Find products associated with category
+    const productsInCategory = products.filter(
+      (product) => product.category === categoryName
+    );
+
+    // Check if there are no products in the category
+    if (productsInCategory.length === 0) {
+      console.error("No products in category.");
+      return "";
+    }
+
+    // Check if the first product has imageUrls and it is not empty
+    const firstProduct = productsInCategory[0];
+    if (!firstProduct.imageUrls || firstProduct.imageUrls.length === 0) {
+      console.error("No images available for the first product in category.");
+      return "";
+    }
+
+    // Return the first image URL
+    return firstProduct.imageUrls[0];
+  };
+
+  const fadeInAnimationVariants = {
+    initial: {
+      opacity: 0,
+      y: 100,
+    },
+    animate: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.1 * index,
+      },
+    }),
+    exit: {
+      opacity: 0,
+      y: 100,
+    },
+  };
+
   return (
     <section className={`${styles.catalogue} ${styles.categories}`}>
       <h3>Categories</h3>
       <div className={styles.categoryGridContainer}>
         <div className={styles.categoryGrid}>
-          {categoryNames.map((category) => {
+          {categoryNames.map((category, index) => {
             return (
-              <div className={styles.categoryItem} key={category}>
-                <div className={styles.categoryImgContainer}>
-                  <img className={styles.categoryImg} src={glassesImg} />
-                </div>
-                <p>{category}</p>
-              </div>
+              <motion.div
+                key={category}
+                variants={fadeInAnimationVariants}
+                initial="initial"
+                whileInView="animate"
+                exit={{ opacity: 0 }}
+                viewport={{ once: true }}
+                custom={index}
+              >
+                <Link
+                  to={`/category/${category}`}
+                  className={styles.categoryItem}
+                >
+                  <div className={styles.categoryImgContainer}>
+                    <motion.img
+                      className={styles.categoryImg}
+                      src={retrieveCategoryImg(category)}
+                      initial={{scale: 1}}
+                      whileHover={{scale: 1.1}}
+                    />
+                  </div>
+                  <p>{category}</p>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
@@ -172,10 +235,6 @@ const Home: React.FC<HomeProps> = ({
   const mediumParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const largeParallax = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
-  const retrieveCategoryImg = (categoryName: string): string | void => {
-
-  }
-
   return (
     <main className={styles.homeMain} ref={homeMainRef}>
       <section className={styles.navAndHero}>
@@ -185,7 +244,10 @@ const Home: React.FC<HomeProps> = ({
         </section>
       </section>
       <section className={styles.categoriesAndCatalogue}>
-        <CategoryCallToAction categoryNames={categoryNames} />
+        <CategoryCallToAction
+          categoryNames={categoryNames}
+          products={products}
+        />
         <section className={styles.catalogue}>
           <h3>View our new range</h3>
           <CatalogueGrid

@@ -12,7 +12,7 @@ import React, {
   RefObject,
 } from "react";
 import { Product } from "../../data/types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CartContext } from "../../App";
 import { Size } from "../../data/types";
 import { motion, useMotionValue } from "framer-motion";
@@ -352,12 +352,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   const { id } = useParams();
   const productSelected = getProductById(id, products);
 
+  const navigate = useNavigate();
+
   return (
     <section className={`${styles.productPage} pageContentContainerWide`}>
       <Button
         colourScheme={ColourScheme.Secondary}
         iconCode="arrow_back"
-        buttonLink="/"
+        onClickFunction={() => navigate(-1)}
         isCircle={true}
         fillsSpace={false}
       />
